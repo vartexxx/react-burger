@@ -1,0 +1,60 @@
+.header {
+    background-color: #1C1C21;
+    //header__container
+    &__container {
+        max-width: 1280px;
+        width: 100%;
+        margin: 0 auto;
+    }
+    //header__list
+    &__list {
+        align-items: center;
+        justify-items: center;
+        display: grid;
+        grid-template-columns: auto auto 1fr 1fr;
+        grid-template-rows: auto;
+        //header__list:last-of-type
+        :last-of-type {
+            justify-self: end;
+        }
+        //header__list:nth-child(3)
+        :nth-child(3) {
+            margin-left: 112px;
+            justify-self: start;
+        }
+    }
+    //header__link
+    &__link {
+        display: flex;
+        align-items: center;
+        color: #F2F2F3;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        //header__link:hover
+        :hover {
+            opacity: 0.7;
+        }
+    }
+    //header__menu
+    &__menu {
+        //header>ul
+        ul {
+            justify-content: start;
+        }
+    }
+    //header__logo
+    &__logo {
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        //header__logo:hover
+        :hover {
+            opacity: 0.7;
+        } 
+    }
+    //header__span
+    &__span {
+        color: #8585AD;
+    }
+}
