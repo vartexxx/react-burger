@@ -1,18 +1,23 @@
 .ingredients {
     max-width: 600px;
+    //ingredients__choice
     &__choice {
         display: flex;
     }
+    //ingredients__cases
     &__cases {
         max-width: 600px;
         overflow-y: scroll;
         height: 664px;
+        //ingredients__cases::-webkit-scrollbar
         &::-webkit-scrollbar {
             width: 8px;
         }
+        //ingredients__cases::-webkit-scrollbar-track
         &::-webkit-scrollbar-track {
             background-color: #2f2f37;
         }
+        //ingredients__cases::-webkit-scrollbar-thumb
         &::-webkit-scrollbar-thumb {
             height: 492px;
             background: #8585ad;
@@ -20,6 +25,7 @@
         }
 
     }
+    //ingredients__items
     &__items {
         display: grid;
         max-width: 600px;

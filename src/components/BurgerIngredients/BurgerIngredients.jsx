@@ -1,10 +1,12 @@
 import React from 'react';
+import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
 import styles from './BurgerIngredients.module.scss';
 import data from '../../utils/data';
-import BurgerIngredientsList from '../burger-ingredients-list/BurgerIngredientsList';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+
 
 function BurgerIngredients() {
+
     const { bun, sauce, main } = React.useMemo(() => {
         return data.reduce((count, item) => {
             if(item.type === 'bun') {
@@ -19,7 +21,7 @@ function BurgerIngredients() {
             console.log(count);
             return count;
         }, {bun: [], sauce: [], main: [] }
-        );
+        )
     });
     const [current, setCurrent] = React.useState('bun');
 

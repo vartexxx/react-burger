@@ -1,6 +1,5 @@
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import data from '../../utils/data';
-import React from 'react';
 import styles from './BurgerConstructor.module.scss';
 
 function BurgerConstructor() {
@@ -21,12 +20,12 @@ function BurgerConstructor() {
                         if(item.type !== 'bun') {
                             return(
                                 <li key={item._id} className={styles.burger__item}>
-                                <DragIcon type="primary" />
-                                <ConstructorElement 
-                                    text={item.name}
-                                    price={item.price}
-                                    thumbnail={item.image}
-                                />
+                                    <DragIcon type="primary" />
+                                    <ConstructorElement 
+                                        text={item.name}
+                                        price={item.price}
+                                        thumbnail={item.image}
+                                    />
                                 </li>
                             )
                         }
@@ -52,6 +51,6 @@ function BurgerConstructor() {
             </div>
         </section>
     )
-}
+};
 
-export {BurgerConstructor};
+export { BurgerConstructor };
