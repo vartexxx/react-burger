@@ -1,0 +1,50 @@
+.burger {
+    &__constructor {
+        max-width: 600px;
+    }
+    &__container {
+        padding-top: 100px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: center;
+    }
+    &__item {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+    &__bun {
+        padding-left: 30px;
+    }
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: scroll;
+        height: 464px;
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: #2f2f37;
+        }
+        &::-webkit-scrollbar-thumb {
+            height: 292px;
+            background: #8585ad;
+            border: 3px solid #8585ad;
+        }
+    }
+    &__order {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        gap: 40px;
+        margin: 40px 16px 51px 0;
+    }
+    &__price {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+}
