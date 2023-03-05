@@ -40,7 +40,7 @@ function BurgerIngredients() {
                         Начинки
                     </Tab>
                 </div>
-                <div className={`${styles.ingredients__cases} mt-10`}>
+                <div className={styles.ingredients__cases}>
                     <BurgerIngredientsList  
                         title='Булки'
                         type='bun'
