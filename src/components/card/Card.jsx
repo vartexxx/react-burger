@@ -1,8 +1,8 @@
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './Card.module.scss';
+import { cardProp } from "../../utils/propTypes";
 
 function Card({ data }) {
-    console.log(data);
     return (
         <div className={styles.card}>
             <img className={`${styles.card__image} pl-4 pr-4`} src={data.image} alt={data.name} />
@@ -15,4 +15,8 @@ function Card({ data }) {
     )
 };
 
-export default Card;
+Card.propTypes = {
+    data: cardProp,
+};
+
+export { Card };
