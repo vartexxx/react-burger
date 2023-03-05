@@ -18,43 +18,49 @@ function BurgerIngredients() {
             else if(item.type === 'main') {
                 count.main.push(item);
             }
-            console.log(count);
             return count;
         }, {bun: [], sauce: [], main: [] }
         )
     });
     const [current, setCurrent] = React.useState('bun');
+    const scrollToTab = (data) => {
+        setCurrent(data);
+        document.querySelector(`#${data}`).scrollIntoView({behavior: 'smooth'});
+    }
 
     return (
         <section className={styles.ingredients} >
             <div className={styles.ingredients__container}>
                 <h1 className='text text_type_main-large pt-10 pb-5'>Соберите бургер</h1>
                 <div className={styles.ingredients__choice}>
-                    <Tab value='bun' active={current === 'bun'} onClick={setCurrent}>
+                    <Tab value='bun' active={current === 'bun'} onClick={scrollToTab}>
                         Булки
                     </Tab>
-                    <Tab value='sauce' active={current === 'sauce'} onClick={setCurrent}>
+                    <Tab value='sauce' active={current === 'sauce'} onClick={scrollToTab}>
                         Соусы
                     </Tab>
-                    <Tab value='main' active={current === 'main'} onClick={setCurrent}>
+                    <Tab value='main' active={current === 'main'} onClick={scrollToTab}>
                         Начинки
                     </Tab>
                 </div>
                 <div className={styles.ingredients__cases}>
-                    <BurgerIngredientsList  
+                    <BurgerIngredientsList
                         title='Булки'
                         type='bun'
                         data={bun}
+                        id='bun'
                     />
                     <BurgerIngredientsList
                         title='Соусы'
                         type='sauce'
                         data={sauce}
+                        id='sauce'
                     />
-                    <BurgerIngredientsList 
+                    <BurgerIngredientsList
                         title='Начинки'
                         type='main'
                         data={main}
+                        id='main'
                     />
                 </div>
             </div>
