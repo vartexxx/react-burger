@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Card } from '../Card/Card';
 import styles from './BurgerIngredientsList.module.scss';
 
@@ -15,5 +16,10 @@ const BurgerIngredientsList = React.forwardRef((props, ref) => {
         </>
     )
 });
+
+BurgerIngredientsList.propTypes = {
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+}
 
 export default BurgerIngredientsList;
