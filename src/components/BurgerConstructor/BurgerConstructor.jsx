@@ -1,7 +1,13 @@
+import React from 'react';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import Modal from '../Modal/Modal';
+import OrderDetails from '../../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.scss';
 
 function BurgerConstructor({data}) {
+    const [modal, modalSet] = React.useState(false);
+    const openModal = () => modalSet(!modal);
+    const closeModal = () => modalSet(!modal);
     return(
         <section className={`${styles.burger__constructor} ml-4`}>
             <ul className={styles.burger__container}>
@@ -45,7 +51,12 @@ function BurgerConstructor({data}) {
                     <p className="text text_type_digits-medium">610</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button htmlType='button' type='primary' size='large'>Оформить заказ</Button>
+                <Button onClick={openModal} htmlType='button' type='primary' size='large'>Оформить заказ</Button>
+                {modal && (
+                    <Modal onClose={closeModal}>
+                        <OrderDetails />
+                    </Modal>
+                )}
             </div>
         </section>
     )
