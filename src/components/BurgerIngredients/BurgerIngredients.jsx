@@ -2,10 +2,9 @@ import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
 import styles from './BurgerIngredients.module.scss';
-import data from '../../utils/data';
 
 
-function BurgerIngredients() {
+function BurgerIngredients({data}) {
 
     const { bun, sauce, main } = React.useMemo(() => {
         return data.reduce((count, item) => {

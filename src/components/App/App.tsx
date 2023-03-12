@@ -18,8 +18,8 @@ function App() {
     <>
       <AppHeader />
       <main className={styles.main}>
-        <BurgerIngredients />
-        <BurgerConstructor />
+        <BurgerIngredients data={state}/>
+        <BurgerConstructor data={state}/>
       </main>
     </>
   );
