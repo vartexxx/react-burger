@@ -12,7 +12,7 @@ function App() {
     getApi()
       .then((data) => setState(data.data))
       .catch((err) => console.log(err))
-  });
+  }, []);
   return (
     <>
       <AppHeader />
