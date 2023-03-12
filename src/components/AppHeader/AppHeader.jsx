@@ -40,7 +40,7 @@ const AppHeader = () => {
                 </nav>
             </div>
         </header>
-    )
+    );
 };
 
-export { AppHeader };
+export default AppHeader;

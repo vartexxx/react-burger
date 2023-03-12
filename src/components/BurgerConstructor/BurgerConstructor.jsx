@@ -1,11 +1,11 @@
-import React from 'react';
+import { useState } from 'react';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.scss';
 
-function BurgerConstructor({data}) {
-    const [modal, modalSet] = React.useState(false);
+const BurgerConstructor = ({data}) => {
+    const [modal, modalSet] = useState(false);
     const openModal = () => modalSet(!modal);
     const closeModal = () => modalSet(!modal);
     return(
@@ -59,7 +59,7 @@ function BurgerConstructor({data}) {
                 )}
             </div>
         </section>
-    )
+    );
 };
 
-export { BurgerConstructor };
+export default BurgerConstructor;

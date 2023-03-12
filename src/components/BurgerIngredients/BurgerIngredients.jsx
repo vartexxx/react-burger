@@ -1,12 +1,12 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
 import styles from './BurgerIngredients.module.scss';
 
 
-function BurgerIngredients({data}) {
+const BurgerIngredients = ({data}) => {
 
-    const { bun, sauce, main } = React.useMemo(() => {
+    const { bun, sauce, main } = useMemo(() => {
         return data.reduce((count, item) => {
             if(item.type === 'bun') {
                 count.bun.push(item);
@@ -21,7 +21,7 @@ function BurgerIngredients({data}) {
         }, {bun: [], sauce: [], main: [] }
         )
     });
-    const [current, setCurrent] = React.useState('bun');
+    const [current, setCurrent] = useState('bun');
     const scrollToTab = (data) => {
         setCurrent(data);
         document.querySelector(`#${data}`).scrollIntoView({behavior: 'smooth'});
@@ -64,7 +64,7 @@ function BurgerIngredients({data}) {
                 </div>
             </div>
         </section>
-    )
+    );
 };
 
-export { BurgerIngredients };
+export default BurgerIngredients;

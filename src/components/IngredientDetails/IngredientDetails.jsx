@@ -1,6 +1,6 @@
 import styles from './IngredientDetails.module.scss';
 
-export default function IngredientDetails({ data }) {
+const IngredientDetails = ({ data }) => {
     return (
         <>
             <p className={`${styles.details__title} ml-10 mt-10 text text_type_main-large`}>Детали ингредиента</p>
@@ -25,5 +25,7 @@ export default function IngredientDetails({ data }) {
                 </li>
             </ul>
         </>
-    )
-}
+    );
+};
+
+export default IngredientDetails;
