@@ -3,7 +3,7 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import styles from './Card.module.scss';
-import { cardProp } from "../../utils/propTypes";
+import cardProp from "../../utils/propTypes";
 
 const Card = ({ data }) => {
     const [modal, modalSet] = useState(false);

@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
+import cardProp from '../../utils/propTypes';
 import styles from './BurgerIngredients.module.scss';
 
 
@@ -65,6 +67,10 @@ const BurgerIngredients = ({data}) => {
             </div>
         </section>
     );
+};
+
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(cardProp).isRequired,
 };
 
 export default BurgerIngredients;

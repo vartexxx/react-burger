@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
+import PropTypes from 'prop-types';
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import styles from './Modal.module.scss';
@@ -13,8 +14,11 @@ const Modal = ({onClose, children}) => {
         }
     };
     useEffect(() => {
-        document.addEventListener('keydown', handleEscClose)
-    });
+        document.addEventListener('keydown', handleEscClose);
+        return () => {
+            document.removeEventListener('keydown', handleEscClose);
+        }
+    }, []);
     return createPortal(
         <>
             <div className={`${styles.modal__container} pb-15`}>
@@ -26,6 +30,10 @@ const Modal = ({onClose, children}) => {
             <ModalOverlay onClose={onClose} />
         </>, modalRoot
     );
+};
+
+Modal.propTypes = {
+    onClose: PropTypes.func.isRequired,
 };
 
 export default Modal;

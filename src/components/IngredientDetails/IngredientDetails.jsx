@@ -1,10 +1,11 @@
+import cardProp from '../../utils/propTypes';
 import styles from './IngredientDetails.module.scss';
 
 const IngredientDetails = ({ data }) => {
     return (
         <>
             <p className={`${styles.details__title} ml-10 mt-10 text text_type_main-large`}>Детали ингредиента</p>
-            <img className src={data.image_large} alt={data.name}/>
+            <img src={data.image_large} alt={data.name}/>
             <p className={`mt-4 text text_type_main-medium`}>{data.name}</p>
             <ul className={`${styles.details__container} mt-8 `} style={{color: "#8585AD"}}>
                 <li className={styles.details__card}>
@@ -26,6 +27,10 @@ const IngredientDetails = ({ data }) => {
             </ul>
         </>
     );
+};
+
+IngredientDetails.propTypes = {
+    data: cardProp,
 };
 
 export default IngredientDetails;
