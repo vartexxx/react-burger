@@ -15,4 +15,4 @@ const cardProp = PropTypes.shape({
     __v: PropTypes.number.isRequired,  
 }).isRequired;
 
-export { cardProp }
+export default cardProp;

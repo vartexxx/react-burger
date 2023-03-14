@@ -1,10 +1,10 @@
-import React from 'react';
+import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
-import { Card } from '../Card/Card';
+import Card from '../Card/Card';
 import styles from './BurgerIngredientsList.module.scss';
 
 
-const BurgerIngredientsList = React.forwardRef((props, ref) => {
+const BurgerIngredientsList = forwardRef((props, ref) => {
     return (
         <>
             <p id={props.id} ref={ref} className='text text_type_main-medium pt-10 pb-6'>{props.title}</p>
@@ -14,12 +14,12 @@ const BurgerIngredientsList = React.forwardRef((props, ref) => {
                 })}
             </div>
         </>
-    )
+    );
 });
 
 BurgerIngredientsList.propTypes = {
     title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
-}
+};
 
 export default BurgerIngredientsList;

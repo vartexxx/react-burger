@@ -1,8 +1,15 @@
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import data from '../../utils/data';
+import Modal from '../Modal/Modal';
+import OrderDetails from '../../OrderDetails/OrderDetails';
+import cardProp from '../../utils/propTypes';
 import styles from './BurgerConstructor.module.scss';
 
-function BurgerConstructor() {
+const BurgerConstructor = ({data}) => {
+    const [modal, modalSet] = useState(false);
+    const openModal = () => modalSet(!modal);
+    const closeModal = () => modalSet(!modal);
     return(
         <section className={`${styles.burger__constructor} ml-4`}>
             <ul className={styles.burger__container}>
@@ -10,9 +17,9 @@ function BurgerConstructor() {
                     <ConstructorElement 
                         type='top'
                         isLocked={true}
-                        text={data[0].name}
-                        price={data[0].price}
-                        thumbnail={data[0].image}
+                        text='Краторная булка N-200i (верх)'
+                        price='1255'
+                        thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
                     />
                 </li>
                 <ul className={`${styles.burger__list} pr-2`}>
@@ -33,11 +40,11 @@ function BurgerConstructor() {
                 </ul>
                 <li className='pl-2'>
                     <ConstructorElement
-                        type="bottom"
+                        type='bottom'
                         isLocked={true}
-                        text={data[data.length - 1].name}
-                        price={data[data.length - 1].price}
-                        thumbnail={data[data.length - 1].image}
+                        text='Краторная булка N-200i (низ)'
+                        price='1255'
+                        thumbnail='https://code.s3.yandex.net/react/code/bun-02.png'
                     />
                 </li>
             </ul>
@@ -46,10 +53,19 @@ function BurgerConstructor() {
                     <p className="text text_type_digits-medium">610</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button htmlType='button' type='primary' size='large'>Оформить заказ</Button>
+                <Button onClick={openModal} htmlType='button' type='primary' size='large'>Оформить заказ</Button>
+                {modal && (
+                    <Modal onClose={closeModal}>
+                        <OrderDetails />
+                    </Modal>
+                )}
             </div>
         </section>
-    )
+    );
 };
 
-export { BurgerConstructor };
+BurgerConstructor.propTypes = {
+    data: PropTypes.arrayOf(cardProp).isRequired,
+};
+
+export default BurgerConstructor;

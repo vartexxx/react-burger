@@ -1,13 +1,14 @@
-import React from 'react';
+import { useMemo, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
+import cardProp from '../../utils/propTypes';
 import styles from './BurgerIngredients.module.scss';
-import data from '../../utils/data';
 
 
-function BurgerIngredients() {
+const BurgerIngredients = ({data}) => {
 
-    const { bun, sauce, main } = React.useMemo(() => {
+    const { bun, sauce, main } = useMemo(() => {
         return data.reduce((count, item) => {
             if(item.type === 'bun') {
                 count.bun.push(item);
@@ -22,7 +23,7 @@ function BurgerIngredients() {
         }, {bun: [], sauce: [], main: [] }
         )
     });
-    const [current, setCurrent] = React.useState('bun');
+    const [current, setCurrent] = useState('bun');
     const scrollToTab = (data) => {
         setCurrent(data);
         document.querySelector(`#${data}`).scrollIntoView({behavior: 'smooth'});
@@ -65,7 +66,11 @@ function BurgerIngredients() {
                 </div>
             </div>
         </section>
-    )
+    );
 };
 
-export { BurgerIngredients };
+BurgerIngredients.propTypes = {
+    data: PropTypes.arrayOf(cardProp).isRequired,
+};
+
+export default BurgerIngredients;
