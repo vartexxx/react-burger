@@ -19,8 +19,12 @@ function App() {
       <AppHeader />
       <main className={styles.main}>
         <BurgerIngredientsContext.Provider value={state}>
-            <BurgerIngredients />
-            <BurgerConstructor />
+          {state.length && (
+            <>
+              <BurgerIngredients />
+              <BurgerConstructor />
+            </>
+          )}
         </BurgerIngredientsContext.Provider>
       </main>
     </>

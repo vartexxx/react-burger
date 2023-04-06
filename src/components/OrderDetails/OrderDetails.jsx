@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import img from '../images/ok.svg';
+import img from '../../images/ok.svg';
 
 
 const OrderDetails = ({ orderNumber }) => {
