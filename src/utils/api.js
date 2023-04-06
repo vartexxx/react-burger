@@ -1,4 +1,4 @@
-const url = 'https://norma.nomoreparties.space/api/ingredients';
+const url = 'https://norma.nomoreparties.space/api';
 
 const checkResponse = res => {
     if(res.ok) {
@@ -7,6 +7,17 @@ const checkResponse = res => {
     return Promise.reject(`Ошибка ${res.status}`);
 };
 
-export default function getApi() {
-    return fetch(`${url}`).then(checkResponse);
+export function getApi() {
+    return fetch(`${url}/ingredients`).then(checkResponse);
+};
+
+export function postApi(data) {
+    return fetch(`${url}/orders`, {
+        method: 'POST',
+        headers: { 'Content-type': 'application/json' },
+        body: JSON.stringify({
+            ingredients: data
+        })
+    })
+    .then((res) => checkResponse(res))
 };
