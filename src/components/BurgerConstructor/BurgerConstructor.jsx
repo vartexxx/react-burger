@@ -1,15 +1,26 @@
-import { useState } from 'react';
-import PropTypes from 'prop-types';
+import { useState, useContext, useMemo } from 'react';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../../OrderDetails/OrderDetails';
-import cardProp from '../../utils/propTypes';
 import styles from './BurgerConstructor.module.scss';
+import { BurgerIngredientsContext } from '../../utils/context';
 
-const BurgerConstructor = ({data}) => {
+
+const BurgerConstructor = () => {
     const [modal, modalSet] = useState(false);
     const openModal = () => modalSet(!modal);
     const closeModal = () => modalSet(!modal);
+    const ingredients = useContext(BurgerIngredientsContext);
+    const bun = useMemo(() => {
+        return ingredients.filter((item) => item.type === 'bun');
+    }, [ingredients])[1];
+    const ingredientsWithoutBun = useMemo(() => {
+        return ingredients.filter((item) => item.type !== 'bun').slice(1, 7);
+    }, [ingredients]);
+    const totalPrice = useMemo(() => {
+        return bun?.price * 2 + ingredientsWithoutBun.reduce((sum, item) => sum + item.price, 0);
+    }, [bun, ingredients]);
+    console.log(totalPrice);
     return(
         <section className={`${styles.burger__constructor} ml-4`}>
             <ul className={styles.burger__container}>
@@ -23,7 +34,7 @@ const BurgerConstructor = ({data}) => {
                     />
                 </li>
                 <ul className={`${styles.burger__list} pr-2`}>
-                    {data.map((item) => {
+                    {ingredients.map((item) => {
                         if(item.type !== 'bun') {
                             return(
                                 <li key={item._id} className={styles.burger__item}>
@@ -62,10 +73,6 @@ const BurgerConstructor = ({data}) => {
             </div>
         </section>
     );
-};
-
-BurgerConstructor.propTypes = {
-    data: PropTypes.arrayOf(cardProp).isRequired,
 };
 
 export default BurgerConstructor;

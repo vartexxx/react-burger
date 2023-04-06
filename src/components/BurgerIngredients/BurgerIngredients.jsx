@@ -2,11 +2,11 @@ import { useContext, useMemo, useState, createContext } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
 import styles from './BurgerIngredients.module.scss';
-import { IngredientsContext } from '../../utils/context';
+import { BurgerIngredientsContext } from '../../utils/context';
 
 
 const BurgerIngredients = () => {
-    const ingredients = useContext(IngredientsContext);
+    const ingredients = useContext(BurgerIngredientsContext);
     const { bun, sauce, main } = useMemo(() => {
         return ingredients.reduce((count, item) => {
             if(item.type === 'bun') {
