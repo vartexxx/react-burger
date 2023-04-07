@@ -2,6 +2,7 @@ import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
 import Card from '../Card/Card';
 import styles from './BurgerIngredientsList.module.scss';
+import cardProp from '../../utils/propTypes';
 
 
 const BurgerIngredientsList = forwardRef((props, ref) => {
@@ -20,6 +21,8 @@ const BurgerIngredientsList = forwardRef((props, ref) => {
 BurgerIngredientsList.propTypes = {
     title: PropTypes.string.isRequired,
     id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    data: PropTypes.arrayOf(cardProp),
 };
 
 export default BurgerIngredientsList;

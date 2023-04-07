@@ -1,15 +1,14 @@
-import { useMemo, useState } from 'react';
-import PropTypes from 'prop-types';
+import { useContext, useMemo, useState, createContext } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
-import cardProp from '../../utils/propTypes';
 import styles from './BurgerIngredients.module.scss';
+import { BurgerIngredientsContext } from '../../utils/context';
 
 
-const BurgerIngredients = ({data}) => {
-
+const BurgerIngredients = () => {
+    const ingredients = useContext(BurgerIngredientsContext);
     const { bun, sauce, main } = useMemo(() => {
-        return data.reduce((count, item) => {
+        return ingredients.reduce((count, item) => {
             if(item.type === 'bun') {
                 count.bun.push(item);
             }
@@ -20,13 +19,13 @@ const BurgerIngredients = ({data}) => {
                 count.main.push(item);
             }
             return count;
-        }, {bun: [], sauce: [], main: [] }
+            }, {bun: [], sauce: [], main: [] }
         )
-    });
+    }, [ingredients]);
     const [current, setCurrent] = useState('bun');
-    const scrollToTab = (data) => {
-        setCurrent(data);
-        document.querySelector(`#${data}`).scrollIntoView({behavior: 'smooth'});
+    const scrollToTab = (id) => {
+        setCurrent(id);
+        document.querySelector(`#${id}`).scrollIntoView({behavior: 'smooth'});
     }
 
     return (
@@ -67,10 +66,6 @@ const BurgerIngredients = ({data}) => {
             </div>
         </section>
     );
-};
-
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(cardProp).isRequired,
 };
 
 export default BurgerIngredients;

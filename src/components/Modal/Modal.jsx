@@ -5,12 +5,13 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import styles from './Modal.module.scss';
 
+
 const modalRoot = document.querySelector('#modal');
 
 const Modal = ({onClose, children}) => {
     const handleEscClose = (evt) => {
         if(evt.key === 'Escape') {
-            onClose();
+            onClose(evt);
         }
     };
     useEffect(() => {
@@ -34,6 +35,7 @@ const Modal = ({onClose, children}) => {
 
 Modal.propTypes = {
     onClose: PropTypes.func.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default Modal;
