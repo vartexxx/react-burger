@@ -1,8 +1,4 @@
-import {
-    GET_INGREDIENTS,
-    GET_INGREDIENTS_STATUS_OK,
-    GET_INGREDIENTS_STATUS_ERR
-} from "../../utils/constants";
+import { GET_INGREDIENTS, GET_INGREDIENTS_STATUS_OK, GET_INGREDIENTS_STATUS_ERR } from "../actions/burgerIngredientsAction"
 
 
 const burgerIngredientsInitialState = {

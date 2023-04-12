@@ -6,7 +6,7 @@ import styles from './App.module.scss';
 import getIngredients from '../../services/actions/burgerIngredientsAction';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 
 function App() {

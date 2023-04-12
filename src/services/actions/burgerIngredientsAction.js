@@ -1,9 +1,7 @@
 import { getApi } from "../../utils/api";
-import {
-    GET_INGREDIENTS,
-    GET_INGREDIENTS_STATUS_OK,
-    GET_INGREDIENTS_STATUS_ERR
-} from "../../utils/constants";
+export const GET_INGREDIENTS = 'GET_INGREDIENTS';
+export const GET_INGREDIENTS_STATUS_OK = 'GET_INGREDIENTS_STATUS_OK';
+export const GET_INGREDIENTS_STATUS_ERR = 'GET_INGREDIENTS_STATUS_ERR';
 
 
 export default function getIngredients() {
