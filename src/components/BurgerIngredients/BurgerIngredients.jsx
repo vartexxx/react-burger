@@ -1,12 +1,20 @@
-import { useContext, useMemo, useState, createContext } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
 import styles from './BurgerIngredients.module.scss';
-import { BurgerIngredientsContext } from '../../utils/context';
+import { useInView } from "react-intersection-observer";
+import { useSelector } from 'react-redux';
 
 
 const BurgerIngredients = () => {
-    const ingredients = useContext(BurgerIngredientsContext);
+    const [bunRef, inViewBun] = useInView({ threshold: 0 });
+    const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
+    const [mainRef, inViewMain] = useInView({ threshold: 0 });
+
+    const ingredients = useSelector(
+        (store) => store.burgerIngredientsReducer.burgerIngredientsList
+    );
+
     const { bun, sauce, main } = useMemo(() => {
         return ingredients.reduce((count, item) => {
             if(item.type === 'bun') {
@@ -22,11 +30,23 @@ const BurgerIngredients = () => {
             }, {bun: [], sauce: [], main: [] }
         )
     }, [ingredients]);
+
     const [current, setCurrent] = useState('bun');
+
     const scrollToTab = (id) => {
         setCurrent(id);
         document.querySelector(`#${id}`).scrollIntoView({behavior: 'smooth'});
     }
+
+    useEffect(() => {
+        if(inViewBun) {
+            setCurrent('bun')
+        } else if (inViewSauce) {
+            setCurrent('sauce')
+        } else {
+            setCurrent('main')
+        }
+    }, [inViewBun, inViewSauce, inViewMain]);
 
     return (
         <section className={styles.ingredients} >
@@ -49,18 +69,21 @@ const BurgerIngredients = () => {
                         type='bun'
                         data={bun}
                         id='bun'
+                        ref={bunRef}
                     />
                     <BurgerIngredientsList
                         title='Соусы'
                         type='sauce'
                         data={sauce}
                         id='sauce'
+                        ref={sauceRef}
                     />
                     <BurgerIngredientsList
                         title='Начинки'
                         type='main'
                         data={main}
                         id='main'
+                        ref={mainRef}
                     />
                 </div>
             </div>
