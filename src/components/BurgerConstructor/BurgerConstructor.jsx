@@ -3,44 +3,40 @@ import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktiku
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.scss';
-import { BurgerIngredientsContext } from '../../utils/context';
-import { postApi } from '../../utils/api';
+import { makeOrder } from '../../services/actions/burgerOrderAction';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const BurgerConstructor = () => {
+    const dispatch = useDispatch();
+    const bun = useSelector(
+        (store) => store.burgerConstructorReducer.burgerConstructorBun
+    );
+    const burgerList = useSelector(
+        (store) => store.burgerConstructorReducer.burgerConstructorList
+    );
+    const order = useSelector(
+        (store) => store.burgerOrderReducer.order
+    )
+    const ingredients = useSelector(
+        (store) => store.burgerConstructorReducer
+    )
+    const bunPrice = useMemo(() =>{
+        return bun === undefined ? 0 : bun.price * 2
+    }, [bun]);
+    const burgerListPrice = useMemo(() => {
+        return burgerList.reduce((sum, item) => sum + item.pirce, 0);
+    }, [burgerList]);
+    const totalPrice = useMemo(() => {
+        return bun === undefined ? burgerListPrice : burgerListPrice + bunPrice
+    }, [bunPrice, burgerListPrice, bun]);
+
     const [modal, setModal] = useState(false);
     const [orderNumber, setOrderNumber] = useState(undefined);
     const [error, setError] = useState('');
-    const ingredients = useContext(BurgerIngredientsContext);
-    
-    const bun = useMemo(() => {
-        return ingredients.filter((item) => item.type === 'bun');
-    }, [ingredients])[1];
-
-    const ingredientsWithoutBun = useMemo(() => {
-        return ingredients.filter((item) => item.type !== 'bun').slice(1, 7);
-    }, [ingredients]);
-
-    const totalPrice = useMemo(() => {
-        return bun?.price * 2 + ingredientsWithoutBun.reduce((sum, item) => sum + item.price, 0);
-    }, [bun, ingredients]);
 
     const toggleModal = () => {
         setModal((prevModal) => !prevModal)
-    };
-
-    const makeOrder = () => {
-        const data = [bun?._id].concat(ingredientsWithoutBun.map((item) => item._id));
-        postApi(data)
-            .then((res) => {
-                setOrderNumber(res.order.number)
-            })
-            .then(() => {
-                toggleModal()
-            })
-            .catch((err) => {
-                setError(err);
-            })
     };
 
     return(
@@ -56,7 +52,7 @@ const BurgerConstructor = () => {
                     />
                 </li>
                 <ul className={`${styles.burger__list} pr-2`}>
-                    {ingredientsWithoutBun.map((item) => {
+                    {burgerList.map((item) => {
                         return(
                             <li key={item._id} className={styles.burger__item}>
                                 <DragIcon type="primary" />
@@ -84,13 +80,13 @@ const BurgerConstructor = () => {
                     <p className="text text_type_digits-medium">{totalPrice}</p>
                     <CurrencyIcon type="primary" />
                 </div>
-                <Button onClick={makeOrder} htmlType='button' type='primary' size='large'>Оформить заказ</Button>
+                <Button onClick={() => dispatch(makeOrder(ingredients))} htmlType='button' type='primary' size='large'>Оформить заказ</Button>
                 {error && (
                     alert(`Произошла ошибка при отправке запроса: ${error}`)
                 )}
                 {modal && (
                         <Modal onClose={toggleModal}>
-                            <OrderDetails orderNumber={orderNumber}/>
+                            {/* <OrderDetails orderNumber={orderNumber}/> */}
                         </Modal>
                 )}
             </div>
