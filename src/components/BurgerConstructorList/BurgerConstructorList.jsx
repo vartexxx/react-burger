@@ -6,23 +6,21 @@ import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burg
 
 
 export default function BurgerConstructorList({filling}) {
-    const dispatch = useDispatch()
-    console.log(filling)
-    return (
-        <Reorder.Item
-            whileDrag={{ scale: 0.9 }}
-            value={filling}
-            className={styles.element}
-        >
-            <DragIcon />
-            <ConstructorElement
-              text={filling.name}
-              price={filling.price}
-              thumbnail={filling.image}
-              handleClose={() =>
-                dispatch({ type: DELETE, payload: filling })
-              }
-            />
-      </Reorder.Item>
-    )
+  const dispatch = useDispatch()
+  return (
+    <Reorder.Item
+      value={filling}
+      className={styles.element} //Задать стиль
+    >
+      <DragIcon />
+      <ConstructorElement
+        text={filling.name}
+        price={filling.price}
+        thumbnail={filling.image}
+        handleClose={() =>
+          dispatch({ type: DELETE, payload: filling })
+        }
+      />
+    </Reorder.Item>
+  )
 }

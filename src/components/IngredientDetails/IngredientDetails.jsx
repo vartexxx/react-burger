@@ -1,10 +1,12 @@
-import cardProp from '../../utils/propTypes';
 import styles from './IngredientDetails.module.scss';
 import { useSelector } from 'react-redux';
+
+
 const IngredientDetails = () => {
     const ingredient = useSelector(
         (store) => store.burgerCurrentIngredientReducer.currentIngredient
     );
+
     return (
         <>
             <p className={`${styles.details__title} ml-10 mt-10 text text_type_main-large`}>Детали ингредиента</p>
@@ -32,8 +34,5 @@ const IngredientDetails = () => {
     );
 };
 
-IngredientDetails.propTypes = {
-    data: cardProp,
-};
 
 export default IngredientDetails;

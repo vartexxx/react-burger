@@ -52,12 +52,12 @@ const BurgerIngredients = () => {
             setCurrent('main')
         }
     }, [inViewBun, inViewSauce, inViewMain]);
+
     const currenIngredient = useSelector(
         (store) => store.burgerCurrentIngredientReducer.currentIngredient
-      );
+    );
     
-      function closeModal(e) {
-        e.stopPropagation();
+    const closeModal = () => {
         dispatch({ type: RESET_INGREDIENT_INFO });
     }
 
@@ -101,10 +101,10 @@ const BurgerIngredients = () => {
                 </div>
             </div>
             {currenIngredient && (
-        <Modal onCloseModal={closeModal}>
-          <IngredientDetails />
-        </Modal>
-      )}
+                <Modal onClose={closeModal}>
+                <IngredientDetails />
+                </Modal>
+            )}
         </section>
     );
 };

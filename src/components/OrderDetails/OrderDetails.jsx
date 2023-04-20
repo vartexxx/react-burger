@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types'
 import img from '../../images/ok.svg';
 import { useSelector } from 'react-redux';
 
 
 const OrderDetails = () => {
-    const { order, orderError } =useSelector((store) => ({
+    const { order, orderError } = useSelector((store) => ({
         order: store.burgerOrderReducer.order,
         orderError: store.burgerOrderReducer.orderError,
     }))
+
     return (
         <>
             {orderError && (
