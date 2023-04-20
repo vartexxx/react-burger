@@ -8,22 +8,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ADD, DELETE, SORT } from '../../services/actions/burgerConstructorAction';
 import { v4 as uuidv4 } from 'uuid';
 import { Reorder } from "framer-motion"
+import { useDrop } from 'react-dnd';
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
-    // const bun = useSelector(
-    //     (store) => store.burgerConstructorReducer.burgerConstructorBun
-    // );
-    // const burgerList = useSelector(
-    //     (store) => store.burgerConstructorReducer.burgerConstructorList
-    // );
     const { bun, burgerList } = useSelector((store) => ({
         bun: store.burgerConstructorReducer.burgerConstructorBun,
         burgerList: store.burgerConstructorReducer.burgerConstructorList,
     }))
-    // const order = useSelector(
-    //     (store) => store.burgerOrderReducer.order
-    // )
+    console.log(bun)
     const ingredients = useSelector(
         (store) => store.burgerConstructorReducer
     )
@@ -38,8 +31,8 @@ const BurgerConstructor = () => {
     }, [bunPrice, burgerListPrice, bun]);
 
     function onDropHandler(ingredient) {
-        dispatch({ type: ADD_INGREDIENT, id: uuidv4(), payload: ingredient });
-      }
+        dispatch({ type: ADD, id: uuidv4(), payload: ingredient });
+    }
     
     const [{ isHover }, dropTarget] = useDrop({
         accept: "ingredients",
