@@ -1,15 +1,32 @@
 .burger {
     //burger__constructor
     &__constructor {
-        max-width: 620px;
+        width: 600px;
+        padding-top: 100px;
+        padding-left: 16px;
     }
     //burger__container
     &__container {
-        padding-top: 100px;
         display: flex;
         flex-direction: column;
         gap: 16px;
-        align-items: center;
+        overflow-y: scroll;
+        max-height: 464px;
+        margin: 0;
+        padding: 0 8px 0 0;
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        //burger__list::-webkit-scrollbar-track
+        &::-webkit-scrollbar-track {
+            background-color: #2f2f37;
+        }
+        //burger__list::-webkit-scrollbar-thumb
+        &::-webkit-scrollbar-thumb {
+            height: 292px;
+            background: #8585ad;
+            border: 3px solid #8585ad;
+        }
     }
     //burger__item
     &__item {
@@ -26,21 +43,16 @@
         display: flex;
         flex-direction: column;
         gap: 16px;
-        overflow-y: scroll;
-        height: 464px;
-        //burger__list::-webkit-scrollbar
-        &::-webkit-scrollbar {
-            width: 8px;
-        }
-        //burger__list::-webkit-scrollbar-track
-        &::-webkit-scrollbar-track {
-            background-color: #2f2f37;
-        }
-        //burger__list::-webkit-scrollbar-thumb
-        &::-webkit-scrollbar-thumb {
-            height: 292px;
-            background: #8585ad;
-            border: 3px solid #8585ad;
+        margin: 0;
+        padding: 0;
+        &_hover {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin: 0;
+            padding: 0;
+            box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
+            0px 0px 8px 8px rgba(51, 51, 255, 0.25);
         }
     }
     //burger__order
@@ -57,16 +69,13 @@
         gap: 8px;
     }
     //burger__lists
-    &__lists {
+    &__list_hover {
         display: flex;
         flex-direction: column;
         gap: 16px;
         margin: 0;
         padding: 0;
-        //burger__lists_hover
-        &_hover {
-            box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
-            0px 0px 8px 8px rgba(51, 51, 255, 0.25);
-        }
+        box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
+        0px 0px 8px 8px rgba(51, 51, 255, 0.25);
     }
 }

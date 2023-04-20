@@ -4,12 +4,17 @@ import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsLis
 import styles from './BurgerIngredients.module.scss';
 import { useInView } from "react-intersection-observer";
 import { useSelector } from 'react-redux';
+import Modal from '../Modal/Modal';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import { useDispatch } from 'react-redux';
+import { RESET_INGREDIENT_INFO } from '../../services/actions/burgerCurrentIngredientAction';
 
 
 const BurgerIngredients = () => {
     const [bunRef, inViewBun] = useInView({ threshold: 0 });
     const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
     const [mainRef, inViewMain] = useInView({ threshold: 0 });
+    const dispatch = useDispatch();
 
     const ingredients = useSelector(
         (store) => store.burgerIngredientsReducer.burgerIngredientsList
@@ -47,6 +52,14 @@ const BurgerIngredients = () => {
             setCurrent('main')
         }
     }, [inViewBun, inViewSauce, inViewMain]);
+    const currenIngredient = useSelector(
+        (store) => store.burgerCurrentIngredientReducer.currentIngredient
+      );
+    
+      function closeModal(e) {
+        e.stopPropagation();
+        dispatch({ type: RESET_INGREDIENT_INFO });
+    }
 
     return (
         <section className={styles.ingredients} >
@@ -87,6 +100,11 @@ const BurgerIngredients = () => {
                     />
                 </div>
             </div>
+            {currenIngredient && (
+        <Modal onCloseModal={closeModal}>
+          <IngredientDetails />
+        </Modal>
+      )}
         </section>
     );
 };

@@ -9,9 +9,9 @@ export const BURGER_ORDER_RESET = 'BURGER_ORDER_RESET';
 export function makeOrder(ingredients) {
     return function (dispatch) {
         const orderList = [
-            ingredients.burgerConstructorBun._id,
-            ...ingredients.burgerConstructorList.map((item) => item._id),
-            ingredients.burgerConstructorBun._id,
+            ingredients.burgerConstructorBunElement._id,
+            ...ingredients.burgerConstructorFillingList.map((item) => item._id),
+            ingredients.burgerConstructorBunElement._id,
         ]
         dispatch({ type: BURGER_ORDER_GET })
         postApi(orderList)

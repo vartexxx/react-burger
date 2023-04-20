@@ -3,8 +3,7 @@ import { BURGER_ORDER_GET, BURGER_ORDER_OK, BURGER_ORDER_FAILED, BURGER_ORDER_RE
 
 const burgerOrderInitialState = {
     order: undefined,
-    orderRequest: false,
-    orderFailedText: undefined,
+    orderError: undefined,
 }
 
 export default function burgerOrderReducer(state = burgerOrderInitialState, action) {
@@ -22,7 +21,6 @@ export default function burgerOrderReducer(state = burgerOrderInitialState, acti
         case BURGER_ORDER_FAILED:
             return {
                 ...state,
-                orderRequest: false,
                 orderFailedText: action.error,
             }
         case BURGER_ORDER_RESET:

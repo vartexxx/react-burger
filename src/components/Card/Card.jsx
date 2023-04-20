@@ -23,13 +23,13 @@ const Card = memo(function Card({ingredient}){
         const counters = {};
         burgerIngredients.burgerIngredientsList.forEach((ingredient) => {
           counters[ingredient._id] =
-            burgerConstructorIngredients.burgerConstructorList.filter(
+            burgerConstructorIngredients.burgerConstructorFillingList.filter(
               (constructorItem) => constructorItem._id === ingredient._id
             ).length;
         });
-        if (burgerConstructorIngredients.burgerConstructorBun) {
+        if (burgerConstructorIngredients.burgerConstructorBunElement) {
           counters[
-            burgerConstructorIngredients.burgerConstructorBun._id
+            burgerConstructorIngredients.burgerConstructorBunElement._id
           ] = 2;
         }
         return counters;
@@ -57,12 +57,6 @@ const Card = memo(function Card({ingredient}){
                 <CurrencyIcon />
             </div>
             <p className="text text_type_main-default">{ingredient.name}</p>
-        
-        {/* {modal && (
-            <Modal onClose={closeModal}>
-                <IngredientDetails data={props.data} />
-            </Modal>
-        )} */}
         </div>
     );
 });
