@@ -5,6 +5,7 @@
         padding-top: 100px;
         padding-left: 16px;
     }
+    //burger__empty
     &__empty {
         display: flex;
         border: 3px solid #8585ad;
@@ -12,6 +13,7 @@
         min-height: 150px;
         align-items: center;
         justify-content: center;
+        //burger__empty_hover
         &_hover {
             display: flex;
             align-items: center;
@@ -19,22 +21,6 @@
             border: 3px solid #8585ad;
             min-width: 500px;
             min-height: 150px;
-            box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
-            0px 0px 8px 8px rgba(51, 51, 255, 0.25);
-        }
-    }
-    &__ingredients {
-        display: flex;
-        width: 100%;
-        border: 3px #8484897f dashed;
-        width: 584px;
-        min-height: 100px;
-        &_hover {
-            display: flex;
-            width: 100%;
-            border: 3px #8484897f dashed;
-            width: 584px;
-            min-height: 100px;
             box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
             0px 0px 8px 8px rgba(51, 51, 255, 0.25);
         }
@@ -61,16 +47,6 @@
             background: #8585ad;
             border: 3px solid #8585ad;
         }
-    }
-    //burger__item
-    &__item {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-    }
-    //burger__bun
-    &__bun {
-        padding-left: 30px;
     }
     //burger__list
     &__list {
@@ -102,16 +78,18 @@
         align-items: center;
         gap: 8px;
     }
-    //burger__lists
-    &__list_hover {
+    //burger__getorder
+    &__getorder {
         display: flex;
-        flex-direction: column;
-        gap: 16px;
-        margin: 0;
-        padding: 0;
-        box-shadow: 0px 0px 16px 8px rgba(51, 51, 255, 0.25),
-        0px 0px 8px 8px rgba(51, 51, 255, 0.25);
+        align-items: center;
+        justify-content: flex-end;
+        gap: 40px;
+        margin: 40px 16px 51px 0; 
+    }
+    //burger__getprice
+    &__getprice {
+        display: flex;
+        align-items: center;
+        gap: 8px;
     }
 }
-
-

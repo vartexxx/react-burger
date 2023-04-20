@@ -5,7 +5,7 @@ const burgerCurrentIngredientInitialState = {
     currentIngredient: undefined,
 }
 
-export default function burgerCurrentIngredientReducer(state=burgerCurrentIngredientInitialState, action) {
+const burgerCurrentIngredientReducer = (state=burgerCurrentIngredientInitialState, action) => {
     switch(action.type) {
         case SET_INGREDIENT_INFO:
             return {
@@ -20,4 +20,6 @@ export default function burgerCurrentIngredientReducer(state=burgerCurrentIngred
         default:
             return state
     }
-}
+};
+
+export default burgerCurrentIngredientReducer;

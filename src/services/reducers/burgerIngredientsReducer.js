@@ -6,7 +6,7 @@ const burgerIngredientsInitialState = {
     burgerIngredientsListErrorText: undefined,
 }
 
-export default function burgerIngredientsReducer(state = burgerIngredientsInitialState, action) {
+const burgerIngredientsReducer = (state = burgerIngredientsInitialState, action) => {
     switch(action.type) {
         case GET_INGREDIENTS:
             return {...state, burgerIngredientsListOk: true}
@@ -22,4 +22,6 @@ export default function burgerIngredientsReducer(state = burgerIngredientsInitia
         default:
             return state
     }
-}
+};
+
+export default burgerIngredientsReducer;

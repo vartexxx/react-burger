@@ -1,49 +1,42 @@
-import {
-    ADD,
-    DELETE,
-    SORT,
-  } from "../actions/burgerConstructorAction";
-  
-  const constructorInitialState = {
-    burgerConstructorBunElement: undefined,
-    burgerConstructorFillingList: [],
-  };
-  
-  export default function burgerConstructorReducer(
-    state = constructorInitialState,
-    action
-  ) {
-    switch (action.type) {
-      case ADD:
-        if (action.payload.type === "bun") {
-          return {
-            ...state,
-            burgerConstructorBunElement: action.payload,
-          };
+import { ADD, DELETE, SORT } from "../actions/burgerConstructorAction";
+
+
+const constructorInitialState = {
+  burgerConstructorBun: undefined,
+  burgerConstructorList: [],
+};
+
+const burgerConstructorReducer = ( state = constructorInitialState, action ) => {
+  switch (action.type) {
+    case ADD:
+      if (action.payload.type === "bun") {
+        return {
+          ...state,
+          burgerConstructorBun: action.payload,
+        };
+      }
+      return {
+        ...state,
+        burgerConstructorList: [
+          ...state.burgerConstructorList,
+          { constructorItemId: action.id, ...action.payload },
+        ],
+      }
+    case DELETE:
+      return {
+        ...state,
+        burgerConstructorList: state.burgerConstructorList.filter(
+          (item) => item.constructorItemId !== action.payload.constructorItemId
+        ),
+      }
+    case SORT:
+      return {
+          ...state,
+          burgerConstructorList: action.payload,
         }
-  
-        return {
-          ...state,
-          burgerConstructorFillingList: [
-            ...state.burgerConstructorFillingList,
-            { constructorItemId: action.id, ...action.payload },
-          ],
-        };
-  
-      case DELETE:
-        return {
-          ...state,
-          burgerConstructorFillingList: state.burgerConstructorFillingList.filter(
-            (item) => item.constructorItemId !== action.payload.constructorItemId
-          ),
-        };
-  
-      case SORT:
-        return {
-            ...state,
-            burgerConstructorFillingList: action.payload,
-          };
-      default:
-        return state;
-    }
+    default:
+      return state;
   }
+};
+
+export default burgerConstructorReducer;

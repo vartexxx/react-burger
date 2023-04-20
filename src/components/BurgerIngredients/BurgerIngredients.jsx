@@ -14,6 +14,7 @@ const BurgerIngredients = () => {
     const [bunRef, inViewBun] = useInView({ threshold: 0 });
     const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
     const [mainRef, inViewMain] = useInView({ threshold: 0 });
+
     const dispatch = useDispatch();
 
     const ingredients = useSelector(
@@ -41,7 +42,7 @@ const BurgerIngredients = () => {
     const scrollToTab = (id) => {
         setCurrent(id);
         document.querySelector(`#${id}`).scrollIntoView({behavior: 'smooth'});
-    }
+    };
 
     useEffect(() => {
         if(inViewBun) {

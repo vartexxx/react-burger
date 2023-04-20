@@ -1,26 +1,32 @@
 import { useDispatch } from "react-redux";
-import styles from './BurgerConstructorList.module.scss'
 import { Reorder } from "framer-motion";
 import { DELETE } from "../../services/actions/burgerConstructorAction";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import cardProp from "../../utils/propTypes";
 
 
-export default function BurgerConstructorList({filling}) {
-  const dispatch = useDispatch()
+const BurgerConstructorList = ({list}) => {
+  const dispatch = useDispatch();
+
   return (
     <Reorder.Item
-      value={filling}
-      className={styles.element} //Задать стиль
+      value={list}
     >
       <DragIcon />
       <ConstructorElement
-        text={filling.name}
-        price={filling.price}
-        thumbnail={filling.image}
+        text={list.name}
+        price={list.price}
+        thumbnail={list.image}
         handleClose={() =>
-          dispatch({ type: DELETE, payload: filling })
+          dispatch({ type: DELETE, payload: list })
         }
       />
     </Reorder.Item>
   )
-}
+};
+
+BurgerConstructorList.propTypes = {
+  list: cardProp
+};
+
+export default BurgerConstructorList;

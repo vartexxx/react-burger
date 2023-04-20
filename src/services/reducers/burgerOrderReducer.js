@@ -6,12 +6,11 @@ const burgerOrderInitialState = {
     orderError: undefined,
 }
 
-export default function burgerOrderReducer(state = burgerOrderInitialState, action) {
+const burgerOrderReducer = (state = burgerOrderInitialState, action) => {
     switch(action.type) {
         case BURGER_ORDER_GET:
             return {
                 ...state,
-                orderRequest: true,
             }
         case BURGER_ORDER_OK:
             return {
@@ -21,7 +20,7 @@ export default function burgerOrderReducer(state = burgerOrderInitialState, acti
         case BURGER_ORDER_FAILED:
             return {
                 ...state,
-                orderFailedText: action.error,
+                orderError: action.error,
             }
         case BURGER_ORDER_RESET:
             return {
@@ -31,4 +30,6 @@ export default function burgerOrderReducer(state = burgerOrderInitialState, acti
         default:
             return state
     }
-}
+};
+
+export default burgerOrderReducer;

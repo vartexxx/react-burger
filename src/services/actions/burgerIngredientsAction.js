@@ -1,10 +1,12 @@
 import { getApi } from "../../utils/api";
+
+
 export const GET_INGREDIENTS = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_STATUS_OK = 'GET_INGREDIENTS_STATUS_OK';
 export const GET_INGREDIENTS_STATUS_ERR = 'GET_INGREDIENTS_STATUS_ERR';
 
 
-export default function getIngredients() {
+const getIngredients = () => {
     return function (dispatch) {
         dispatch({ type: GET_INGREDIENTS})
         getApi()
@@ -16,3 +18,5 @@ export default function getIngredients() {
             })
     }
 };
+
+export default getIngredients;
