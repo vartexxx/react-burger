@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import AppHeader from '../AppHeader/AppHeader';
 import MainPage from '../../pages/MainPage/MainPage';
 import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import getIngredients from '../../services/actions/burgerIngredientsAction';
 
 
@@ -20,7 +21,7 @@ function App() {
       <AppHeader />
       <Routes>
         <Route path='/' element={<MainPage />} />
-
+        <Route path='/register' element={<RegisterPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
     </>

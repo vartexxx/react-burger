@@ -1,0 +1,29 @@
+.register {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    //register__form
+    &__form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        row-gap: 24px;
+    }
+    //register__container
+    &__container {
+        display: flex;
+    }
+    //register__login
+    &__login {
+        text-decoration: none;
+        color: #4C4CFF;
+        opacity: 1;
+        transition: opacity 0.3s;
+        :hover {
+            opacity: 0.7;
+        }
+        :active {
+            color: #fff;
+        }
+    }
+}
