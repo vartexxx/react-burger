@@ -17,6 +17,7 @@ const Card = memo(function Card({ingredient}){
     burgerIngredients: store.burgerIngredientsReducer,
   }));
 
+  //Оптимизировать.
   const counter = useMemo(() => {
     const counters = {};
     burgerIngredients.burgerIngredientsList.forEach((ingredient) => {

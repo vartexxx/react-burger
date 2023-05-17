@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react';
+import { useMemo } from 'react';
 import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerConstructor.module.scss';
 import { useDispatch, useSelector } from 'react-redux';
@@ -16,8 +16,6 @@ import PropTypes from "prop-types";
 const BurgerConstructor = () => {
     const dispatch = useDispatch();
 
-    const [orderSum, setOrderSum] = useState(0);
-
     const { bun, burgerList, order, ingredients } = useSelector((store) => ({
         bun: store.burgerConstructorReducer.burgerConstructorBun,
         burgerList: store.burgerConstructorReducer.burgerConstructorList,
@@ -25,15 +23,16 @@ const BurgerConstructor = () => {
         ingredients: store.burgerConstructorReducer,
     }));
 
-    const bunPrice = useMemo(() =>{
+    const bunPrice = useMemo(() => {
         return bun === undefined ? 0 : bun.price * 2
     }, [bun]);
 
-    useEffect(() => {
+    const orderSum = useMemo(() => {
         const sum = burgerList.reduce(
-          (sum, item) => sum + item.price, 0);
-        setOrderSum(sum + bunPrice);
-    }, [bun, burgerList]);
+            (sum, item) => sum + item.price, 0
+        );
+        return sum + bunPrice
+    }, [burgerList, bunPrice])
 
     const closeModal = () => {
         dispatch({ type: BURGER_ORDER_RESET });
