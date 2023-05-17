@@ -9,9 +9,9 @@ const BurgerIngredientsList = forwardRef((props, ref) => {
     return (
         <>
             <p id={props.id} ref={ref} className='text text_type_main-medium pt-10 pb-6'>{props.title}</p>
-            <div className={styles.container}>
+            <div className={styles.burger__container}>
                 {props.data.map((item) => {
-                    return <Card key={item._id} data={item} />
+                    return <Card key={item._id} ingredient={item} />
                 })}
             </div>
         </>

@@ -1,101 +1,125 @@
-import { useState, useContext, useMemo } from 'react';
-import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import Modal from '../Modal/Modal';
-import OrderDetails from '../OrderDetails/OrderDetails';
+import { useMemo } from 'react';
+import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './BurgerConstructor.module.scss';
-import { BurgerIngredientsContext } from '../../utils/context';
-import { postApi } from '../../utils/api';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { ADD, SORT } from '../../services/actions/burgerConstructorAction';
+import { v4 as uuidv4 } from 'uuid';
+import { Reorder } from "framer-motion"
+import { useDrop } from 'react-dnd';
+import BurgerConstructorList from '../BurgerConstructorList/BurgerConstructorList';
+import { BURGER_ORDER_RESET } from '../../services/actions/burgerOrderAction';
+import Modal from '../Modal/Modal';
+import makeOrder from '../../services/actions/burgerOrderAction';
+import OrderDetails from '../OrderDetails/OrderDetails';
+import PropTypes from "prop-types";
 
 const BurgerConstructor = () => {
-    const [modal, setModal] = useState(false);
-    const [orderNumber, setOrderNumber] = useState(undefined);
-    const [error, setError] = useState('');
-    const ingredients = useContext(BurgerIngredientsContext);
-    
-    const bun = useMemo(() => {
-        return ingredients.filter((item) => item.type === 'bun');
-    }, [ingredients])[1];
+    const dispatch = useDispatch();
 
-    const ingredientsWithoutBun = useMemo(() => {
-        return ingredients.filter((item) => item.type !== 'bun').slice(1, 7);
-    }, [ingredients]);
+    const { bun, burgerList, order, ingredients } = useSelector((store) => ({
+        bun: store.burgerConstructorReducer.burgerConstructorBun,
+        burgerList: store.burgerConstructorReducer.burgerConstructorList,
+        order: store.burgerOrderReducer.order,
+        ingredients: store.burgerConstructorReducer,
+    }));
 
-    const totalPrice = useMemo(() => {
-        return bun?.price * 2 + ingredientsWithoutBun.reduce((sum, item) => sum + item.price, 0);
-    }, [bun, ingredients]);
+    const bunPrice = useMemo(() => {
+        return bun === undefined ? 0 : bun.price * 2
+    }, [bun]);
 
-    const toggleModal = () => {
-        setModal((prevModal) => !prevModal)
+    const orderSum = useMemo(() => {
+        const sum = burgerList.reduce(
+            (sum, item) => sum + item.price, 0
+        );
+        return sum + bunPrice
+    }, [burgerList, bunPrice])
+
+    const closeModal = () => {
+        dispatch({ type: BURGER_ORDER_RESET });
     };
 
-    const makeOrder = () => {
-        const data = [bun?._id].concat(ingredientsWithoutBun.map((item) => item._id));
-        postApi(data)
-            .then((res) => {
-                setOrderNumber(res.order.number)
-            })
-            .then(() => {
-                toggleModal()
-            })
-            .catch((err) => {
-                setError(err);
-            })
+    const onDropHandler = (ingredient) => {
+        dispatch({ type: ADD, id: uuidv4(), payload: ingredient });
     };
+
+    const [{ isHover }, dropTarget] = useDrop({
+        accept: "ingredients",
+        drop(ingredient) {
+          onDropHandler(ingredient);
+        },
+        collect: (monitor) => ({
+          isHover: monitor.isOver(),
+        }),
+    });
 
     return(
-        <section className={`${styles.burger__constructor} ml-4`}>
-            <ul className={styles.burger__container}>
-                <li className='pl-2'>
+        <section ref={dropTarget} className={`${styles.burger__constructor} ml-4`}>
+            {!bun ? (
+                <div className={isHover ? styles.burger__empty_hover : styles.burger__empty}>
+                    <p className='text text_type_main-medium'>Добавьте булочки и ингредиенты 👈👈👈</p>
+                </div>
+            ) : (
+                <ul ref={dropTarget} className={isHover ? styles.burger__list_hover : styles.burger__list}>
                     <ConstructorElement 
                         type='top'
                         isLocked={true}
-                        text={`${bun?.name} (верх)`}
-                        price={Number(bun?.price)}
+                        text={`${bun.name} (верх)`}
+                        price={bun.price}
                         thumbnail={String(bun?.image)}
+                        extraClass='ml-5'
                     />
-                </li>
-                <ul className={`${styles.burger__list} pr-2`}>
-                    {ingredientsWithoutBun.map((item) => {
-                        return(
-                            <li key={item._id} className={styles.burger__item}>
-                                <DragIcon type="primary" />
-                                <ConstructorElement 
-                                    text={item.name}
-                                    price={item.price}
-                                    thumbnail={item.image}
-                                />
-                            </li>
-                        )
-                    })}
-                </ul>
-                <li className='pl-2'>
+                    <Reorder.Group
+                        axis='y'
+                        className={styles.burger__container}
+                        values={burgerList}
+                        onReorder={(sortFillingList) => dispatch(
+                            {type: SORT, payload: sortFillingList}
+                        )}
+                    >
+                        {burgerList.map((item) => {
+                            return(<BurgerConstructorList key={item.constructorItemId} list={item} />)
+                        })}
+                    </Reorder.Group>
                     <ConstructorElement
                         type='bottom'
                         isLocked={true}
-                        text={`${bun?.name} (низ)`}
-                        price={Number(bun?.price)}
+                        text={`${bun.name} (низ)`}
+                        price={bun.price}
                         thumbnail={String(bun?.image)}
+                        extraClass='ml-5'
                     />
-                </li>
-            </ul>
+                </ul>  
+            )}
             <div className={`${styles.burger__order} mt-10 mr-4`}>
                 <div className={styles.burger__price}>
-                    <p className="text text_type_digits-medium">{totalPrice}</p>
-                    <CurrencyIcon type="primary" />
+                    <div className={styles.burger__getorder}>
+                        <div className={styles.burger__getprice}>
+                            <p className="text text_type_digits-medium">{orderSum}</p>
+                            <CurrencyIcon type="primary" />
+                        </div>
+                        <Button
+                            htmlType="button"
+                            type="primary"
+                            size="large"
+                            onClick={() => dispatch(makeOrder(ingredients))}
+                            disabled={!ingredients.burgerConstructorBun}
+                        >
+                            Оформить заказ
+                        </Button>
+                        {order && (
+                            <Modal onClose={closeModal}>
+                                <OrderDetails />
+                            </Modal>
+                        )}
+                    </div>
                 </div>
-                <Button onClick={makeOrder} htmlType='button' type='primary' size='large'>Оформить заказ</Button>
-                {error && (
-                    alert(`Произошла ошибка при отправке запроса: ${error}`)
-                )}
-                {modal && (
-                        <Modal onClose={toggleModal}>
-                            <OrderDetails orderNumber={orderNumber}/>
-                        </Modal>
-                )}
             </div>
         </section>
     );
 };
+
+BurgerConstructor.propTypes = {
+    orderSum: PropTypes.number,
+}
 
 export default BurgerConstructor;
