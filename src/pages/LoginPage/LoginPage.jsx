@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components"
-import { Link, NavLink } from "react-router-dom"
+import { Link } from "react-router-dom"
 import styles from './LoginPage.module.scss';
 
 
@@ -42,6 +42,5 @@ const LoginPage = () => {
         </section>
     )
 }
-
 
 export default LoginPage;
