@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from './ForgotPasswordPage.module.scss';
 
+
 const ForgotPasswordPage = () => {
     const [inputInfo, setInputInfo] = useState('');
     return (

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import styles from './NotFoundPage.module.scss';
 
+
 const NotFoundPage = () => {
     return (
         <div className={styles.nf__container}>

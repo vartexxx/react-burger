@@ -8,8 +8,8 @@ import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import LoginPage from '../../pages/LoginPage/LoginPage';
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage';
 import ResetPasswordPage from '../../pages/ResetPasswordPage/ResetPasswordPage';
+import IngredientPage from '../../pages/IngredientPage/IngredientPage';
 import getIngredients from '../../services/actions/burgerIngredientsAction';
-
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
       <AppHeader />
       <Routes>
         <Route path='/' element={<MainPage />} />
+        <Route path='/ingredients/:id' element={<IngredientPage />} />
         <Route path='/register' element={<RegisterPage />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/forgot-password' element={<ForgotPasswordPage />} />

@@ -1,12 +1,9 @@
-import styles from './IngredientDetails.module.scss';
 import { useSelector } from 'react-redux';
+import styles from './IngredientDetails.module.scss';
 
 
 const IngredientDetails = () => {
-    const ingredient = useSelector(
-        (store) => store.burgerCurrentIngredientReducer.currentIngredient
-    );
-
+    const ingredient = useSelector((store) => store.burgerCurrentIngredientReducer.currentIngredient)
     return (
         <>
             <p className={`${styles.details__title} ml-10 mt-10 text text_type_main-large`}>Детали ингредиента</p>

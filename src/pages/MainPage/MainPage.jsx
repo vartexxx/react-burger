@@ -1,18 +1,32 @@
-import { HTML5Backend } from "react-dnd-html5-backend";
-import { DndProvider } from "react-dnd";
-import BurgerIngredients from "../../components/BurgerIngredients/BurgerIngredients";
-import BurgerConstructor from "../../components/BurgerConstructor/BurgerConstructor";
-import styles from './MainPage.module.scss';
+import Main from "../../components/Main/Main";
+import IngredientDetails from "../../components/IngredientDetails/IngredientDetails";
+import Modal from '../../components/Modal/Modal';
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { RESET_INGREDIENT_INFO } from "../../services/actions/burgerCurrentIngredientAction";
+import { useSelector } from "react-redux";
 
 
 const MainPage = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const ingredient = useSelector(
+        (store) => store.burgerCurrentIngredientReducer.currentIngredient
+    );
+    function closeModal(e) {
+        e.stopPropagation();
+        dispatch({ type: RESET_INGREDIENT_INFO });
+        navigate("/");
+    }
     return (
-        <DndProvider backend={HTML5Backend}>
-            <main className={styles.main}>
-                <BurgerIngredients />
-                <BurgerConstructor />
-            </main>
-        </DndProvider>
+        <>
+            <Main />
+            {ingredient && (
+                <Modal onCloseModal={closeModal}>
+                    <IngredientDetails />
+                </Modal>
+            )}
+        </>
     )
 }
 

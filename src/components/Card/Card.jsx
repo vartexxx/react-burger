@@ -1,11 +1,10 @@
 import { memo, useMemo } from "react";
-import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useSelector, useDispatch } from "react-redux";
+import { useDrag } from "react-dnd";
+import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
 import styles from './Card.module.scss';
 import { SET_INGREDIENT_INFO } from "../../services/actions/burgerCurrentIngredientAction";
-import { useSelector } from "react-redux";
-import { Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDrag } from "react-dnd";
-import { useDispatch } from "react-redux";
 import cardProp from "../../utils/propTypes";
 
 
@@ -46,12 +45,18 @@ const Card = memo(function Card({ingredient}){
     {getCounterInredient(ingredient._id) !== 0 && (
       <Counter count={getCounterInredient(ingredient._id)} size="default" />
     )}
-      <img ref={dragPreviewRef} className={`pl-4 pr-4`} src={ingredient.image} alt={ingredient.name} />
-      <div className={styles.card__price}>
-        <p className="text text_type_digits-default mt-1 mb-1">{ingredient.price}</p>
-        <CurrencyIcon />
-      </div>
-      <p className="text text_type_main-default">{ingredient.name}</p>
+      <Link
+        to={`/ingredients/${ingredient._id}`}
+        className={`text_color_primary ${styles.card__link}`}
+        state={{ from: "/" }}
+      >
+        <img ref={dragPreviewRef} className={`pl-4 pr-4`} src={ingredient.image} alt={ingredient.name} />
+        <div className={styles.card__price}>
+          <p className="text text_type_digits-default mt-1 mb-1">{ingredient.price}</p>
+          <CurrencyIcon />
+        </div>
+        <p className="text text_type_main-default">{ingredient.name}</p>
+      </Link>
     </div>
   );
 });

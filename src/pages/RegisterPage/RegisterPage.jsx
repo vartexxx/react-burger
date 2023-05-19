@@ -39,7 +39,7 @@ const RegisterPage = () => {
             <div className={`${styles.register__container}`}>
                 <p className={`text text_type_main-default text_color_inactive mr-2`}>Уже зарегистрированы?</p>
                 <div className={`${styles.register__login}`}>
-                    <Link className={`text text_type_main-default`} to='/login' >Войти</Link>
+                    <Link className={`${styles.register__login} text text_type_main-default`} to='/login' >Войти</Link>
                 </div>
             </div>
         </section>

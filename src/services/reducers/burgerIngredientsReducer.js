@@ -20,7 +20,7 @@ const burgerIngredientsReducer = (state = burgerIngredientsInitialState, action)
                 burgerIngredientsListErrorText: action.error,
             }
         default:
-            return state
+            { return state }
     }
 };
 
