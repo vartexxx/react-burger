@@ -1,14 +1,26 @@
 import { useState } from "react";
 import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components"
-import { Link } from "react-router-dom"
+import { Link, useLocation, Navigate } from "react-router-dom"
 import styles from './LoginPage.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import loginUserAction from "../../services/actions/loginUserAction";
 
 
 const LoginPage = () => {
     const [inputInfo, setInputInfo] = useState({ email: '', password: '' });
+    const dispatch = useDispatch();
+    const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
+    const location = useLocation();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(
+            loginUserAction(inputInfo.email, inputInfo.password)
+        )
+    }
+    if (isAuth) { return (<Navigate to={location.state?.from || '/'} />) }
     return (
         <section className={styles.login}>
-            <form className={`${styles.login__form} mt-20 mb-20`}>
+            <form className={`${styles.login__form} mt-20 mb-20`} onSubmit={onSubmit}>
                 <h2 className={`${styles.login__title} text text_type_main-medium mt-25`}>Вход</h2>
                 <EmailInput
                     type='email'

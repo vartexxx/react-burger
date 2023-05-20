@@ -1,13 +1,28 @@
 import { Input, Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react"
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import styles from './RegisterPage.module.scss';
+import { useDispatch, useSelector } from "react-redux";
+import userRegisterAction from "../../services/actions/registerUserAction";
+import { registerUser } from "../../utils/api";
 
 const RegisterPage = () => {
     const [inputInfo, setInputInfo] = useState({ name: '', email: '', password: '' });
+    const dispatch = useDispatch();
+    const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        dispatch(
+            userRegisterAction(inputInfo.name, inputInfo.email, inputInfo.password)
+        )
+    }
+    console.log(isAuth);
+    if (isAuth) {
+        return <Navigate to={'/'} />
+    }
     return (
         <section className={`${styles.register}`}>
-            <form className={`${styles.register__form} mt-20 mb-20`}>
+            <form className={`${styles.register__form} mt-20 mb-20`} onSubmit={onSubmit}>
                 <h2 className={`${styles.register__title} text text_type_main-medium mt-25`}>Регистрация</h2>
                 <Input
                     type='text'
