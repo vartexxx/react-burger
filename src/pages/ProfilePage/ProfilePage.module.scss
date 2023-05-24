@@ -1,0 +1,44 @@
+.profile {
+    //profile__container
+    &__container {
+        margin: auto;
+        max-width: 1280px;
+        display: flex;
+        gap: 60px;
+    }
+    //profile__navigation
+    &__navigation {
+        max-width: 320px;
+        display: flex;
+        flex-direction: column;
+        gap: 80px;
+    }
+    //profile__navlink
+    &__navlink {
+        display: flex;
+        flex-direction: column;
+    }
+    //profile__form
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+    }
+    //profile__buttons
+    &__buttons {
+        display: flex;
+        justify-content: flex-end;
+    }
+    //profile__link
+    &__link {
+        min-height: 64px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+    //profile__text
+    &__text {
+        color: #8585ad;
+        opacity: 0.4;
+    }
+}

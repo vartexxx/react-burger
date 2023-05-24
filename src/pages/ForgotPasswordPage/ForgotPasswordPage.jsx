@@ -1,24 +1,35 @@
 import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components"
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
 import styles from './ForgotPasswordPage.module.scss';
-
+import { useDispatch, useSelector } from "react-redux";
+import forgotPasswordAction from "../../services/actions/forgotPasswordAction";
 
 const ForgotPasswordPage = () => {
-    const [inputInfo, setInputInfo] = useState('');
+    const [email, setEmail] = useState('');
+    const dispatch = useDispatch();
+    const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
+    const forgotPasswordCodeSend = useSelector((store) => store.authorizeReducer.forgotPasswordCodeSend);
+    const location = useLocation();
+    const onSubmit = (e) => {
+        e.preventDefault();
+        if (email) { dispatch(forgotPasswordAction(email))}
+    }
+    if (isAuth) { return <Navigate to='/' />}
+    if (forgotPasswordCodeSend) { return <Navigate to={'/reset-password'} state={{prevName: location.pathname}} />}
     return (
         <section className={styles.forgot}>
-            <form className={`${styles.forgot__form} mt-20 mb-20`}>
+            <form className={`${styles.forgot__form} mt-20 mb-20`} onSubmit={onSubmit}>
                 <h2 className={`${styles.forgot__title} text text_type_main-medium mt-25`}>Восстановление пароля</h2>
                 <EmailInput
                     type='email'
                     placeholder='Укажите e-mail'
-                    value={inputInfo.email}
+                    value={email}
                     name='email'
                     error={false}
                     errorText='Ошибка в E-mail'
                     size='default'
-                    onChange={e => { setInputInfo(e.target.value) }}
+                    onChange={e => { setEmail(e.target.value) }}
                 />
                 <Button htmlType="submit" type="primary" size="medium">Восстановить</Button>
             </form>

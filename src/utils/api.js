@@ -1,3 +1,4 @@
+import { getCookie } from "./cookie";
 const url = 'https://norma.nomoreparties.space/api';
 
 const checkResponse = res => {
@@ -81,24 +82,24 @@ export function refreshUserToken(refreshToken) {
     .then((res) => checkResponse(res))
 }
   
-export function forgotUserPassword(data) {
+export function forgotUserPassword(email) {
     return fetch(`${url}/password-reset`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({email}),
     })
     .then((res) => checkResponse(res))
 }
 
-export function resetUserPassword(data) {
+export function resetUserPassword(password, token) {
     return fetch(`${url}/password-reset/reset`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({password, token}),
     })
     .then((res) => checkResponse(res))
 }
@@ -115,3 +116,14 @@ export function changeUserData(data, accessToken) {
     })
     .then((res) => checkResponse(res))
 }
+
+export function getUserRequest() {
+    return fetch(`${url}/auth/user`, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'authorization': `${getCookie('token')}`
+        }
+    })
+    .then((res) => checkResponse(res))
+};
