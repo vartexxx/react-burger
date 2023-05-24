@@ -1,7 +1,7 @@
-import { useDispatch } from "react-redux";
-import { Reorder } from "framer-motion";
-import { DELETE } from "../../services/actions/burgerConstructorAction";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Reorder } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { DELETE } from "../../services/actions/burgerConstructorAction";
 import cardProp from "../../utils/propTypes";
 
 

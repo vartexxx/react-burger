@@ -1,9 +1,9 @@
+import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { EmailInput, PasswordInput, Button } from "@ya.praktikum/react-developer-burger-ui-components"
-import { Link, useLocation, Navigate } from "react-router-dom"
-import styles from './LoginPage.module.scss';
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import loginUserAction from "../../services/actions/loginUserAction";
+import styles from './LoginPage.module.scss';
 
 
 const LoginPage = () => {
@@ -15,9 +15,10 @@ const LoginPage = () => {
         e.preventDefault();
         dispatch(
             loginUserAction(inputInfo.email, inputInfo.password)
-        )
-    }
-    if (isAuth) { return (<Navigate to={location.state?.from || '/'} />) }
+        );
+    };
+    if (isAuth) { return (<Navigate to={location.state?.from || '/'} />) };
+
     return (
         <section className={styles.login}>
             <form className={`${styles.login__form} mt-20 mb-20`} onSubmit={onSubmit}>
@@ -52,7 +53,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default LoginPage;

@@ -45,15 +45,13 @@ export function loginUser(email, password) {
     .then((res) => checkResponse(res))
 }
 
-export function logoutUser(refreshToken) {
+export function logoutUser() {
     return fetch(`${url}/auth/logout`, {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-            token: refreshToken,
-        }),
+        body: JSON.stringify({ token: localStorage.getItem('jwt') }),
     })
     .then((res) => checkResponse(res))
 }

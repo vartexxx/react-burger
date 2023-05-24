@@ -1,23 +1,29 @@
-import { PasswordInput, Input, Button } from "@ya.praktikum/react-developer-burger-ui-components"
+import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link, useLocation, Navigate } from "react-router-dom";
-import styles from './ResetPasswordPage.module.scss';
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import resetPasswrodAction from "../../services/actions/resetPasswordAction";
+import styles from './ResetPasswordPage.module.scss';
+
 
 const ResetPasswordPage = () => {
-    const [inputInfo, setInputInfo] = useState({ password: '', code: '' });
     const dispatch = useDispatch();
     const location = useLocation();
     const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
     const resetSuccess = useSelector((store) => store.authorizeReducer.resetPasswordSuccess);
     const prevName = location.state?.prevName;
+
+    const [inputInfo, setInputInfo] = useState({ password: '', code: '' });
+
     const onSubmit = (e) => {
         e.preventDefault();
         dispatch(resetPasswrodAction(inputInfo.password, inputInfo.code))
-    }
+    };
+
     if (!prevName || isAuth) { return (<Navigate to='/' />) };
+
     if (resetSuccess) { return (<Navigate to='/login'/>) };
+
     return (
         <section className={styles.reset}>
             <form className={`${styles.reset__form} mt-20 mb-20`} onSubmit={onSubmit}>

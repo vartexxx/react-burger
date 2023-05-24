@@ -1,14 +1,7 @@
 import {
-    registerUser,
-    loginUser,
-    logoutUser,
-    checkUserToken,
-    refreshUserToken,
-    forgotUserPassword,
-    resetUserPassword,
-    changeUserData
+    registerUser
 } from "../../utils/api";
-import { setCookie, getCookie, deleteCookie, parseCookie } from "../../utils/cookie";
+import { setCookie } from "../../utils/cookie";
 
 
 export const USER_REGISTER_REQUEST = 'USER_REGISTER_REQUEST';

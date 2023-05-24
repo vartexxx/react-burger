@@ -15,4 +15,10 @@
         flex-direction: column;
         align-items: center;
     }
+    &__text {
+        align-self: center;
+    }
+    &__image {
+        align-self: center;
+    }
 }

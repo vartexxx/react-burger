@@ -1,35 +1,45 @@
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate, NavLink, Outlet, useLocation } from "react-router-dom";
-import { useState } from "react"
-import { getCookie } from "../../utils/cookie";
+import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { changeUserData } from "../../utils/api";
-import { logoutUser } from "../../utils/api";
 import styles from './ProfilePage.module.scss';
-import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
+import logoutUserAction from "../../services/actions/logoutUserAction";
+
 
 const ProfilePage = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const location = useLocation()
-    const { user } = useSelector((store) => store.authorizeReducer)
+    const location = useLocation();
+
+    const { user } = useSelector((store) => store.authorizeReducer);
+
     const [userData, setUserDate] = useState(user);
     const [inputInfo, setInputInfo] = useState({ name: '', email: ''});
-    const refreshToken = getCookie('refreshToken');
+
     const onFormReset = () => {
         setUserDate({ name: user.name, email: user.email})
-    }
+    };
+
     const onFormChange = (e) => {
         setUserDate({...userData, [e.target.name]: e.target.value })
-    }
+    };
+
     const profileFormSubmit = (e) => {
         e.preventDefault();
         dispatch(
             changeUserData(userData)
-        )
+        );
+    };
+
+    const logoutUser = () => {
+        dispatch(logoutUserAction());
     }
+
     const checkButton = () => {
         return JSON.stringify(user) === JSON.stringify(userData)
-    }
+    };
+
     const activeStyle = {
         color: "#f2f2f3",
     };
@@ -41,24 +51,24 @@ const ProfilePage = () => {
                     <div className={styles.profile__navigation}>
                         <nav className={styles.profile__navlink}>
                             <NavLink
-                            to="/profile"
-                            className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
-                            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                to="/profile"
+                                className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
+                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
                             >
                                 Профиль
                             </NavLink>
                             <NavLink
-                            to="/profile/orders"
-                            className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
-                            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                to="/profile/orders"
+                                className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
+                                style={({ isActive }) => (isActive ? activeStyle : undefined)}
                             >
                                 История заказов
                             </NavLink>
                             <NavLink
-                            onClick={() =>
-                                dispatch(logoutUser(refreshToken, () => navigate('/login')))
-                            }
-                            className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
+                                onClick={() =>
+                                    dispatch(logoutUser(() => navigate('/login')))
+                                }
+                                className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
                             >
                                 Выход
                             </NavLink>
@@ -117,7 +127,7 @@ const ProfilePage = () => {
                 </div>
             </section>
         </>
-    )
+    );
 };
 
 export default ProfilePage;

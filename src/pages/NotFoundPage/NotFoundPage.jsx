@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 import styles from './NotFoundPage.module.scss';
 
 
@@ -11,7 +11,7 @@ const NotFoundPage = () => {
                 <Link className={`${styles.nf__back} text text_type_main-large`} to='/' >Вернуться на главную страницу</Link>
             </div>
         </div>
-    )
-}
+    );
+};
 
 export default NotFoundPage;

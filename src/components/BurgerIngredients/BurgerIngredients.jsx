@@ -1,13 +1,12 @@
-import { useMemo, useState, useEffect } from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
-import styles from './BurgerIngredients.module.scss';
+import { useEffect, useMemo, useState } from 'react';
 import { useInView } from "react-intersection-observer";
-import { useSelector } from 'react-redux';
-import Modal from '../Modal/Modal';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RESET_INGREDIENT_INFO } from '../../services/actions/burgerCurrentIngredientAction';
+import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
+import IngredientDetails from '../IngredientDetails/IngredientDetails';
+import Modal from '../Modal/Modal';
+import styles from './BurgerIngredients.module.scss';
 
 
 const BurgerIngredients = () => {

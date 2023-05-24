@@ -1,11 +1,10 @@
 .ingredient {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 720px;
     margin: 0 auto;
     //ingredient__container
     &__container {
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
         gap: 20px;
     }

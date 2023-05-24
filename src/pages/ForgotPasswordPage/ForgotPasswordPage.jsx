@@ -1,9 +1,10 @@
-import { EmailInput, Button } from "@ya.praktikum/react-developer-burger-ui-components"
+import { Button, EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useState } from "react";
-import { Link, Navigate, useLocation, useNavigate } from "react-router-dom";
-import styles from './ForgotPasswordPage.module.scss';
 import { useDispatch, useSelector } from "react-redux";
+import { Link, Navigate, useLocation } from "react-router-dom";
 import forgotPasswordAction from "../../services/actions/forgotPasswordAction";
+import styles from './ForgotPasswordPage.module.scss';
+
 
 const ForgotPasswordPage = () => {
     const [email, setEmail] = useState('');
@@ -14,9 +15,9 @@ const ForgotPasswordPage = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         if (email) { dispatch(forgotPasswordAction(email))}
-    }
-    if (isAuth) { return <Navigate to='/' />}
-    if (forgotPasswordCodeSend) { return <Navigate to={'/reset-password'} state={{prevName: location.pathname}} />}
+    };
+    if (isAuth) { return <Navigate to='/' /> };
+    if (forgotPasswordCodeSend) { return <Navigate to={'/reset-password'} state={{prevName: location.pathname}} />};
     return (
         <section className={styles.forgot}>
             <form className={`${styles.forgot__form} mt-20 mb-20`} onSubmit={onSubmit}>
@@ -40,7 +41,7 @@ const ForgotPasswordPage = () => {
                 </div>
             </div>
         </section>
-    )
-}
+    );
+};
 
 export default ForgotPasswordPage;
