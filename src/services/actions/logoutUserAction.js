@@ -12,8 +12,8 @@ const logoutUserAction = () => (dispatch) => {
     logoutUser()
     .then((res) => {
         if(res && res.success) {
-            deleteCookie('token');
-            localStorage.removeItem('jwt');
+            deleteCookie('accessToken');
+            localStorage.removeItem('refreshToken');
             dispatch({type: LOGOUT_USER_SUCCESS})
         }
         else {

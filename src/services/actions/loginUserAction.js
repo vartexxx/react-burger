@@ -14,8 +14,8 @@ const loginUserAction = (email, password) => (dispatch) => {
     loginUser(email, password)
     .then(res => {
         if (res && res.success) {
-            setCookie('token', res.accessToken, { expires: 1200 });
-            localStorage.setItem("jwt", res.refreshToken);
+            setCookie('accessToken', res.accessToken, { expires: 1200 });
+            localStorage.setItem('refreshToken', res.refreshToken);
             dispatch({ type: USER_LOGIN_SUCCESS, user: res.user })
         }
         else {

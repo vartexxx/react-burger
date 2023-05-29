@@ -24,7 +24,7 @@ const MainPage = () => {
         <>
             <Main />
             {ingredient && (
-                <Modal onCloseModal={closeModal}>
+                <Modal onClose={closeModal}>
                     <IngredientDetails ingredient={ingredient} />
                 </Modal>
             )}

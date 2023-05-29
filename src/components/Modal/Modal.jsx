@@ -21,7 +21,7 @@ const Modal = ({onClose, children}) => {
     });
     return createPortal(
         <>
-            <div className={`${styles.modal__container} pb-15`}>
+            <div className={`${styles.modal__container} pb-15`} onClick={(e) => e.stopPropagation()}>
                 <button type='button' className={styles.modal__button} onClick={onClose}>
                     <CloseIcon />
                 </button>

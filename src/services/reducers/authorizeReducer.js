@@ -1,11 +1,14 @@
-import { USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS, USER_REGISTER_ERROR } from "../actions/registerUserAction";
-import { USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS, USER_LOGIN_ERROR } from "../actions/loginUserAction";
 import { FORGOT_PASSWORD_ERROR, FORGOT_PASSWORD_REQUEST, FORGOT_PASSWORD_SUCCESS } from "../actions/forgotPasswordAction";
+import { GET_USER_FAILED, GET_USER_REQUEST, GET_USER_SUCCESS } from "../actions/getUserAction";
+import { USER_LOGIN_ERROR, USER_LOGIN_REQUEST, USER_LOGIN_SUCCESS } from "../actions/loginUserAction";
+import { LOGOUT_USER_ERROR, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../actions/logoutUserAction";
+import { USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../actions/registerUserAction";
 import { RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS } from "../actions/resetPasswordAction";
+import { UPDATE_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../actions/updateUserAction";
 
 
 const initialState = {
-    user: { name: '', email: '' },
+    user: { name: '', email: '', },
     isAuthorization: false,
 
     registerRequest: false,
@@ -14,6 +17,9 @@ const initialState = {
     loginRequest: false,
     loginFailed: false,
 
+    logoutUserRequest: false,
+    logoutUserFailed: false,
+
     forgotPasswordRequest: false,
     forgotPasswordFailed: false,
     forgotPasswordCodeSend: false,
@@ -21,6 +27,12 @@ const initialState = {
     resetPasswordRequest: false,
     resetPasswordFailed: false,
     resetPasswordSuccess: false,
+
+    getUserRequest: false,
+    getUserFailed: false,
+
+    updateUserRequest: false,
+    updateUserFailed: false,
 };
 
 
@@ -62,6 +74,28 @@ const authorizeReducer = ( state = initialState, action) => {
         case USER_LOGIN_ERROR: {
             return {
                 ...state, loginRequest: false, loginFailed: true
+            }
+        }
+        case LOGOUT_USER_REQUEST: {
+            return {
+                ...state,
+                logoutUserRequest: true,
+                logoutUserFailed: false,
+            }
+        }
+        case LOGOUT_USER_SUCCESS: {
+            return {
+                ...state,
+                isAuthorization: false,
+                logoutUserRequest: false,
+                logoutUserFailed: false,
+            }
+        }
+        case LOGOUT_USER_ERROR: {
+            return {
+                ...state,
+                logoutUserRequest: false,
+                logoutUserFailed: true,
             }
         }
         case FORGOT_PASSWORD_REQUEST: {
@@ -110,6 +144,51 @@ const authorizeReducer = ( state = initialState, action) => {
                 resetPasswordRequest: false,
                 resetPasswordFailed: true,
                 resetPasswordSuccess: false
+            }
+        }
+        case GET_USER_REQUEST: {
+            return {
+                ...state,
+                getUserRequest: true,
+                getUserFailed: false,
+            }
+        }
+        case GET_USER_SUCCESS: {
+            return {
+                ...state,
+                isAuthorization: true,
+                user: action.user,
+                getUserRequest: false,
+                getUserFailed: false,
+            }
+        }
+        case GET_USER_FAILED: {
+            return {
+                ...state,
+                getUserRequest: false,
+                getUserFailed: true,
+            }
+        }
+        case UPDATE_USER_REQUEST: {
+            return {
+                ...state,
+                updateUserRequest: true,
+                updateUserFailed: false,
+            }
+        }
+        case UPDATE_USER_SUCCESS: {
+            return {
+                ...state,
+                user: action.user,
+                updateUserRequest: false,
+                updateUserFailed: false,
+            }
+        }
+        case UPDATE_USER_FAILED: {
+            return {
+                ...state,
+                updateUserRequest: false,
+                updateUserFailed: true,
             }
         }
         default: { return state }

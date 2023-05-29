@@ -42,7 +42,7 @@ const Card = memo(function Card({ingredient}){
     return (
         <div ref={dragRef} className={`${styles.card} ml-4 mr-4`} onClick={openModal}>
             {getCounterInredient(ingredient._id) !== 0 && (
-            <Counter count={getCounterInredient(ingredient._id)} size="default" />
+                <Counter count={getCounterInredient(ingredient._id)} size="default" />
             )}
             <Link
                 to={`/ingredients/${ingredient._id}`}

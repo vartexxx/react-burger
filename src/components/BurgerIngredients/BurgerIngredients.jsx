@@ -102,7 +102,7 @@ const BurgerIngredients = () => {
             </div>
             {currenIngredient && (
                 <Modal onClose={closeModal}>
-                <IngredientDetails />
+                    <IngredientDetails />
                 </Modal>
             )}
         </section>

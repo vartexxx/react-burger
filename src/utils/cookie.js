@@ -28,12 +28,6 @@ export function getCookie(name) {
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
 
-export function parseCookie(name) {
-    let authToken;
-    authToken = name.split("Bearer ")[1];
-    return authToken;
-}
-
 export function deleteCookie(name) {
-    setCookie(name, null, { expires: -1 });
+    setCookie(name, null, {expires: -1});
 }

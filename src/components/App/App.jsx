@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, createBrowserRouter } from 'react-router-dom';
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage';
 import IngredientPage from '../../pages/IngredientPage/IngredientPage';
 import LoginPage from '../../pages/LoginPage/LoginPage';
@@ -18,17 +18,16 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 function App() {
     const dispatch = useDispatch();
-
     useEffect(() => {
         dispatch(getIngredients());
     }, [dispatch])
 
     useEffect(() => {
-        const accessToken = getCookie('token');
+        const accessToken = getCookie('accessToken');
         if (accessToken) {
             dispatch(getUserAction())
         }
-    }, [])
+    }, [dispatch])
 
     return (
         <>

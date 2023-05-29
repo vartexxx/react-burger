@@ -1,5 +1,6 @@
-import { setCookie } from "../../utils/cookie";
 import { refreshUserToken } from "../../utils/api";
+import { setCookie } from "../../utils/cookie";
+
 
 export const REFRESH_TOKEN_REQUEST = 'REFRESH_TOKEN_REQUEST';
 export const REFRESH_TOKEN_SUCCESS = 'REFRESH_TOKEN_SUCCESS';
@@ -10,8 +11,8 @@ const refreshTokenAction = () => (dispatch) => {
     refreshUserToken()
     .then(res => {
         if (res && res.success) {
-            setCookie('token', res.accessToken, { expires: 1200 });
-            localStorage.setItem("jwt", res.refreshToken);
+            setCookie('accessToken', res.accessToken, { expires: 1200 });
+            localStorage.setItem('refreshToken', res.refreshToken);
             dispatch({ type: REFRESH_TOKEN_SUCCESS })
         }
         else {

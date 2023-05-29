@@ -2,9 +2,9 @@ import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-component
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { changeUserData } from "../../utils/api";
-import styles from './ProfilePage.module.scss';
 import logoutUserAction from "../../services/actions/logoutUserAction";
+import updateUserAction from "../../services/actions/updateUserAction";
+import styles from './ProfilePage.module.scss';
 
 
 const ProfilePage = () => {
@@ -13,12 +13,13 @@ const ProfilePage = () => {
     const location = useLocation();
 
     const { user } = useSelector((store) => store.authorizeReducer);
-
-    const [userData, setUserDate] = useState(user);
-    const [inputInfo, setInputInfo] = useState({ name: '', email: ''});
+    const password = '';
+    const profile = {...user,  password}
+    const [userData, setUserDate] = useState(profile);
+    const [iconInfo, setIconInfo] = useState({ name: '', email: '', password: ''});
 
     const onFormReset = () => {
-        setUserDate({ name: user.name, email: user.email})
+        setUserDate({ name: user.name, email: user.email, password: ''})
     };
 
     const onFormChange = (e) => {
@@ -28,7 +29,7 @@ const ProfilePage = () => {
     const profileFormSubmit = (e) => {
         e.preventDefault();
         dispatch(
-            changeUserData(userData)
+            updateUserAction(userData)
         );
     };
 
@@ -37,7 +38,7 @@ const ProfilePage = () => {
     }
 
     const checkButton = () => {
-        return JSON.stringify(user) === JSON.stringify(userData)
+        return JSON.stringify(profile) === JSON.stringify(userData)
     };
 
     const activeStyle = {
@@ -54,6 +55,7 @@ const ProfilePage = () => {
                                 to="/profile"
                                 className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
                                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                                end
                             >
                                 Профиль
                             </NavLink>
@@ -66,7 +68,7 @@ const ProfilePage = () => {
                             </NavLink>
                             <NavLink
                                 onClick={() =>
-                                    dispatch(logoutUser(() => navigate('/login')))
+                                    (logoutUser(() => navigate('/login')))
                                 }
                                 className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
                             >
@@ -81,27 +83,31 @@ const ProfilePage = () => {
                         <form className={styles.profile__form} onSubmit={profileFormSubmit}>
                             <Input
                                 value={userData.name}
-                                disabled={inputInfo.name ? false : true}
+                                disabled={iconInfo.name ? false : true}
                                 onChange={onFormChange}
-                                onIconClick={() => setInputInfo({ ...inputInfo, name: !inputInfo.name })}
+                                onIconClick={() => setIconInfo({ ...iconInfo, name: !iconInfo.name })}
                                 icon="EditIcon"
                                 placeholder="Имя"
                                 name="name"
                             />
                             <Input
                                 value={userData.email}
-                                disabled={inputInfo.email ? false : true}
+                                disabled={iconInfo.email ? false : true}
                                 onChange={onFormChange}
-                                onIconClick={() => setInputInfo({ ...inputInfo, email: !inputInfo.email })}
+                                onIconClick={() => setIconInfo({ ...iconInfo, email: !iconInfo.email })}
                                 icon="EditIcon"
                                 placeholder="Логин"
                                 name="email"
                             />
                             <Input
+                                value={userData.password}
+                                disabled={iconInfo.password ? false : true}
+                                onChange={onFormChange}
+                                onIconClick={() => setIconInfo({...iconInfo, password: !iconInfo.password})}
+                                type={'password'}
                                 icon="EditIcon"
                                 placeholder="Пароль"
-                                value="*********"
-                                disabled
+                                name="password"
                             />
                             <div className={styles.profile__buttons}>
                                 <Button

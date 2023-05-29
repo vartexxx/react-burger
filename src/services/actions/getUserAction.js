@@ -16,7 +16,7 @@ const getUserAction = () => (dispatch) => {
         dispatch({ type: GET_USER_SUCCESS, user: res.user }) 
     })
     .catch(() => {
-        const refreshToken = localStorage.getItem('jwt');
+        const refreshToken = localStorage.getItem('refreshToken');
         if (refreshToken) {
             dispatch(refreshTokenAction());
             getUserRequest()
