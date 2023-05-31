@@ -1,5 +1,5 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import logoutUserAction from "../../services/actions/logoutUserAction";
@@ -17,6 +17,7 @@ const ProfilePage = () => {
     const profile = {...user,  password}
     const [userData, setUserDate] = useState(profile);
     const [iconInfo, setIconInfo] = useState({ name: '', email: '', password: ''});
+    const [activeButtons, setActiveButtons] = useState(false);
 
     const onFormReset = () => {
         setUserDate({ name: user.name, email: user.email, password: ''})
@@ -24,6 +25,7 @@ const ProfilePage = () => {
 
     const onFormChange = (e) => {
         setUserDate({...userData, [e.target.name]: e.target.value })
+        setActiveButtons(true)
     };
 
     const profileFormSubmit = (e) => {
@@ -31,6 +33,7 @@ const ProfilePage = () => {
         dispatch(
             updateUserAction(userData)
         );
+        setActiveButtons(false)
     };
 
     const logoutUser = () => {
@@ -109,25 +112,27 @@ const ProfilePage = () => {
                                 placeholder="Пароль"
                                 name="password"
                             />
-                            <div className={styles.profile__buttons}>
-                                <Button
-                                    onClick={onFormReset}
-                                    disabled={checkButton() ? true : false}
-                                    type="secondary"
-                                    size="medium"
-                                    htmlType="button"
-                                >
-                                    Отмена
-                                </Button>
-                                <Button
-                                    disabled={checkButton() ? true : false}
-                                    type="primary"
-                                    size="medium"
-                                    htmlType="submit"
-                                >
-                                    Сохранить
-                                </Button>
-                            </div>
+                            {activeButtons && 
+                                <div className={styles.profile__buttons}>
+                                    <Button
+                                        onClick={onFormReset}
+                                        disabled={checkButton() ? true : false}
+                                        type="secondary"
+                                        size="medium"
+                                        htmlType="button"
+                                    >
+                                        Отмена
+                                    </Button>
+                                    <Button
+                                        disabled={checkButton() ? true : false}
+                                        type="primary"
+                                        size="medium"
+                                        htmlType="submit"
+                                    >
+                                        Сохранить
+                                    </Button>
+                                </div>
+                            }
                         </form>
                     )}
                 </div>

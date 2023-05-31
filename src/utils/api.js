@@ -121,9 +121,9 @@ export function resetUserPassword(password, token) {
 
 export function changeUserData(data) {
     return fetchWithRefresh(`${url}/auth/user`, {
-        method: "PATCH",
+        method: 'PATCH',
         headers: {
-            "Content-Type": "application/json",
+            'Content-Type': "application/json",
             'authorization': `${getCookie('accessToken')}`,
         },
         body: JSON.stringify(data),
