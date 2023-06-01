@@ -1,6 +1,6 @@
+import { useSelector } from 'react-redux';
 import img from '../../images/ok.svg';
 import styles from './OrderDetails.module.scss';
-import { useSelector } from 'react-redux';
 
 
 const OrderDetails = () => {

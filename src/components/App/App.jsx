@@ -1,32 +1,53 @@
 import { useEffect } from 'react';
-import AppHeader from '../AppHeader/AppHeader';
-import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
-import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-import styles from './App.module.scss';
-import getIngredients from '../../services/actions/burgerIngredientsAction';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch } from 'react-redux';
+import { Route, Routes, createBrowserRouter } from 'react-router-dom';
+import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage';
+import IngredientPage from '../../pages/IngredientPage/IngredientPage';
+import LoginPage from '../../pages/LoginPage/LoginPage';
+import MainPage from '../../pages/MainPage/MainPage';
+import NotFoundPage from '../../pages/NotFoundPage/NotFoundPage';
+import ProfilePage from '../../pages/ProfilePage/ProfilePage';
+import RegisterPage from '../../pages/RegisterPage/RegisterPage';
+import ResetPasswordPage from '../../pages/ResetPasswordPage/ResetPasswordPage';
+import getIngredients from '../../services/actions/burgerIngredientsAction';
+import getUserAction from '../../services/actions/getUserAction';
+import { getCookie } from '../../utils/cookie';
+import AppHeader from '../AppHeader/AppHeader';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 
 function App() {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(getIngredients());
+    }, [dispatch])
 
-  useEffect(() => {
-    dispatch(getIngredients());
-  }, [dispatch])
+    useEffect(() => {
+        const accessToken = getCookie('accessToken');
+        if (accessToken) {
+            dispatch(getUserAction())
+        }
+    }, [dispatch])
 
-  return (
-    <>
-      <AppHeader />
-        <DndProvider backend={HTML5Backend}>
-          <main className={styles.main}>
-            <BurgerIngredients />
-            <BurgerConstructor />
-          </main>
-        </DndProvider>
-    </>
-  );
+    return (
+        <>
+            <AppHeader />
+            <Routes>
+                <Route path='/' element={<MainPage />} />
+                <Route path='/ingredients/:id' element={<IngredientPage />} />
+                <Route path='/register' element={<RegisterPage />} />
+                <Route path='/login' element={<LoginPage />} />
+                <Route path='/forgot-password' element={<ForgotPasswordPage />} />
+                <Route path='/reset-password' element={<ResetPasswordPage />} />
+                <Route path='/profile/*' 
+                    element={
+                    <ProtectedRoute element={<ProfilePage />} />
+                    }
+                />
+                <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+        </> 
+    );
 };
 
 export default App;

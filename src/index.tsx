@@ -5,7 +5,7 @@ import './index.scss';
 import App from './components/App/App';
 import { Provider } from "react-redux";
 import { rootReducer } from './services/reducers';
-
+import { BrowserRouter } from 'react-router-dom';
 
 declare global {
   interface Window {
@@ -24,6 +24,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
 <Provider store={store} >
-  <App />
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 </Provider>
 );

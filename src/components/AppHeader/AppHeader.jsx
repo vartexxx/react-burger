@@ -1,40 +1,43 @@
-import { 
-    Logo,
+import {
     BurgerIcon,
     ListIcon,
+    Logo,
     ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link } from "react-router-dom";
 import styles from './AppHeader.module.scss';
 
 
 const AppHeader = () => {
+    const setActive = ({isActive}) => ({color: isActive ? '#f2f2f3' : ''})
+
     return (
         <header className={styles.header}>
             <div className={styles.header__container}>
                 <nav className={`${styles.header__menu} pt-4 pb-4`}>
                     <ul className={styles.header__list}>
                         <li>
-                            <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} href="#">
+                            <Link to={'/'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} style={{setActive}}>
                                 <BurgerIcon type="primary" />
                                 <span className="text text_type_main-default ml-2">Конструктор</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 ml-2`} href="#">
+                            <Link to={'/feed'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 ml-2`} style={{setActive}}>
                                 <ListIcon type="secondary"/>
                                 <span style={{color: "#8585AD"}} className={`${styles.header__span} text text_type_main-default ml-2`}>Лента заказов</span>
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a href="#" className={styles.header__logo}>
+                            <Link to={'/'} className={styles.header__logo}>
                                 <Logo />
-                            </a>
+                            </Link>
                         </li>
                         <li>
-                            <a className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} href="#">
+                            <Link to={'/profile'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} style={{setActive}}>
                                 <ProfileIcon type="secondary" />
                                 <span className={`${styles.header__span} text text_type_main-default ml-2`}>Личный кабинет</span>
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </nav>

@@ -1,17 +1,17 @@
-import { useMemo } from 'react';
-import { ConstructorElement, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import styles from './BurgerConstructor.module.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { ADD, SORT } from '../../services/actions/burgerConstructorAction';
-import { v4 as uuidv4 } from 'uuid';
-import { Reorder } from "framer-motion"
-import { useDrop } from 'react-dnd';
-import BurgerConstructorList from '../BurgerConstructorList/BurgerConstructorList';
-import { BURGER_ORDER_RESET } from '../../services/actions/burgerOrderAction';
-import Modal from '../Modal/Modal';
-import makeOrder from '../../services/actions/burgerOrderAction';
-import OrderDetails from '../OrderDetails/OrderDetails';
+import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { Reorder } from "framer-motion";
 import PropTypes from "prop-types";
+import { useMemo } from 'react';
+import { useDrop } from 'react-dnd';
+import { useDispatch, useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
+import { ADD, SORT } from '../../services/actions/burgerConstructorAction';
+import makeOrder, { BURGER_ORDER_RESET } from '../../services/actions/burgerOrderAction';
+import BurgerConstructorList from '../BurgerConstructorList/BurgerConstructorList';
+import Modal from '../Modal/Modal';
+import OrderDetails from '../OrderDetails/OrderDetails';
+import styles from './BurgerConstructor.module.scss';
+
 
 const BurgerConstructor = () => {
     const dispatch = useDispatch();

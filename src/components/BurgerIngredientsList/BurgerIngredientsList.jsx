@@ -1,8 +1,8 @@
-import { forwardRef } from 'react';
 import PropTypes from 'prop-types';
+import { forwardRef } from 'react';
+import cardProp from '../../utils/propTypes';
 import Card from '../Card/Card';
 import styles from './BurgerIngredientsList.module.scss';
-import cardProp from '../../utils/propTypes';
 
 
 const BurgerIngredientsList = forwardRef((props, ref) => {

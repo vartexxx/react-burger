@@ -1,32 +1,32 @@
-import { useDispatch } from "react-redux";
-import { Reorder } from "framer-motion";
-import { DELETE } from "../../services/actions/burgerConstructorAction";
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Reorder } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { DELETE } from "../../services/actions/burgerConstructorAction";
 import cardProp from "../../utils/propTypes";
 
 
 const BurgerConstructorList = ({list}) => {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-  return (
-    <Reorder.Item
-      value={list}
-    >
-      <DragIcon />
-      <ConstructorElement
-        text={list.name}
-        price={list.price}
-        thumbnail={list.image}
-        handleClose={() =>
-          dispatch({ type: DELETE, payload: list })
-        }
-      />
-    </Reorder.Item>
-  )
+    return (
+        <Reorder.Item
+            value={list}
+        >
+            <DragIcon />
+            <ConstructorElement
+                text={list.name}
+                price={list.price}
+                thumbnail={list.image}
+                handleClose={() =>
+                dispatch({ type: DELETE, payload: list })
+                }
+            />
+        </Reorder.Item>
+    )
 };
 
 BurgerConstructorList.propTypes = {
-  list: cardProp
+    list: cardProp
 };
 
 export default BurgerConstructorList;
