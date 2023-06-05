@@ -1,14 +1,9 @@
-import PropTypes from "prop-types";
 import styles from './ModalOverlay.module.scss';
 
-const ModalOverlay = ({onClose}) => {
+const ModalOverlay = ({ animation, closeModalAnimation }) => {
     return (
-        <div className={styles.overlay} onClick={onClose}></div>
+        <div className={animation ? `${styles.modal__overlay} ${styles.modal__active}` : `${styles.modal__overlay}`} onClick={() => closeModalAnimation()}></div>
     )
 };
-
-ModalOverlay.propTypes = {
-    onclose: PropTypes.func,
-}
 
 export default ModalOverlay;

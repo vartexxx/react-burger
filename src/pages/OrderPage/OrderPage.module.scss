@@ -1,0 +1,94 @@
+.order {
+    //order__container
+    &__container {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 640px;
+    }
+    //order__number
+    &__number {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 24px;
+    }
+    //order__ingredients
+    &__ingredients {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: overlay;
+        position: relative;
+        max-height: 310px;
+        &::-webkit-scrollbar {
+            width: 8px;
+            background-color: #2F2F37;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #8585AD;
+        }
+    }
+    //order__ingredient
+    &__ingredient {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+    }
+    //order__ingredientsbox
+    &__ingredientsbox {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    //order__imagecontainer
+    &__imagecontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        height: 64px;
+        box-sizing: border-box;
+        background-image: linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
+          linear-gradient(to top right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        border-radius: 50%;
+        border-width: 2px;
+        border-color: transparent;
+        border-style: solid;
+        transition: opacity 0.4s ease;
+    }
+    //order__image
+    &__image {
+        width: 112px;
+        height: 56px;
+        object-fit: cover;
+    }
+    //order__const
+    &__cost {
+        display: flex;
+        gap: 9px;
+    }
+    //order__dac
+    &__dac {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 40px;
+    }
+    //order__total
+    &__total {
+        display: flex;
+        gap: 9px;
+    }
+    @-moz-document url-prefix() {
+        &__ingredients {
+            overflow-y: scroll;
+            scrollbar-color: #8585AD #2F2F37;
+            scrollbar-width: thin;
+            max-width: 614px;
+        }
+    }
+
+}

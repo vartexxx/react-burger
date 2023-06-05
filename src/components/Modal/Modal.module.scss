@@ -1,25 +1,70 @@
 .modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    visibility: hidden;
+    z-index: 15;
+    transition: 0.3s all;
+    transform: translate(-50%, -50%);
+    //modal__active
+    &__active {
+        visibility: visible;
+    }
+    //modal__content
+    &__content {
+        position: relative;
+        width: 720px;
+        background: #1C1C21;
+        border: 1px solid rgba(76, 76, 255, 0.2);
+        box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
+        border-radius: 40px;
+        transform: scale(0);
+        z-index: 2;
+        animation: close 0.3s ease-in;
+    }
+    //modal__contentactive
+    &__contentactive {
+        transform: scale(1);
+        animation: open 0.3s ease-in;
+    }
     //modal__container
     &__container {
         display: flex;
-        flex-direction: column;
+        justify-content: space-between;
         align-items: center;
-        width: 720px;
-        position: fixed;
-        left: 50%;
-        top: 50%;
-        background: #1c1c21;
-        transform: translate(-50%, -50%);
-        box-shadow: 0px 24px 32px rgba(0, 0, 0, 0.04), 0px 16px 24px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.04), 0px 0px 1px rgba(0, 0, 0, 0.04);
-        border-radius: 40px;
-        z-index: 1;
+        min-height: 64px;
     }
     //modal__button
     &__button {
-        background-color: transparent;
+        opacity: 1;
+        transition: opacity 0.4s ease;
         cursor: pointer;
-        position: fixed;
-        top: 50px;
-        right: 40px;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
+}
+  
+@keyframes open {
+    0% {
+        transform: scale(0);
+    }
+    50% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+  
+@keyframes close {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.5);
+    }
+    100% {
+        transform: scale(0);
     }
 }

@@ -1,4 +1,6 @@
 import { getCookie } from "./cookie";
+
+
 const url = 'https://norma.nomoreparties.space/api';
 
 const checkResponse = (res) => {
@@ -33,7 +35,10 @@ export function getApi() {
 export function postApi(data) {
     return fetch(`${url}/orders`, {
         method: 'POST',
-        headers: { 'Content-type': 'application/json' },
+        headers: { 
+            'Content-type': 'application/json',
+            'authorization': `${getCookie('accessToken')}`,
+        },
         body: JSON.stringify({
             ingredients: data
         })

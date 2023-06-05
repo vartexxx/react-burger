@@ -1,9 +1,9 @@
-import {SET_INGREDIENT_INFO, RESET_INGREDIENT_INFO} from '../actions/burgerCurrentIngredientAction';
+import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO } from '../actions/burgerCurrentIngredientAction';
 
 
 const burgerCurrentIngredientInitialState = {
     currentIngredient: undefined,
-}
+};
 
 const burgerCurrentIngredientReducer = (state=burgerCurrentIngredientInitialState, action) => {
     switch(action.type) {

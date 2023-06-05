@@ -1,0 +1,90 @@
+.container {
+    display: flex;
+    width: 640px;
+    flex-direction: column;
+    padding-top: 122px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  .ingredients_box {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .image_container {
+    width: 64px;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-width: 2px;
+    border-color: transparent;
+    border-style: solid;
+    box-sizing: border-box;
+    background-image: linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
+      linear-gradient(to top right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    border-radius: 50%;
+    transition: opacity 0.4s ease;
+  }
+  
+  .image {
+    object-fit: cover;
+    width: 112px;
+    height: 56px;
+  }
+  
+  .ingredients {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    gap: 16px;
+    overflow-y: overlay;
+    position: relative;
+    max-height: 310px;
+  }
+  
+  @-moz-document url-prefix() {
+    .ingredients {
+      overflow-y: scroll;
+      scrollbar-color: #8585AD #2F2F37;
+      scrollbar-width: thin;
+      max-width: 614px;
+    }
+  }
+  
+  .ingredients::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2F2F37;
+  }
+  
+  .ingredients::-webkit-scrollbar-thumb {
+    background-color: #8585AD;
+  }
+  
+  .cost {
+    display: flex;
+    gap: 9px;
+    margin-right: 32px;
+  }
+  
+  .ingredient {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .date_and_cost {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 40px;
+  }
+  
+  .total {
+    display: flex;
+    gap: 9px;
+  }

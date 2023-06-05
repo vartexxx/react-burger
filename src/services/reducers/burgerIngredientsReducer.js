@@ -1,10 +1,10 @@
-import { GET_INGREDIENTS, GET_INGREDIENTS_STATUS_OK, GET_INGREDIENTS_STATUS_ERR } from "../actions/burgerIngredientsAction"
+import { GET_INGREDIENTS, GET_INGREDIENTS_STATUS_ERR, GET_INGREDIENTS_STATUS_OK } from "../actions/burgerIngredientsAction";
 
 
 const burgerIngredientsInitialState = {
     burgerIngredientsList: [],
     burgerIngredientsListErrorText: undefined,
-}
+};
 
 const burgerIngredientsReducer = (state = burgerIngredientsInitialState, action) => {
     switch(action.type) {

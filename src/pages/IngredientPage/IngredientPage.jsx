@@ -20,13 +20,31 @@ const IngredientPage = () => {
     ) : (
         item && (
             <>
-                <main className={styles.ingredient}>
-                    <div className={`${styles.ingredient__container} mt-20`}>
-                        <IngredientDetails
-                            ingredient={item}
-                        />
+                <div className={styles.container}>
+                    <h2 className='text text_type_main-large'>Детали ингредиента</h2>
+                    <div className='pl-5 pr-5'>
+                        <img src={item?.image_large} alt={item?.name} />
                     </div>
-                </main>
+                    <p className='text text_type_main-medium pt-4'>{item?.name}</p>
+                    <div className={styles.colorizator + ' pt-8'}>
+                        <div style={{ textAlign: 'center' }}>
+                            <p className='text text_type_main-default text_color_inactive'>Калории,ккал</p>
+                            <p className='text text_type_digits-default text_color_inactive pt-2'>{item?.calories}</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <p className='text text_type_main-default text_color_inactive'>Белки, г</p>
+                            <p className='text text_type_digits-default text_color_inactive pt-2'>{item?.proteins}</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <p className='text text_type_main-default text_color_inactive'>Жиры, г</p>
+                            <p className='text text_type_digits-default text_color_inactive pt-2'>{item?.fat}</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <p className='text text_type_main-default text_color_inactive'>Углеводы, г</p>
+                            <p className='text text_type_digits-default text_color_inactive pt-2'>{item?.carbohydrates}</p>
+                        </div>
+                    </div>
+                </div>
             </>
         )
     );

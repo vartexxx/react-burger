@@ -1,9 +1,13 @@
 import { combineReducers } from "redux";
-import burgerIngredientsReducer from './burgerIngredientsReducer';
-import burgerConstructorReducer from "./burgerConstructorReducer";
-import burgerOrderReducer from "./burgerOrderReducer";
-import burgerCurrentIngredientReducer from "./burgerCurrentIngredientReducer";
 import authorizeReducer from "./authorizeReducer";
+import burgerConstructorReducer from "./burgerConstructorReducer";
+import burgerCurrentIngredientReducer from "./burgerCurrentIngredientReducer";
+import burgerIngredientsReducer from './burgerIngredientsReducer';
+import burgerOrderReducer from "./burgerOrderReducer";
+import orderCurrentReducer from "./orderCurrentReducer";
+import wsReducer from "./wsReducer";
+import wsReducerForOrders from "./wsReducerForOrders";
+
 
 export const rootReducer = combineReducers({
     burgerIngredientsReducer,
@@ -11,4 +15,7 @@ export const rootReducer = combineReducers({
     burgerOrderReducer,
     burgerCurrentIngredientReducer,
     authorizeReducer,
+    orderCurrentReducer,
+    wsReducer,
+    wsReducerForOrders,
 });
