@@ -1,4 +1,5 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
+import PropTypes from 'prop-types';
 import { useMemo, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
@@ -70,6 +71,12 @@ const FeedOrderCard = ({ order, onStatus, pathOrder }) => {
             }
         </>
     )
+};
+
+FeedOrderCard.propTypes = {
+    order: PropTypes.object.isRequired,
+    pathOrder: PropTypes.string.isRequired,
+    onStatus: PropTypes.bool,
 };
 
 export default FeedOrderCard;

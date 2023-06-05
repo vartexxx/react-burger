@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IngredientDetails from '../../../../components/IngredientDetails/IngredientDetails';
@@ -48,6 +49,12 @@ const FeedIcons = ({ id, count, index }) => {
             }
         </>
     )
+};
+
+FeedIcons.propTypes = {
+    id: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    index: PropTypes.number.isRequired,
 };
 
 export default FeedIcons;
