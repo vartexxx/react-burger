@@ -2,8 +2,10 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import { useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { WS_CONNECTION_START, WS_CONNECTION_END } from '../../services/actions/wsActions';
+import { WS_CONNECTION_END, wsConnectionStart } from '../../services/actions/wsActions';
+import { WS_URL_ALL } from '../../utils/variables';
 import styles from './OrderPage.module.scss';
+
 
 const OrderPage = () => {
     const dispatch = useDispatch();
@@ -16,7 +18,7 @@ const OrderPage = () => {
     const status = order?.status === 'done' ? 'Выполнен' : order?.status === 'created' ? 'Создан' : order?.status === 'pending' ? 'Готовится' : '';
 
     useEffect(() => {
-        dispatch({ type: WS_CONNECTION_START });
+        dispatch(wsConnectionStart(WS_URL_ALL));
         return () => { dispatch({ type: WS_CONNECTION_END }) }
     }, [dispatch]);
 

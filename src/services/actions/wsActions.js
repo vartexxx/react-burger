@@ -14,6 +14,21 @@ export const WS_CONNECTION_ORDERS_CLOSED = 'WS_CONNECTION_ORDERS_CLOSED';
 export const WS_SEND_ORDERS_MESSAGE = 'WS_SEND_ORDERS_MESSAGE';
 export const WS_CONNECTION_ORDERS_END = 'WS_CONNECTION_ORDERS_END';
 
+export const wsConnectionStart = (url) => {
+    return {
+        type: WS_CONNECTION_START,
+        payload: url,
+    }
+};
+
+
+export const wsOrderConnectionStart = (url) => {
+    return {
+        type: WS_CONNECTION_ORDERS_START,
+        payload: url,
+    }
+}
+
 export const wsActions = {
     wsInit: WS_CONNECTION_START,
     onOpen: WS_CONNECTION_SUCCESS,

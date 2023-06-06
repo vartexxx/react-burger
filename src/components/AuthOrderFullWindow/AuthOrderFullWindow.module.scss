@@ -1,90 +1,93 @@
-.container {
-    display: flex;
-    width: 640px;
-    flex-direction: column;
-    padding-top: 122px;
-    margin-right: auto;
-    margin-left: auto;
-  }
-  
-  .ingredients_box {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-  
-  .image_container {
-    width: 64px;
-    height: 64px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-width: 2px;
-    border-color: transparent;
-    border-style: solid;
-    box-sizing: border-box;
-    background-image: linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)),
-      linear-gradient(to top right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
-    background-origin: border-box;
-    background-clip: content-box, border-box;
-    border-radius: 50%;
-    transition: opacity 0.4s ease;
-  }
-  
-  .image {
-    object-fit: cover;
-    width: 112px;
-    height: 56px;
-  }
-  
-  .ingredients {
-    display: flex;
-    flex-direction: column;
-    margin-top: 24px;
-    gap: 16px;
-    overflow-y: overlay;
-    position: relative;
-    max-height: 310px;
-  }
-  
-  @-moz-document url-prefix() {
-    .ingredients {
-      overflow-y: scroll;
-      scrollbar-color: #8585AD #2F2F37;
-      scrollbar-width: thin;
-      max-width: 614px;
+.order {
+    //order__container
+    &__container {
+        display: flex;
+        flex-direction: column;
+        margin: 0 auto;
+        width: 640px;
     }
-  }
-  
-  .ingredients::-webkit-scrollbar {
-    width: 8px;
-    background-color: #2F2F37;
-  }
-  
-  .ingredients::-webkit-scrollbar-thumb {
-    background-color: #8585AD;
-  }
-  
-  .cost {
-    display: flex;
-    gap: 9px;
-    margin-right: 32px;
-  }
-  
-  .ingredient {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
-  
-  .date_and_cost {
-    display: flex;
-    justify-content: space-between;
-    padding-top: 40px;
-  }
-  
-  .total {
-    display: flex;
-    gap: 9px;
-  }
+    //order__imagecontainer
+    &__imagecontainer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-width: 2px;
+        border-color: transparent;
+        border-style: solid;
+        box-sizing: border-box;
+        background-image: linear-gradient(rgba(19, 19, 22, 1), rgba(19, 19, 22, 1)), linear-gradient(to top right, rgba(128, 26, 178, 1), rgba(76, 76, 255, 1));
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        border-radius: 50%;
+        transition: opacity 0.4s ease;
+        width: 64px;
+        height: 64px;
+    }
+    //order__box
+    &__box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+    //order__image
+    &__image {
+        object-fit: cover;
+        width: 112px;
+        height: 56px;
+    }
+    //order__ingredients
+    &__ingredients {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        overflow-y: overlay;
+        position: relative;
+        max-height: 310px;
+        &::-webkit-scrollbar {
+            width: 8px;
+            background-color: #2F2F37;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #8585AD;
+        }
+    }
+    //order__cost
+    &__cost {
+        display: flex;
+        gap: 9px;
+        margin-right: 32px;
+    }
+    //order__ingredient
+    &__ingredient {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+    }
+    //order__dac
+    &__dac {
+        display: flex;
+        justify-content: space-between;
+        padding-top: 40px;
+    }
+    //order__total
+    &__total {
+        display: flex;
+        gap: 9px;
+    }
+    //order__number
+    &__number {
+        height: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    @-moz-document url-prefix() {
+        &__ingredients {
+          overflow-y: scroll;
+          scrollbar-color: #8585AD #2F2F37;
+          scrollbar-width: thin;
+          max-width: 614px;
+        }
+    }
+}

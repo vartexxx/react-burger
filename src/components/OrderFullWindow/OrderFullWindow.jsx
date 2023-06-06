@@ -26,6 +26,7 @@ const OrderFullWindow = () => {
         }, {});
         return counts
     }, [order])
+
     const cost = useMemo(() => {
         let total = 0;
         order.ingredients.forEach((id) => {

@@ -4,12 +4,26 @@ import {
     Logo,
     ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { Link } from "react-router-dom";
+import { useCallback } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import styles from './AppHeader.module.scss';
 
 
 const AppHeader = () => {
-    const setActive = ({isActive}) => ({color: isActive ? '#f2f2f3' : ''})
+    const { pathname } = useLocation();
+    const active = {
+        color: '#F2F2F3'
+    };
+    const toggleIcon = useCallback((url) => {
+        if (pathname === "/" && url === "/") {
+            return "primary";
+        } else if (pathname.includes(url) && url !== "/") {
+            return "primary";
+        } else {
+            return "secondary"
+        }
+    }, [pathname]);
+
 
     return (
         <header className={styles.header}>
@@ -17,16 +31,16 @@ const AppHeader = () => {
                 <nav className={`${styles.header__menu} pt-4 pb-4`}>
                     <ul className={styles.header__list}>
                         <li>
-                            <Link to={'/'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} style={{setActive}}>
-                                <BurgerIcon type="primary" />
-                                <span className="text text_type_main-default ml-2">Конструктор</span>
-                            </Link>
+                            <NavLink to={'/'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 text text_type_main-default`} style={({ isActive }) => (isActive ? active : undefined)}>
+                                <BurgerIcon type={toggleIcon('/')} />
+                                Конструктор
+                            </NavLink>
                         </li>
                         <li>
-                            <Link to={'/feed'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5 ml-2`} style={{setActive}}>
-                                <ListIcon type="secondary"/>
-                                <span style={{color: "#8585AD"}} className={`${styles.header__span} text text_type_main-default ml-2`}>Лента заказов</span>
-                            </Link>
+                            <NavLink to={'/feed'} className={`${styles.header__link} text text_type_main-default pt-4 pr-5 pb-4 pl-5 ml-2`} style={({ isActive }) => (isActive ? active : undefined)}>
+                                <ListIcon type={toggleIcon('/feed')}/>
+                                Лента заказов
+                            </NavLink>
                         </li>
                         <li>
                             <Link to={'/'} className={styles.header__logo}>
@@ -34,10 +48,10 @@ const AppHeader = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link to={'/profile'} className={`${styles.header__link} pt-4 pr-5 pb-4 pl-5`} style={{setActive}}>
-                                <ProfileIcon type="secondary" />
-                                <span className={`${styles.header__span} text text_type_main-default ml-2`}>Личный кабинет</span>
-                            </Link>
+                            <NavLink to={'/profile'} className={`${styles.header__link} text text_type_main-default pt-4 pr-5 pb-4 pl-5`} style={({ isActive }) => (isActive ? active : undefined)}>
+                                <ProfileIcon type={toggleIcon('/profile')} />
+                                Личный кабинет
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

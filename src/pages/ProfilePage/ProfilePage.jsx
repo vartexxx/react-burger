@@ -5,7 +5,8 @@ import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import logoutUserAction from "../../services/actions/logoutUserAction";
 import updateUserAction from "../../services/actions/updateUserAction";
-import { WS_CONNECTION_ORDERS_END, WS_CONNECTION_ORDERS_START } from "../../services/actions/wsActions";
+import { WS_CONNECTION_ORDERS_END, wsOrderConnectionStart } from "../../services/actions/wsActions";
+import { WS_URL_ALL } from "../../utils/variables";
 import FeedOrderCard from "../FeedPage/FeedOrderCard/FeedOrderCard";
 import styles from './ProfilePage.module.scss';
 
@@ -58,7 +59,7 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if(location.pathname === '/profile/orders') {
-            dispatch({type: WS_CONNECTION_ORDERS_START})
+            dispatch(wsOrderConnectionStart(WS_URL_ALL))
         }
         return () => {
             dispatch({ type: WS_CONNECTION_ORDERS_END })

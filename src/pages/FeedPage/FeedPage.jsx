@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { v4 as uuidv4 } from 'uuid';
-import { WS_CONNECTION_END, WS_CONNECTION_START } from "../../services/actions/wsActions";
+import { WS_CONNECTION_END, wsConnectionStart } from "../../services/actions/wsActions";
+import { WS_URL_ALL } from "../../utils/variables";
 import FeedOrderCard from "./FeedOrderCard/FeedOrderCard";
 import styles from './FeedPage.module.scss';
 
@@ -14,13 +15,12 @@ const FeedPage = () => {
     const inWork = useMemo(() => orders.filter((item) => (item.status === 'pending' || item.status === 'created')), [orders]);
 
     useEffect(() => {
-        dispatch({ type: WS_CONNECTION_START });
+        dispatch(wsConnectionStart(WS_URL_ALL));
         return () => { dispatch({ type: WS_CONNECTION_END }) }
     }, [dispatch])
 
-    const filterToHour = (done) => {
-        let dayOrders = done.filter((item) => (new Date(item.updatedAt)).getTime() >= (new Date()).getTime() - 1 * 60 * 60 * 1000);
-        return dayOrders;
+    const filterOrders = (done) => {
+        return done.slice(0, 10)
     }
 
     return (
@@ -39,7 +39,7 @@ const FeedPage = () => {
                         <div className={styles.feed__ready}>
                             <h4 className={`text text_type_main-medium`}>Готовы:</h4>
                             <div className={`${styles.feed__donecon} mt-4`}>
-                                {filterToHour(done).map((item) => (
+                                {filterOrders(done).map((item) => (
                                     <p className={`text text_type_digits-default ${styles.feed__done}`} key={uuidv4()}>{item.number}</p>
                                 ))}
                             </div>
