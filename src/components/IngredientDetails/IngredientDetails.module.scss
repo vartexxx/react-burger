@@ -1,4 +1,7 @@
 .details {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     //details__title
     &__title {
         align-self: center;
@@ -19,6 +22,7 @@
         align-self: center;
     }
     &__image {
+        justify-self: center;
         align-self: center;
     }
 }

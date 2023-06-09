@@ -14,7 +14,9 @@ import getUserAction from '../../services/actions/getUserAction';
 import { getCookie } from '../../utils/cookie';
 import AppHeader from '../AppHeader/AppHeader';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
+import FeedPage from '../../pages/FeedPage/FeedPage';
+import OrderPage from '../../pages/OrderPage/OrderPage';
+import AuthOrderFullWindow from '../AuthOrderFullWindow/AuthOrderFullWindow';
 
 function App() {
     const dispatch = useDispatch();
@@ -34,7 +36,7 @@ function App() {
             <AppHeader />
             <Routes>
                 <Route path='/' element={<MainPage />} />
-                <Route path='/ingredients/:id' element={<IngredientPage />} />
+                <Route path='/ingredients/:id' element={<IngredientPage />} exact={true}/>
                 <Route path='/register' element={<RegisterPage />} />
                 <Route path='/login' element={<LoginPage />} />
                 <Route path='/forgot-password' element={<ForgotPasswordPage />} />
@@ -44,7 +46,14 @@ function App() {
                     <ProtectedRoute element={<ProfilePage />} />
                     }
                 />
+                <Route path='/profile/orders/:id'
+                    element={
+                        <ProtectedRoute element={<AuthOrderFullWindow />} />
+                    }
+                />
                 <Route path='*' element={<NotFoundPage />} />
+                <Route path='/feed' element={<FeedPage />} />
+                <Route path='/feed/:id' element={<OrderPage />} />
             </Routes>
         </> 
     );

@@ -1,10 +1,10 @@
-import { BURGER_ORDER_GET, BURGER_ORDER_OK, BURGER_ORDER_FAILED, BURGER_ORDER_RESET } from "../actions/burgerOrderAction";
+import { BURGER_ORDER_FAILED, BURGER_ORDER_GET, BURGER_ORDER_OK, BURGER_ORDER_RESET } from "../actions/burgerOrderAction";
 
 
 const burgerOrderInitialState = {
     order: undefined,
     orderError: undefined,
-}
+};
 
 const burgerOrderReducer = (state = burgerOrderInitialState, action) => {
     switch(action.type) {

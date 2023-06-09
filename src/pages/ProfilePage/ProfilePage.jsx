@@ -1,20 +1,28 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { v4 as uuidv4 } from 'uuid';
 import logoutUserAction from "../../services/actions/logoutUserAction";
 import updateUserAction from "../../services/actions/updateUserAction";
+import { WS_CONNECTION_ORDERS_END, wsOrderConnectionStart } from "../../services/actions/wsActions";
+import { WS_URL_ALL } from "../../utils/variables";
+import FeedOrderCard from "../FeedPage/FeedOrderCard/FeedOrderCard";
 import styles from './ProfilePage.module.scss';
 
 
 const ProfilePage = () => {
+    let {'*': path} = useParams();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const location = useLocation();
 
     const { user } = useSelector((store) => store.authorizeReducer);
+    const orders = useSelector(state => state.wsReducerForOrders.orders);
+
     const password = '';
     const profile = {...user,  password}
+
     const [userData, setUserDate] = useState(profile);
     const [iconInfo, setIconInfo] = useState({ name: '', email: '', password: ''});
     const [activeButtons, setActiveButtons] = useState(false);
@@ -48,6 +56,16 @@ const ProfilePage = () => {
         color: "#f2f2f3",
     };
 
+
+    useEffect(() => {
+        if(location.pathname === '/profile/orders') {
+            dispatch(wsOrderConnectionStart(WS_URL_ALL))
+        }
+        return () => {
+            dispatch({ type: WS_CONNECTION_ORDERS_END })
+        }
+    }, [dispatch, location.pathname])
+
     return (
         <>
             <section className={`mt-30`}>
@@ -80,8 +98,12 @@ const ProfilePage = () => {
                         </nav>
                         <p className={`text text_type_main-default ${styles.profile__text}`}>В этом разделе вы можете изменить&nbsp; свои персональные данные</p>
                     </div>
-                    {location.state ? (
-                        <Outlet />
+                    {path == 'orders' ? (
+                        <div className={styles.order}>
+                            {orders.map((item) => (
+                                <FeedOrderCard order={item} key={uuidv4()} onStatus={true} pathOrder={'/profile/orders'} />
+                            ))}
+                        </div>
                     ) : (
                         <form className={styles.profile__form} onSubmit={profileFormSubmit}>
                             <Input

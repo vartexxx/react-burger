@@ -22,28 +22,6 @@ const updateUserAction = (data) => (dispatch) => {
     .catch(() => {
         dispatch({ type: UPDATE_USER_FAILED })
     })
-    // .catch(() => {
-    //     const refreshToken = localStorage.getItem('refreshToken');
-    //     if(refreshToken) {
-    //         refreshUserToken()
-    //         .then(res => {
-    //             if (res && res.success) {
-    //                 setCookie('accessToken', res.accessToken, { expires: 1200 });
-    //                 localStorage.setItem('refreshToken', res.refreshToken);
-    //                 dispatch({ type: REFRESH_TOKEN_SUCCESS });
-    //             }
-    //             else {
-    //                 dispatch({ type: REFRESH_TOKEN_FAILED });
-    //             }
-    //         })
-    //         .then(() => {
-    //             changeUserData(data)
-    //             .then((res) => {
-    //                 dispatch({ type: UPDATE_USER_SUCCESS, user: res.user });
-    //             })
-    //         })
-    //     } else { dispatch({ type: UPDATE_USER_FAILED }) }
-    // })
-}
+};
 
 export default updateUserAction;

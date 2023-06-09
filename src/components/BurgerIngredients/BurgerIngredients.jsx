@@ -14,8 +14,6 @@ const BurgerIngredients = () => {
     const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
     const [mainRef, inViewMain] = useInView({ threshold: 0 });
 
-    const dispatch = useDispatch();
-
     const ingredients = useSelector(
         (store) => store.burgerIngredientsReducer.burgerIngredientsList
     );
@@ -52,14 +50,6 @@ const BurgerIngredients = () => {
             setCurrent('main')
         }
     }, [inViewBun, inViewSauce, inViewMain]);
-
-    const currenIngredient = useSelector(
-        (store) => store.burgerCurrentIngredientReducer.currentIngredient
-    );
-    
-    const closeModal = () => {
-        dispatch({ type: RESET_INGREDIENT_INFO });
-    }
 
     return (
         <section className={styles.ingredients} >
@@ -100,11 +90,6 @@ const BurgerIngredients = () => {
                     />
                 </div>
             </div>
-            {currenIngredient && (
-                <Modal onClose={closeModal}>
-                    <IngredientDetails />
-                </Modal>
-            )}
         </section>
     );
 };
