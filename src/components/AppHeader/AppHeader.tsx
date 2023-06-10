@@ -4,17 +4,17 @@ import {
     Logo,
     ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useCallback } from "react";
+import { FC, useCallback } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import styles from './AppHeader.module.scss';
 
 
-const AppHeader = () => {
+const AppHeader: FC = () => {
     const { pathname } = useLocation();
     const active = {
         color: '#F2F2F3'
     };
-    const toggleIcon = useCallback((url) => {
+    const toggleIcon = useCallback((url: string) => {
         if (pathname === "/" && url === "/") {
             return "primary";
         } else if (pathname.includes(url) && url !== "/") {

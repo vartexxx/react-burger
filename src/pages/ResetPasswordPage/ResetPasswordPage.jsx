@@ -2,7 +2,7 @@ import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burg
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, Navigate, useLocation } from "react-router-dom";
-import resetPasswrodAction from "../../services/actions/resetPasswordAction";
+import resetPasswordAction from "../../services/actions/resetPasswordAction";
 import styles from './ResetPasswordPage.module.scss';
 
 
@@ -17,7 +17,7 @@ const ResetPasswordPage = () => {
 
     const onSubmit = (e) => {
         e.preventDefault();
-        dispatch(resetPasswrodAction(inputInfo.password, inputInfo.code))
+        dispatch(resetPasswordAction(inputInfo.password, inputInfo.code))
     };
 
     if (!prevName || isAuth) { return (<Navigate to='/' />) };
