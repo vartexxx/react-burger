@@ -3,18 +3,26 @@ import {
     WS_CONNECTION_ORDERS_END,
     WS_CONNECTION_ORDERS_ERROR,
     WS_CONNECTION_ORDERS_SUCCESS,
-    WS_GET_ORDERS_MESSAGE
+    WS_GET_ORDERS_MESSAGE,
+    TWsConnectionAction
 } from "../actions/wsActions";
+import { TOrderInfo } from "../types/types";
 
+type TInitalState = {
+    orders: TOrderInfo[],
+    total: number,
+    totalToday: number,
+    wsConnected: boolean,
+}
 
-const initialState = {
+const initialState: TInitalState = {
     orders: [],
     total: 0,
     totalToday: 0,
     wsConnected: false
 };
   
-const wsReducerForOrders = (state = initialState, action) => {
+const wsReducerForOrders = (state = initialState, action: TWsConnectionAction) => {
     switch (action.type) {
         case WS_CONNECTION_ORDERS_SUCCESS:
             return {

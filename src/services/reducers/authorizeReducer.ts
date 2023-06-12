@@ -5,9 +5,40 @@ import { LOGOUT_USER_ERROR, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../
 import { USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../actions/registerUserAction";
 import { RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS } from "../actions/resetPasswordAction";
 import { UPDATE_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../actions/updateUserAction";
+import { TUserActions } from "../actions";
 
+type TInitialState = {
+    user: {
+        name: string,
+        email: string,
+    },
+    isAuthorization: boolean,
 
-const initialState = {
+    registerRequest: boolean,
+    registerFailed: boolean,
+
+    loginRequest: boolean,
+    loginFailed: boolean,
+
+    logoutUserRequest: boolean,
+    logoutUserFailed: boolean,
+
+    forgotPasswordRequest: boolean,
+    forgotPasswordFailed: boolean,
+    forgotPasswordCodeSend: boolean,
+
+    resetPasswordRequest: boolean,
+    resetPasswordFailed: boolean,
+    resetPasswordSuccess: boolean,
+
+    getUserRequest: boolean,
+    getUserFailed: boolean,
+
+    updateUserRequest: boolean,
+    updateUserFailed: boolean,
+}
+
+const initialState: TInitialState = {
     user: { name: '', email: '', },
     isAuthorization: false,
 
@@ -36,7 +67,7 @@ const initialState = {
 };
 
 
-const authorizeReducer = ( state = initialState, action) => {
+const authorizeReducer = ( state = initialState, action: TUserActions) => {
     switch(action.type) {
         case USER_REGISTER_REQUEST: {
             return {

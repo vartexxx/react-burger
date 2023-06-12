@@ -79,7 +79,7 @@ const BurgerConstructor = () => {
                             )}
                         >
                             {burgerList.map((item) => {
-                                return(<BurgerConstructorList key={item.constructorItemId} list={item} />)
+                                return(<BurgerConstructorList key={item.id} list={item} />)
                             })}
                         </Reorder.Group>
                         <ConstructorElement

@@ -1,12 +1,17 @@
-import { ADD, DELETE, SORT } from "../actions/burgerConstructorAction";
+import { ADD, DELETE, SORT, TBurgerConstructorActions } from "../actions/burgerConstructorAction";
+import { TIngredientsInfo } from "../types/types";
 
+type TInitialState = {
+    burgerConstructorBun: undefined | string,
+    burgerConstructorList: TIngredientsInfo,
+}
 
-const constructorInitialState = {
+const constructorInitialState: TInitialState = {
     burgerConstructorBun: undefined,
     burgerConstructorList: [],
 };
 
-const burgerConstructorReducer = ( state = constructorInitialState, action ) => {
+const burgerConstructorReducer = ( state = constructorInitialState, action: TBurgerConstructorActions ) => {
     switch (action.type) {
         case ADD:
             if (action.payload.type === "bun") {
@@ -19,14 +24,14 @@ const burgerConstructorReducer = ( state = constructorInitialState, action ) => 
                 ...state,
                 burgerConstructorList: [
                     ...state.burgerConstructorList,
-                    { constructorItemId: action.id, ...action.payload },
+                    { id: action.id, ...action.payload },
                 ],
             }
         case DELETE:
             return {
                 ...state,
                 burgerConstructorList: state.burgerConstructorList.filter(
-                    (item) => item.constructorItemId !== action.payload.constructorItemId
+                    (item) => item._id !== action.payload._id
                 ),
             }
         case SORT:

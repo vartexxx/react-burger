@@ -16,13 +16,18 @@ export interface IOkOrder {
 }
 
 export interface IFailedOrder {
-    readonly type: typeof BURGER_ORDER_FAILED
+    readonly type: typeof BURGER_ORDER_FAILED,
+    readonly error: string;
+}
+export interface IResetOrder {
+    readonly type: typeof BURGER_ORDER_RESET;
 }
 
 export type TBurgerOrderAction =
     | IGetOrder
     | IOkOrder
-    | IFailedOrder;
+    | IFailedOrder
+    | IResetOrder;
 
 
 const makeOrder: AppThunk = (ingredients) => (dispatch: AppDispatch) => {

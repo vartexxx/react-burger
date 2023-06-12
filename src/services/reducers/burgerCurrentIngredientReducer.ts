@@ -1,11 +1,15 @@
 import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO } from '../actions/burgerCurrentIngredientAction';
+import { TIngredientCurrentAction } from '../actions/burgerCurrentIngredientAction';
 
+type TInitialState = {
+    currentIngredient: undefined | string[]
+}
 
-const burgerCurrentIngredientInitialState = {
+const burgerCurrentIngredientInitialState: TInitialState = {
     currentIngredient: undefined,
 };
 
-const burgerCurrentIngredientReducer = (state=burgerCurrentIngredientInitialState, action) => {
+const burgerCurrentIngredientReducer = (state=burgerCurrentIngredientInitialState, action: TIngredientCurrentAction) => {
     switch(action.type) {
         case SET_INGREDIENT_INFO:
             return {

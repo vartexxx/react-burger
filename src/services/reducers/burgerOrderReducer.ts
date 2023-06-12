@@ -1,12 +1,17 @@
 import { BURGER_ORDER_FAILED, BURGER_ORDER_GET, BURGER_ORDER_OK, BURGER_ORDER_RESET } from "../actions/burgerOrderAction";
+import { TBurgerOrderAction } from "../actions/burgerOrderAction";
 
+type TInitalState = {
+    order: undefined | number,
+    orderError: undefined | string,
+}
 
-const burgerOrderInitialState = {
-    order: undefined,
-    orderError: undefined,
+const burgerOrderInitialState: TInitalState = {
+    order: 0,
+    orderError: '',
 };
 
-const burgerOrderReducer = (state = burgerOrderInitialState, action) => {
+const burgerOrderReducer = (state = burgerOrderInitialState, action: TBurgerOrderAction) => {
     switch(action.type) {
         case BURGER_ORDER_GET:
             return {

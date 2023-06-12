@@ -25,12 +25,13 @@ export interface IGetIngredients {
 }
 
 export interface IGetIngredientsStatusOk {
-    readonly type: typeof GET_INGREDIENTS_STATUS_OK
+    readonly type: typeof GET_INGREDIENTS_STATUS_OK,
     data: TIngredient[]
 }
 
 export interface IGetIngredientsStatusErr {
-    readonly type: typeof GET_INGREDIENTS_STATUS_ERR
+    readonly type: typeof GET_INGREDIENTS_STATUS_ERR,
+    readonly error: string
 }
 
 export type TBurgerIngredientsAction =
