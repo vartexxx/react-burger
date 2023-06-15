@@ -1,16 +1,14 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { memo, useMemo } from "react";
+import { FC, memo, useMemo, useState } from "react";
 import { useDrag } from "react-dnd";
-// import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { SET_INGREDIENT_INFO, RESET_INGREDIENT_INFO } from "../../services/actions/burgerCurrentIngredientAction";
-import styles from './Card.module.scss';
-import { useState } from "react";
-import Modal from "../Modal/Modal";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO } from "../../services/actions/burgerCurrentIngredientAction";
 import { useDispatch, useSelector } from "../../services/types/hooks";
 import { IIngredient } from "../../services/types/types";
-import { FC } from "react";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import Modal from "../Modal/Modal";
+import styles from './Card.module.scss';
+
 
 interface ICard {
     ingredient: IIngredient
@@ -19,7 +17,6 @@ interface ICard {
 interface ICounters {
     [counters: string]: number;
 }
-
 
 const Card: FC<ICard> = memo(function Card({ ingredient }){
     const dispatch = useDispatch();
@@ -52,12 +49,12 @@ const Card: FC<ICard> = memo(function Card({ ingredient }){
     const openModal = () => {
         dispatch({ type: SET_INGREDIENT_INFO, payload: ingredient });
         setIsOpen(true);
-        window.history.pushState({ path: `/ingredients/${ingredient._id}` }, '', `/ingredients/${ingredient._id}`)
+        window.history.pushState({ path: `/ingredients/${ingredient._id}` }, '', `/ingredients/${ingredient._id}`);
     };
     
     const closeModal = () => {
         dispatch({ type: RESET_INGREDIENT_INFO });
-        window.history.pushState({ path: `/` }, '', `/`)
+        window.history.pushState({ path: `/` }, '', `/`);
     }
 
     return (

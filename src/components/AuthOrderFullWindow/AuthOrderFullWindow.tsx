@@ -2,9 +2,10 @@ import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burge
 import { useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { WS_CONNECTION_ORDERS_END, wsOrderConnectionStart } from '../../services/actions/wsActions';
+import { useDispatch, useSelector } from '../../services/types/hooks';
 import { WS_URL_ALL } from '../../utils/variables';
 import styles from './AuthOrderFullWindow.module.scss';
-import { useDispatch, useSelector } from '../../services/types/hooks';
+
 
 const AuthOrderFullWindow = () => {
     const dispatch = useDispatch();

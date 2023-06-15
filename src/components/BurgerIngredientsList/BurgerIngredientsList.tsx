@@ -1,16 +1,15 @@
 import { forwardRef } from 'react';
+import { IIngredient } from '../../services/types/types';
 import Card from '../Card/Card';
 import styles from './BurgerIngredientsList.module.scss';
-import { IIngredient } from '../../services/types/types';
 
 interface IBurgerIngredientsList {
-    title: string;
-    id: string;
-    type: string;
-    data: Array<IIngredient>;
+    title: string,
+    id: string,
+    type: string,
+    data: Array<IIngredient>,
 }
 type ref = HTMLParagraphElement;
-
 
 const BurgerIngredientsList = forwardRef<ref, IBurgerIngredientsList>((props, ref) => {
     return (

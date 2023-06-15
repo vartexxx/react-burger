@@ -1,11 +1,11 @@
-import styles from './ModalOverlay.module.scss';
 import { FC } from 'react';
+import styles from './ModalOverlay.module.scss';
 
 
 type TModalOverlay = {
     animation: boolean,
-    closeModalAnimation: () => void
-}
+    closeModalAnimation: () => void,
+};
 
 const ModalOverlay: FC<TModalOverlay> = ({ animation, closeModalAnimation }) => {
     return (

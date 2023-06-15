@@ -1,17 +1,17 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { useInView } from "react-intersection-observer";
-import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
-import styles from './BurgerIngredients.module.scss';
 import { useSelector } from '../../services/types/hooks';
 import { IIngredient } from '../../services/types/types';
+import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
+import styles from './BurgerIngredients.module.scss';
 
 
 interface IISort {
-    bun: Array<IIngredient>;
-    main: Array<IIngredient>;
-    sauce: Array<IIngredient>;
-}
+    bun: Array<IIngredient>,
+    main: Array<IIngredient>,
+    sauce: Array<IIngredient>,
+};
 
 const BurgerIngredients: FC = () => {
     const [bunRef, inViewBun] = useInView({ threshold: 0 });

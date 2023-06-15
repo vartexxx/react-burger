@@ -1,7 +1,9 @@
-import styles from './IngredientDetails.module.scss';
+import { FC } from 'react';
 import { useSelector } from '../../services/types/hooks';
+import styles from './IngredientDetails.module.scss';
 
-const IngredientDetails = () => {
+
+const IngredientDetails: FC = () => {
     const { currentIngredient } = useSelector((store) => store.burgerCurrentIngredientReducer);
     return (
         <div className={`${styles.details} pb-15 pl-10 pr-10`}>
@@ -28,6 +30,5 @@ const IngredientDetails = () => {
         </div>
     );
 };
-
 
 export default IngredientDetails;

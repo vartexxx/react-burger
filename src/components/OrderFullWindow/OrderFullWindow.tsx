@@ -1,8 +1,8 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useMemo } from "react";
-import styles from './OrderFullWindow.module.scss';
+import { FC, useMemo } from "react";
 import { useSelector } from "../../services/types/hooks";
-import { FC } from "react";
+import styles from './OrderFullWindow.module.scss';
+
 
 const OrderFullWindow: FC = () => {
     const { order } = useSelector((state) => state.orderCurrentReducer);
@@ -26,7 +26,7 @@ const OrderFullWindow: FC = () => {
             return item;
         }, {});
         return counts
-    }, [order])
+    }, [order]);
 
     const cost = useMemo(() => {
         let total = 0;
@@ -35,7 +35,7 @@ const OrderFullWindow: FC = () => {
             if (ingredient) { total += ingredient.price };
         });
         return total
-    }, [ingredientsList, order])
+    }, [ingredientsList, order]);
 
     return (
         <section className={`${styles.order__container} pt-4 pb-30`}>

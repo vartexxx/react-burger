@@ -1,17 +1,16 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Reorder } from "framer-motion";
-import PropTypes from "prop-types";
 import { useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD, SORT } from '../../services/actions/burgerConstructorAction';
 import makeOrder, { BURGER_ORDER_RESET } from '../../services/actions/burgerOrderAction';
+import { useDispatch, useSelector } from '../../services/types/hooks';
+import { IIngredient } from '../../services/types/types';
 import BurgerConstructorList from '../BurgerConstructorList/BurgerConstructorList';
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.scss';
-import { useDispatch, useSelector } from '../../services/types/hooks';
-import { IIngredient } from '../../services/types/types';
 
 
 const BurgerConstructor = () => {
@@ -121,9 +120,5 @@ const BurgerConstructor = () => {
         </>
     );
 };
-
-BurgerConstructor.propTypes = {
-    orderSum: PropTypes.number,
-}
 
 export default BurgerConstructor;

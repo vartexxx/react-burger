@@ -1,13 +1,14 @@
-import { Navigate, useLocation } from "react-router-dom";
 import { FC } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import { useSelector } from "../../services/types/hooks";
+
 
 type TProtectedRoute = {
     element: any
 }
 
 const ProtectedRoute: FC<TProtectedRoute> = ({ element }) => {
-    const isAuthorization = useSelector(state => state.authorizeReducer['isAuthorization'])
+    const isAuthorization = useSelector(state => state.authorizeReducer['isAuthorization']);
     const location = useLocation();
 
     return (

@@ -1,8 +1,10 @@
+import { FC } from 'react';
 import img from '../../images/ok.svg';
-import styles from './OrderDetails.module.scss';
 import { useSelector } from '../../services/types/hooks';
+import styles from './OrderDetails.module.scss';
 
-const OrderDetails = () => {
+
+const OrderDetails: FC = () => {
     const { order, orderError } = useSelector((store) => ({
         order: store.burgerOrderReducer.order,
         orderError: store.burgerOrderReducer.orderError,

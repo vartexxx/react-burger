@@ -6,8 +6,8 @@ import { IIngredient } from "../../services/types/types";
 import { FC } from "react";
 
 interface IBurgerConstructorList {
-    list: IIngredient
-}
+    list: IIngredient,
+};
 
 const BurgerConstructorList: FC<IBurgerConstructorList> = ({list , }) => {
     const dispatch = useDispatch();
