@@ -2,14 +2,14 @@ import { GET_CURRENT_ORDER_INFO, REMOVE_CURRENT_ORDER_INFO } from "../actions/or
 import { TOrderInfo } from "../types/types";
 
 
-export interface IGetCurrentOrderInfo {
-    readonly type: typeof GET_CURRENT_ORDER_INFO;
-    order: TOrderInfo
-  }
+interface IGetCurrentOrderInfo {
+    readonly type: typeof GET_CURRENT_ORDER_INFO,
+    order: TOrderInfo,
+};
   
-export interface IRemoveCurrentOrderInfo {
-    readonly type: typeof REMOVE_CURRENT_ORDER_INFO
-}
+interface IRemoveCurrentOrderInfo {
+    readonly type: typeof REMOVE_CURRENT_ORDER_INFO,
+};
   
 export type TOrderCurrentInfoActons =
     | IGetCurrentOrderInfo

@@ -1,12 +1,13 @@
 import {
+    TWsConnectionAction,
     WS_CONNECTION_CLOSED,
     WS_CONNECTION_END,
     WS_CONNECTION_ERROR,
     WS_CONNECTION_SUCCESS,
     WS_GET_MESSAGE,
-    TWsConnectionAction,
 } from "../actions/wsActions";
 import { TOrderInfo } from "../types/types";
+
 
 type TInitialState = {
     orders: TOrderInfo[],

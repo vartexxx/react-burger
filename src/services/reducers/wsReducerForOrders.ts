@@ -1,12 +1,13 @@
-import { 
+import {
+    TWsConnectionAction,
     WS_CONNECTION_ORDERS_CLOSED,
     WS_CONNECTION_ORDERS_END,
     WS_CONNECTION_ORDERS_ERROR,
     WS_CONNECTION_ORDERS_SUCCESS,
-    WS_GET_ORDERS_MESSAGE,
-    TWsConnectionAction
+    WS_GET_ORDERS_MESSAGE
 } from "../actions/wsActions";
 import { TOrderInfo } from "../types/types";
+
 
 type TInitalState = {
     orders: TOrderInfo[],

@@ -1,4 +1,6 @@
 import { TOrderInfo } from "../types/types";
+
+
 export const WS_CONNECTION_START: 'WS_CONNECTION_START' = 'WS_CONNECTION_START';
 export const WS_CONNECTION_SUCCESS: 'WS_CONNECTION_SUCCESS' = 'WS_CONNECTION_SUCCESS';
 export const WS_CONNECTION_ERROR: 'WS_CONNECTION_ERROR' = 'WS_CONNECTION_ERROR';
@@ -19,67 +21,67 @@ export interface IPayload {
     orders: TOrderInfo[],
     total: number,
     totalToday: number,
-}
+};
 
-export interface IWsConnectionStart {
+interface IWsConnectionStart {
     readonly type: typeof WS_CONNECTION_START,
     payload: string,
-}
+};
 
-export interface IWsConnectionSuccess {
-    readonly type: typeof WS_CONNECTION_SUCCESS
-}
+interface IWsConnectionSuccess {
+    readonly type: typeof WS_CONNECTION_SUCCESS,
+};
 
-export interface IWsConnectionError {
-    readonly type: typeof WS_CONNECTION_ERROR
-}
+interface IWsConnectionError {
+    readonly type: typeof WS_CONNECTION_ERROR,
+};
 
-export interface IWsConnectionEnd {
-    readonly type: typeof WS_CONNECTION_END
-}
+interface IWsConnectionEnd {
+    readonly type: typeof WS_CONNECTION_END,
+};
 
-export interface IWsConnectionClosed {
-    readonly type: typeof WS_CONNECTION_CLOSED
-}
+interface IWsConnectionClosed {
+    readonly type: typeof WS_CONNECTION_CLOSED,
+};
 
-export interface IWsGetMessage {
+interface IWsGetMessage {
     readonly type: typeof WS_GET_MESSAGE,
-    payload: IPayload
-}
+    payload: IPayload,
+};
 
-export interface IWsSendMessage {
-    readonly type: typeof WS_SEND_MESSAGE
-}
+interface IWsSendMessage {
+    readonly type: typeof WS_SEND_MESSAGE,
+};
 
-export interface IWsConnectionOrdersStart {
+interface IWsConnectionOrdersStart {
     readonly type: typeof WS_CONNECTION_ORDERS_START,
-    payload: string
-}
+    payload: string,
+};
 
-export interface IWsConnectionOrdersSuccess {
-    readonly type: typeof WS_CONNECTION_ORDERS_SUCCESS
-}
+interface IWsConnectionOrdersSuccess {
+    readonly type: typeof WS_CONNECTION_ORDERS_SUCCESS,
+};
 
-export interface IWsConnectionOrdersError {
-    readonly type: typeof WS_CONNECTION_ORDERS_ERROR
-}
+interface IWsConnectionOrdersError {
+    readonly type: typeof WS_CONNECTION_ORDERS_ERROR,
+};
 
-export interface IWsConnectionOrdersEnd {
-    readonly type: typeof WS_CONNECTION_ORDERS_END
-}
+interface IWsConnectionOrdersEnd {
+    readonly type: typeof WS_CONNECTION_ORDERS_END,
+};
 
-export interface IWsConnectionOrdersClosed {
-    readonly type: typeof WS_CONNECTION_ORDERS_CLOSED
-}
+interface IWsConnectionOrdersClosed {
+    readonly type: typeof WS_CONNECTION_ORDERS_CLOSED,
+};
 
-export interface IWsOrdersGetMessage {
+interface IWsOrdersGetMessage {
     readonly type: typeof WS_GET_ORDERS_MESSAGE,
-    payload: IPayload
-}
+    payload: IPayload,
+};
 
-export interface IWsOrdersSendMessage {
-    readonly type: typeof WS_SEND_ORDERS_MESSAGE
-}
+interface IWsOrdersSendMessage {
+    readonly type: typeof WS_SEND_ORDERS_MESSAGE,
+};
 
 export type TWsConnectionAction =
     | IWsConnectionStart
@@ -97,7 +99,7 @@ export type TWsConnectionAction =
     | IWsOrdersGetMessage
     | IWsOrdersSendMessage;
 
-export const wsConnectionStart = (url: string) => {
+export const wsConnectionStart = (url: string): IWsConnectionStart => {
     return {
         type: WS_CONNECTION_START,
         payload: url,
@@ -105,12 +107,12 @@ export const wsConnectionStart = (url: string) => {
 };
 
 
-export const wsOrderConnectionStart = (url: string) => {
+export const wsOrderConnectionStart = (url: string): IWsConnectionOrdersStart => {
     return {
         type: WS_CONNECTION_ORDERS_START,
         payload: url,
     }
-}
+};
 
 export interface IWsActions {
     readonly wsInit: typeof WS_CONNECTION_START,
@@ -127,7 +129,7 @@ export interface IWsActions {
     readonly onCloseOrders: typeof WS_CONNECTION_ORDERS_CLOSED,
     readonly wsSendMessageOrders: typeof WS_SEND_ORDERS_MESSAGE,
     readonly wsCloseOrders: typeof WS_CONNECTION_ORDERS_END
-}
+};
 
 export const wsActions: IWsActions = {
     wsInit: WS_CONNECTION_START,

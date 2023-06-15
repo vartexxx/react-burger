@@ -1,22 +1,23 @@
 import { refreshUserToken } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
-import { AppThunk, AppDispatch } from "../types/types";
+import { AppDispatch, AppThunk } from "../types/types";
+
 
 export const REFRESH_TOKEN_REQUEST: 'REFRESH_TOKEN_REQUEST' = 'REFRESH_TOKEN_REQUEST';
 export const REFRESH_TOKEN_SUCCESS: 'REFRESH_TOKEN_SUCCESS' = 'REFRESH_TOKEN_SUCCESS';
 export const REFRESH_TOKEN_FAILED: 'REFRESH_TOKEN_FAILED' = 'REFRESH_TOKEN_FAILED';
 
-export interface IRefreshTokenRequest {
-    readonly type: typeof REFRESH_TOKEN_REQUEST
-}
+interface IRefreshTokenRequest {
+    readonly type: typeof REFRESH_TOKEN_REQUEST,
+};
 
-export interface IRefreshTokenSuccess {
-    readonly type: typeof REFRESH_TOKEN_SUCCESS
-}
+interface IRefreshTokenSuccess {
+    readonly type: typeof REFRESH_TOKEN_SUCCESS,
+};
 
-export interface IRefreshTokenFailed {
-    readonly type: typeof REFRESH_TOKEN_FAILED
-}
+interface IRefreshTokenFailed {
+    readonly type: typeof REFRESH_TOKEN_FAILED,
+};
 
 export type TRefreshTokenAction =
     | IRefreshTokenRequest

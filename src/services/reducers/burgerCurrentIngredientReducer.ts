@@ -1,9 +1,10 @@
-import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO } from '../actions/burgerCurrentIngredientAction';
-import { TIngredientCurrentAction } from '../actions/burgerCurrentIngredientAction';
-import { TIngredientInfo } from '../types/types';
+import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO, TIngredientCurrentAction } from '../actions/burgerCurrentIngredientAction';
+import { IIngredient } from '../types/types';
+
+
 type TInitialState = {
-    currentIngredient: undefined | TIngredientInfo
-}
+    currentIngredient: undefined | IIngredient,
+};
 
 const burgerCurrentIngredientInitialState: TInitialState = {
     currentIngredient: undefined,

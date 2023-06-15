@@ -1,11 +1,11 @@
-import { GET_INGREDIENTS, GET_INGREDIENTS_STATUS_ERR, GET_INGREDIENTS_STATUS_OK } from "../actions/burgerIngredientsAction";
-import { TBurgerIngredientsAction } from "../actions/burgerIngredientsAction";
+import { GET_INGREDIENTS, GET_INGREDIENTS_STATUS_ERR, GET_INGREDIENTS_STATUS_OK, TBurgerIngredientsAction } from "../actions/burgerIngredientsAction";
 import { IIngredient } from "../types/types";
 
-export interface IIngredientsInitialState {
-    burgerIngredientsList: Array<IIngredient>;
-    burgerIngredientsListErrorText: string | undefined;
-}
+
+interface IIngredientsInitialState {
+    burgerIngredientsList: Array<IIngredient>,
+    burgerIngredientsListErrorText: string | undefined,
+};
 
 const burgerIngredientsInitialState: IIngredientsInitialState = {
     burgerIngredientsList: [],

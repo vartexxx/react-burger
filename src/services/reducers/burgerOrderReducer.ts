@@ -1,5 +1,5 @@
-import { BURGER_ORDER_FAILED, BURGER_ORDER_GET, BURGER_ORDER_OK, BURGER_ORDER_RESET } from "../actions/burgerOrderAction";
-import { TBurgerOrderAction } from "../actions/burgerOrderAction";
+import { BURGER_ORDER_FAILED, BURGER_ORDER_GET, BURGER_ORDER_OK, BURGER_ORDER_RESET, TBurgerOrderAction } from "../actions/burgerOrderAction";
+
 
 type TInitalState = {
     order: undefined | number,

@@ -5,7 +5,8 @@ import { LOGOUT_USER_ERROR, LOGOUT_USER_REQUEST, LOGOUT_USER_SUCCESS } from "../
 import { USER_REGISTER_ERROR, USER_REGISTER_REQUEST, USER_REGISTER_SUCCESS } from "../actions/registerUserAction";
 import { RESET_PASSWORD_FAILED, RESET_PASSWORD_REQUEST, RESET_PASSWORD_SUCCESS } from "../actions/resetPasswordAction";
 import { UPDATE_USER_FAILED, UPDATE_USER_REQUEST, UPDATE_USER_SUCCESS } from "../actions/updateUserAction";
-import { TUserActions } from "../actions";
+import { TUserActions } from "../actions/userActions";
+
 
 type TInitialState = {
     user: {
@@ -36,7 +37,7 @@ type TInitialState = {
 
     updateUserRequest: boolean,
     updateUserFailed: boolean,
-}
+};
 
 const initialState: TInitialState = {
     user: { name: '', email: '', },

@@ -1,10 +1,11 @@
 import { ADD, DELETE, SORT, TConstructorAction } from "../actions/burgerConstructorAction";
-import { TIngredientsInfo } from "../types/types";
 import { IIngredient } from "../types/types";
-export interface IConstructorInitialState {
-    burgerConstructorBun: IIngredient | undefined;
-    burgerConstructorList: Array<IIngredient>;
-}
+
+
+interface IConstructorInitialState {
+    burgerConstructorBun: IIngredient | undefined,
+    burgerConstructorList: Array<IIngredient>,
+};
 
 
 const constructorInitialState: IConstructorInitialState = {

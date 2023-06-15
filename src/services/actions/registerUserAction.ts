@@ -2,25 +2,26 @@ import {
     registerUser
 } from "../../utils/api";
 import { setCookie } from "../../utils/cookie";
+import { AppDispatch, AppThunk } from "../types/types";
 import { IUser } from "./getUserAction";
-import { AppThunk, AppDispatch } from "../types/types";
+
 
 export const USER_REGISTER_REQUEST: 'USER_REGISTER_REQUEST' = 'USER_REGISTER_REQUEST';
 export const USER_REGISTER_SUCCESS: 'USER_REGISTER_SUCCESS' = 'USER_REGISTER_SUCCESS';
 export const USER_REGISTER_ERROR: 'USER_REGISTER_ERROR' = 'USER_REGISTER_ERROR';
 
-export interface IUserRegisterRequest {
-    readonly type: typeof USER_REGISTER_REQUEST
-}
+interface IUserRegisterRequest {
+    readonly type: typeof USER_REGISTER_REQUEST,
+};
 
-export interface IUserRegisterSuccess {
+interface IUserRegisterSuccess {
     readonly type: typeof USER_REGISTER_SUCCESS,
-    user: IUser
-}
+    user: IUser,
+};
 
-export interface IUserRegisterError {
-    readonly type: typeof USER_REGISTER_ERROR
-}
+interface IUserRegisterError {
+    readonly type: typeof USER_REGISTER_ERROR,
+};
 
 export type TUserRegisterAction =
     | IUserRegisterRequest

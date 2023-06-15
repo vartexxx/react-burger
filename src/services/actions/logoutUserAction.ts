@@ -1,22 +1,22 @@
-import { deleteCookie } from "../../utils/cookie";
 import { logoutUser } from "../../utils/api";
-import { AppThunk, AppDispatch } from "../types/types";
+import { deleteCookie } from "../../utils/cookie";
+import { AppDispatch, AppThunk } from "../types/types";
 
 export const LOGOUT_USER_REQUEST: 'LOGOUT_USER_REQUEST' = 'LOGOUT_USER_REQUEST';
 export const LOGOUT_USER_SUCCESS: 'LOGOUT_USER_SUCCESS' = 'LOGOUT_USER_SUCCESS';
 export const LOGOUT_USER_ERROR: 'LOGOUT_USER_ERROR' = 'LOGOUT_USER_ERROR';
 
-export interface IUserLogoutRequest {
-    readonly type: typeof LOGOUT_USER_REQUEST
-}
+interface IUserLogoutRequest {
+    readonly type: typeof LOGOUT_USER_REQUEST,
+};
 
-export interface IUserLogoutSuccess {
-    readonly type: typeof LOGOUT_USER_SUCCESS
-}
+interface IUserLogoutSuccess {
+    readonly type: typeof LOGOUT_USER_SUCCESS,
+};
 
-export interface IUserLogoutError {
-    readonly type: typeof LOGOUT_USER_ERROR
-}
+interface IUserLogoutError {
+    readonly type: typeof LOGOUT_USER_ERROR,
+};
 
 export type TUserLogoutAction =
     | IUserLogoutRequest

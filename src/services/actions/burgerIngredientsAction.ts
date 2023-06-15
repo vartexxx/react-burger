@@ -1,44 +1,29 @@
 import { getApi } from "../../utils/api";
-import { AppDispatch, AppThunk } from "../types/types";
+import { AppDispatch, AppThunk, IIngredient } from "../types/types";
+
 
 export const GET_INGREDIENTS: 'GET_INGREDIENTS' = 'GET_INGREDIENTS';
 export const GET_INGREDIENTS_STATUS_OK: 'GET_INGREDIENTS_STATUS_OK' = 'GET_INGREDIENTS_STATUS_OK';
 export const GET_INGREDIENTS_STATUS_ERR: 'GET_INGREDIENTS_STATUS_ERR' = 'GET_INGREDIENTS_STATUS_ERR';
 
-export type TIngredient = {
-    _id: string;
-    name: string;
-    type: string;
-    proteins: number;
-    fat: number;
-    carbohydrates: number;
-    calories: number;
-    price: number;
-    image: string;
-    image_mobile: string;
-    image_large: string;
-    __v: number;
-};
-
-export interface IGetIngredients {
+interface IGetIngredients {
     readonly type: typeof GET_INGREDIENTS
 }
 
-export interface IGetIngredientsStatusOk {
+interface IGetIngredientsStatusOk {
     readonly type: typeof GET_INGREDIENTS_STATUS_OK,
-    data: TIngredient[]
+    data: IIngredient[],
 }
 
-export interface IGetIngredientsStatusErr {
+interface IGetIngredientsStatusErr {
     readonly type: typeof GET_INGREDIENTS_STATUS_ERR,
-    readonly error: string
+    readonly error: string,
 }
 
 export type TBurgerIngredientsAction =
     | IGetIngredients
     | IGetIngredientsStatusOk
     | IGetIngredientsStatusErr;
-
     
 const getIngredients: AppThunk = () => (dispatch: AppDispatch | AppThunk) => {
     dispatch({ type: GET_INGREDIENTS})

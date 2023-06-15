@@ -1,34 +1,35 @@
 import { postApi } from "../../utils/api";
-import { AppThunk, AppDispatch } from "../types/types";
+import { AppDispatch, AppThunk } from "../types/types";
+
 
 export const BURGER_ORDER_GET: 'BURGER_ORDER_GET' = 'BURGER_ORDER_GET';
 export const BURGER_ORDER_OK: 'BURGER_ORDER_OK' = 'BURGER_ORDER_OK';
 export const BURGER_ORDER_FAILED: 'BURGER_ORDER_FAILED' = 'BURGER_ORDER_FAILED';
 export const BURGER_ORDER_RESET: 'BURGER_ORDER_RESET' = 'BURGER_ORDER_RESET';
 
-export interface IGetOrder {
-    readonly type: typeof BURGER_ORDER_GET
-}
+interface IGetOrder {
+    readonly type: typeof BURGER_ORDER_GET,
+};
 
-export interface IOkOrder {
+interface IOkOrder {
     readonly type: typeof BURGER_ORDER_OK,
-    payload: number
-}
+    payload: number,
+};
 
-export interface IFailedOrder {
+interface IFailedOrder {
     readonly type: typeof BURGER_ORDER_FAILED,
-    readonly error: string;
-}
-export interface IResetOrder {
-    readonly type: typeof BURGER_ORDER_RESET;
-}
+    readonly error: string,
+};
+
+interface IResetOrder {
+    readonly type: typeof BURGER_ORDER_RESET,
+};
 
 export type TBurgerOrderAction =
     | IGetOrder
     | IOkOrder
     | IFailedOrder
     | IResetOrder;
-
 
 const makeOrder: AppThunk = (ingredients) => (dispatch: AppDispatch) => {
         const orderList = [
