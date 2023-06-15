@@ -1,28 +1,27 @@
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, FormEvent, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import resetPasswordAction from "../../services/actions/resetPasswordAction";
+import { useDispatch, useSelector } from "../../services/types/hooks";
 import styles from './ResetPasswordPage.module.scss';
 
 
-const ResetPasswordPage = () => {
+const ResetPasswordPage: FC = () => {
     const dispatch = useDispatch();
     const location = useLocation();
-    const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
-    const resetSuccess = useSelector((store) => store.authorizeReducer.resetPasswordSuccess);
+    const { isAuthorization, resetPasswordSuccess } = useSelector((store) => store.authorizeReducer);
     const prevName = location.state?.prevName;
 
     const [inputInfo, setInputInfo] = useState({ password: '', code: '' });
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(resetPasswordAction(inputInfo.password, inputInfo.code))
     };
 
-    if (!prevName || isAuth) { return (<Navigate to='/' />) };
+    if (!prevName || isAuthorization) { return (<Navigate to='/' />) };
 
-    if (resetSuccess) { return (<Navigate to='/login'/>) };
+    if (resetPasswordSuccess) { return (<Navigate to='/login'/>) };
 
     return (
         <section className={styles.reset}>
@@ -55,5 +54,6 @@ const ResetPasswordPage = () => {
         </section>
     )
 }
+
 
 export default ResetPasswordPage;

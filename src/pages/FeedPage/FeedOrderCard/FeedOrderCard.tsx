@@ -1,16 +1,22 @@
 import { CurrencyIcon, FormattedDate } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from 'prop-types';
-import { useMemo, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useMemo, useState } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import Modal from "../../../components/Modal/Modal";
 import OrderFullWindow from "../../../components/OrderFullWindow/OrderFullWindow";
 import { GET_CURRENT_ORDER_INFO, REMOVE_CURRENT_ORDER_INFO } from "../../../services/actions/orderCurrentAction";
+import { useDispatch, useSelector } from "../../../services/types/hooks";
+import { TOrderInfo } from "../../../services/types/types";
 import FeedIcons from "./FeedIcons/FeedIcons";
 import styles from './FeedOrderCard.module.scss';
 
 
-const FeedOrderCard = ({ order, onStatus, pathOrder }) => {
+type TFeedOrderCard = {
+    order: TOrderInfo,
+    onStatus?: boolean,
+    pathOrder: string,
+};
+
+const FeedOrderCard: FC<TFeedOrderCard> = ({ order, onStatus, pathOrder }) => {
     const dispatch = useDispatch();
     const ingredients = useSelector(state => state.burgerIngredientsReducer.burgerIngredientsList);
     const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +36,7 @@ const FeedOrderCard = ({ order, onStatus, pathOrder }) => {
         let total = 0;
         order.ingredients.forEach((id) => {
             const ingredient = ingredients.find((item) => (item._id === id));
-                total += ingredient?.price;
+                if(ingredient) { total += ingredient?.price; }
         });
         return total
     }, [ingredients, order]);
@@ -73,10 +79,5 @@ const FeedOrderCard = ({ order, onStatus, pathOrder }) => {
     )
 };
 
-FeedOrderCard.propTypes = {
-    order: PropTypes.object.isRequired,
-    pathOrder: PropTypes.string.isRequired,
-    onStatus: PropTypes.bool,
-};
 
 export default FeedOrderCard;

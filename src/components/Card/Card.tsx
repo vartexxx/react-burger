@@ -86,4 +86,5 @@ const Card: FC<ICard> = memo(function Card({ ingredient }){
     );
 });
 
+
 export default Card;

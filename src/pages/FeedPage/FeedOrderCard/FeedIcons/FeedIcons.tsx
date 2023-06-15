@@ -1,13 +1,18 @@
-import PropTypes from 'prop-types';
-import { useMemo, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useMemo, useState } from 'react';
 import IngredientDetails from '../../../../components/IngredientDetails/IngredientDetails';
 import Modal from '../../../../components/Modal/Modal';
 import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO } from '../../../../services/actions/burgerCurrentIngredientAction';
+import { useDispatch, useSelector } from '../../../../services/types/hooks';
 import styles from './FeedIcons.module.scss';
 
 
-const FeedIcons = ({ id, count, index }) => {
+type TFeedIcons = {
+    id: string,
+    count: number,
+    index: number,
+};
+
+const FeedIcons: FC<TFeedIcons> = ({ id, count, index }) => {
     const dispatch = useDispatch();
 
     const ingredients = useSelector(state => state.burgerIngredientsReducer.burgerIngredientsList);
@@ -17,7 +22,7 @@ const FeedIcons = ({ id, count, index }) => {
     const onClick = () => {
         dispatch({ type: SET_INGREDIENT_INFO, payload: ingredient });
         setIsOpen(true);
-        window.history.pushState({ path: `/ingredients/${ingredient._id}` }, '', `/ingredients/${ingredient._id}`)
+        window.history.pushState({ path: `/ingredients/${ingredient!._id}` }, '', `/ingredients/${ingredient!._id}`)
     };
     const onClose = () => {
         dispatch({ type: RESET_INGREDIENT_INFO });
@@ -51,10 +56,5 @@ const FeedIcons = ({ id, count, index }) => {
     )
 };
 
-FeedIcons.propTypes = {
-    id: PropTypes.string.isRequired,
-    count: PropTypes.number.isRequired,
-    index: PropTypes.number.isRequired,
-};
 
 export default FeedIcons;

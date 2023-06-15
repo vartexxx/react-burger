@@ -1,8 +1,9 @@
 import { Link } from "react-router-dom";
 import styles from './NotFoundPage.module.scss';
+import { FC } from "react";
 
 
-const NotFoundPage = () => {
+const NotFoundPage: FC = () => {
     return (
         <div className={styles.nf__container}>
             <h2 className={`${styles.nf__title} text text_type_digits-large mt-25`}>ERROR 404</h2>
@@ -13,5 +14,6 @@ const NotFoundPage = () => {
         </div>
     );
 };
+
 
 export default NotFoundPage;

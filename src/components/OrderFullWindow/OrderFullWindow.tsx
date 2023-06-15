@@ -71,4 +71,5 @@ const OrderFullWindow: FC = () => {
     )
 };
 
+
 export default OrderFullWindow;

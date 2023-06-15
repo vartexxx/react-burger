@@ -5,6 +5,7 @@ import { useDispatch } from "../../services/types/hooks";
 import { IIngredient } from "../../services/types/types";
 import { FC } from "react";
 
+
 interface IBurgerConstructorList {
     list: IIngredient,
 };

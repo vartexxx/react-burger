@@ -1,11 +1,11 @@
-import { useSelector } from 'react-redux';
+import { FC } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
-import IngredientDetails from '../../components/IngredientDetails/IngredientDetails';
+import { useSelector } from '../../services/types/hooks';
 import MainPage from '../MainPage/MainPage';
 import styles from './IngredientPage.module.scss';
 
 
-const IngredientPage = () => {
+const IngredientPage: FC = () => {
     const ingredients = useSelector(
         (store) => store.burgerIngredientsReducer.burgerIngredientsList
     );
@@ -18,7 +18,6 @@ const IngredientPage = () => {
     return location.state?.from === "/" ? (
         <MainPage />
     ) : (
-        item && (
             <>
                 <div className={styles.container}>
                     <h2 className='text text_type_main-large'>Детали ингредиента</h2>
@@ -46,8 +45,8 @@ const IngredientPage = () => {
                     </div>
                 </div>
             </>
-        )
     );
 };
+
 
 export default IngredientPage;

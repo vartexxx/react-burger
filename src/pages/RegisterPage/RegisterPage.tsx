@@ -1,25 +1,25 @@
 import { Button, EmailInput, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, FormEvent, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import userRegisterAction from "../../services/actions/registerUserAction";
+import { useDispatch, useSelector } from "../../services/types/hooks";
 import styles from './RegisterPage.module.scss';
 
 
-const RegisterPage = () => {
+const RegisterPage: FC = () => {
     const dispatch = useDispatch();
-    const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
+    const { isAuthorization } = useSelector((store) => store.authorizeReducer);
 
     const [inputInfo, setInputInfo] = useState({ name: '', email: '', password: '' });
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(
             userRegisterAction(inputInfo.name, inputInfo.email, inputInfo.password)
         );
     };
 
-    if (isAuth) {
+    if (isAuthorization) {
         return <Navigate to={'/'} />
     }
 
@@ -38,12 +38,9 @@ const RegisterPage = () => {
                     onChange={e => { setInputInfo({ ...inputInfo, [e.target.name]: e.target.value }) }}
                 />
                 <EmailInput
-                    type='email'
                     placeholder='E-mail'
                     value={inputInfo.email}
                     name='email'
-                    error={false}
-                    errorText='Ошибка в E-mail'
                     size='default'
                     onChange={e => { setInputInfo({ ...inputInfo, [e.target.name]: e.target.value }) }}
                 />

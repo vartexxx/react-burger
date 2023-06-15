@@ -24,4 +24,5 @@ const BurgerIngredientsList = forwardRef<ref, IBurgerIngredientsList>((props, re
     );
 });
 
+
 export default BurgerIngredientsList;

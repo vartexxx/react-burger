@@ -1,7 +1,8 @@
+import { FC } from "react";
 import Main from "../../components/Main/Main";
 
 
-const MainPage = () => {
+const MainPage: FC = () => {
 
     return (
         <>
@@ -9,5 +10,6 @@ const MainPage = () => {
         </>
     );
 };
+
 
 export default MainPage;

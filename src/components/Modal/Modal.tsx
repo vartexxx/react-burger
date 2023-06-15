@@ -55,4 +55,5 @@ const Modal: FC<TModal> = ({ setActive, onClose, header, children }) => {
     );
 };
 
+
 export default Modal;

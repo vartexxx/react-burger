@@ -1,15 +1,16 @@
-import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, useEffect, useMemo } from "react";
 import { v4 as uuidv4 } from 'uuid';
 import { WS_CONNECTION_END, wsConnectionStart } from "../../services/actions/wsActions";
+import { useDispatch, useSelector } from "../../services/types/hooks";
+import { TOrderInfo } from "../../services/types/types";
 import { WS_URL_ALL } from "../../utils/variables";
 import FeedOrderCard from "./FeedOrderCard/FeedOrderCard";
 import styles from './FeedPage.module.scss';
 
 
-const FeedPage = () => {
+const FeedPage: FC = () => {
     const dispatch = useDispatch();
-    const { orders, total, totalToday } = useSelector(state => state.wsReducer)
+    const { orders, total, totalToday } = useSelector(state => state.wsReducer);
 
     const done = useMemo(() => orders.filter((item) => (item.status === 'done')), [orders]);
     const inWork = useMemo(() => orders.filter((item) => (item.status === 'pending' || item.status === 'created')), [orders]);
@@ -17,11 +18,11 @@ const FeedPage = () => {
     useEffect(() => {
         dispatch(wsConnectionStart(WS_URL_ALL));
         return () => { dispatch({ type: WS_CONNECTION_END }) }
-    }, [dispatch])
+    }, [dispatch]);
 
-    const filterOrders = (done) => {
-        return done.slice(0, 10)
-    }
+    const filterOrders = (done: TOrderInfo[]) => {
+        return done.slice(0, 10);
+    };
 
     return (
         <section className={styles.feed}>
@@ -68,5 +69,6 @@ const FeedPage = () => {
         </section>
     )
 };
+
 
 export default FeedPage;

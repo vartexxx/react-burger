@@ -1,6 +1,6 @@
 import { Button, ConstructorElement, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Reorder } from "framer-motion";
-import { useMemo, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD, SORT } from '../../services/actions/burgerConstructorAction';
@@ -13,7 +13,7 @@ import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.scss';
 
 
-const BurgerConstructor = () => {
+const BurgerConstructor: FC = () => {
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -120,5 +120,6 @@ const BurgerConstructor = () => {
         </>
     );
 };
+
 
 export default BurgerConstructor;

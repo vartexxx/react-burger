@@ -13,4 +13,5 @@ const ModalOverlay: FC<TModalOverlay> = ({ animation, closeModalAnimation }) => 
     )
 };
 
+
 export default ModalOverlay;

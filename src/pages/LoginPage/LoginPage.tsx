@@ -1,35 +1,32 @@
 import { Button, EmailInput, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { FC, FormEvent, useState } from "react";
 import { Link, Navigate, useLocation } from "react-router-dom";
 import loginUserAction from "../../services/actions/loginUserAction";
+import { useDispatch, useSelector } from "../../services/types/hooks";
 import styles from './LoginPage.module.scss';
 
 
-const LoginPage = () => {
+const LoginPage: FC = () => {
     const [inputInfo, setInputInfo] = useState({ email: '', password: '' });
     const dispatch = useDispatch();
-    const isAuth = useSelector((store) => store.authorizeReducer.isAuthorization);
+    const { isAuthorization } = useSelector((store) => store.authorizeReducer);
     const location = useLocation();
-    const onSubmit = (e) => {
+    const onSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(
             loginUserAction(inputInfo.email, inputInfo.password)
         );
     };
-    if (isAuth) { return (<Navigate to={location.state?.from || '/'} />) };
+    if (isAuthorization) { return (<Navigate to={location.state?.from || '/'} />) };
 
     return (
         <section className={styles.login}>
             <form className={`${styles.login__form} mt-20 mb-20`} onSubmit={onSubmit}>
                 <h2 className={`${styles.login__title} text text_type_main-medium mt-25`}>Вход</h2>
                 <EmailInput
-                    type='email'
                     placeholder='E-mail'
                     value={inputInfo.email}
                     name='email'
-                    error={false}
-                    errorText='Ошибка в E-mail'
                     size='default'
                     onChange={e => { setInputInfo({ ...inputInfo, [e.target.name]: e.target.value }) }}
                 />
@@ -55,5 +52,6 @@ const LoginPage = () => {
         </section>
     );
 };
+
 
 export default LoginPage;

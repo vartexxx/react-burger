@@ -1,42 +1,41 @@
 import { Button, Input } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { NavLink, useLocation, useNavigate, useParams } from "react-router-dom";
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { v4 as uuidv4 } from 'uuid';
 import logoutUserAction from "../../services/actions/logoutUserAction";
 import updateUserAction from "../../services/actions/updateUserAction";
 import { WS_CONNECTION_ORDERS_END, wsOrderConnectionStart } from "../../services/actions/wsActions";
+import { useDispatch, useSelector } from "../../services/types/hooks";
 import { WS_URL_ALL } from "../../utils/variables";
 import FeedOrderCard from "../FeedPage/FeedOrderCard/FeedOrderCard";
 import styles from './ProfilePage.module.scss';
 
 
-const ProfilePage = () => {
+const ProfilePage: FC = () => {
     let {'*': path} = useParams();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const location = useLocation();
 
-    const { user } = useSelector((store) => store.authorizeReducer);
+    const { user }: any = useSelector((store) => store.authorizeReducer);
     const orders = useSelector(state => state.wsReducerForOrders.orders);
 
     const password = '';
     const profile = {...user,  password}
 
     const [userData, setUserDate] = useState(profile);
-    const [iconInfo, setIconInfo] = useState({ name: '', email: '', password: ''});
+    const [iconInfo, setIconInfo] = useState({ name: false, email: false, password: false});
     const [activeButtons, setActiveButtons] = useState(false);
 
     const onFormReset = () => {
         setUserDate({ name: user.name, email: user.email, password: ''})
     };
 
-    const onFormChange = (e) => {
+    const onFormChange = (e: ChangeEvent<HTMLInputElement>) => {
         setUserDate({...userData, [e.target.name]: e.target.value })
         setActiveButtons(true)
     };
 
-    const profileFormSubmit = (e) => {
+    const profileFormSubmit = (e: FormEvent) => {
         e.preventDefault();
         dispatch(
             updateUserAction(userData)
@@ -88,8 +87,9 @@ const ProfilePage = () => {
                                 История заказов
                             </NavLink>
                             <NavLink
+                                to={'/login'}
                                 onClick={() =>
-                                    (logoutUser(() => navigate('/login')))
+                                    (logoutUser())
                                 }
                                 className={`text text_type_main-medium text_color_inactive ${styles.profile__link}`}
                             >
@@ -98,7 +98,7 @@ const ProfilePage = () => {
                         </nav>
                         <p className={`text text_type_main-default ${styles.profile__text}`}>В этом разделе вы можете изменить&nbsp; свои персональные данные</p>
                     </div>
-                    {path == 'orders' ? (
+                    {path === 'orders' ? (
                         <div className={styles.order}>
                             {orders.map((item) => (
                                 <FeedOrderCard order={item} key={uuidv4()} onStatus={true} pathOrder={'/profile/orders'} />
@@ -162,5 +162,6 @@ const ProfilePage = () => {
         </>
     );
 };
+
 
 export default ProfilePage;

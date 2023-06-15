@@ -1,5 +1,5 @@
 import { CurrencyIcon, FormattedDate } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
 import { WS_CONNECTION_ORDERS_END, wsOrderConnectionStart } from '../../services/actions/wsActions';
 import { useDispatch, useSelector } from '../../services/types/hooks';
@@ -7,7 +7,7 @@ import { WS_URL_ALL } from '../../utils/variables';
 import styles from './AuthOrderFullWindow.module.scss';
 
 
-const AuthOrderFullWindow = () => {
+const AuthOrderFullWindow: FC = () => {
     const dispatch = useDispatch();
     const params = useParams();
     const { orders } = useSelector(state => state.wsReducerForOrders)
@@ -83,5 +83,6 @@ const AuthOrderFullWindow = () => {
         </section>
     )
 };
+
 
 export default AuthOrderFullWindow;

@@ -16,4 +16,5 @@ const ProtectedRoute: FC<TProtectedRoute> = ({ element }) => {
     )
 }
 
+
 export default ProtectedRoute;
