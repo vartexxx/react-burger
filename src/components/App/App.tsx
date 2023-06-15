@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import FeedPage from '../../pages/FeedPage/FeedPage';
 import ForgotPasswordPage from '../../pages/ForgotPasswordPage/ForgotPasswordPage';
@@ -13,13 +12,14 @@ import RegisterPage from '../../pages/RegisterPage/RegisterPage';
 import ResetPasswordPage from '../../pages/ResetPasswordPage/ResetPasswordPage';
 import getIngredients from '../../services/actions/burgerIngredientsAction';
 import getUserAction from '../../services/actions/getUserAction';
+import { useDispatch } from '../../services/types/hooks';
 import { getCookie } from '../../utils/cookie';
 import AppHeader from '../AppHeader/AppHeader';
 import AuthOrderFullWindow from '../AuthOrderFullWindow/AuthOrderFullWindow';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
 
-function App() {
+const App: FC = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getIngredients());

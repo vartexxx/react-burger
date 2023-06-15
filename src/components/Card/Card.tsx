@@ -1,17 +1,27 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { memo, useMemo } from "react";
 import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { SET_INGREDIENT_INFO, RESET_INGREDIENT_INFO } from "../../services/actions/burgerCurrentIngredientAction";
-import cardProp from "../../utils/propTypes";
 import styles from './Card.module.scss';
 import { useState } from "react";
 import Modal from "../Modal/Modal";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
+import { useDispatch, useSelector } from "../../services/types/hooks";
+import { IIngredient } from "../../services/types/types";
+import { FC } from "react";
+
+interface ICard {
+    ingredient: IIngredient
+}
+
+interface ICounters {
+    [counters: string]: number;
+}
 
 
-const Card = memo(function Card({ingredient}){
+const Card: FC<ICard> = memo(function Card({ ingredient }){
     const dispatch = useDispatch();
     const [isOpen, setIsOpen] = useState(false);
 
@@ -21,10 +31,10 @@ const Card = memo(function Card({ingredient}){
     }));
 
     const counter = useMemo(() => {
-        const counters = {};
-        burgerIngredients.burgerIngredientsList.forEach((ingredient) => {
+        const counters: ICounters = {};
+        burgerIngredients.burgerIngredientsList.forEach((ingredient: { _id: string | number; }) => {
             counters[ingredient._id] = burgerConstructorIngredients.burgerConstructorList.filter(
-                (constructorItem) => constructorItem._id === ingredient._id).length;
+                (constructorItem: { _id: string | number; }) => constructorItem._id === ingredient._id).length;
         });
         if (burgerConstructorIngredients.burgerConstructorBun) {
             counters[burgerConstructorIngredients.burgerConstructorBun._id] = 2;
@@ -32,7 +42,7 @@ const Card = memo(function Card({ingredient}){
         return counters;
     }, [burgerConstructorIngredients, burgerIngredients]);
     
-    const getCounterInredient = (ingredientId) => counter[ingredientId];
+    const getCounterInredient = (ingredientId: string) => counter[ingredientId];
 
     const [, dragRef, dragPreviewRef] = useDrag({
         type: "ingredients",
@@ -64,7 +74,7 @@ const Card = memo(function Card({ingredient}){
                     <img ref={dragPreviewRef} className={`pl-4 pr-4`} src={ingredient.image} alt={ingredient.name} />
                     <div className={styles.card__price}>
                         <p className="text text_type_digits-default mt-1 mb-1">{ingredient.price}</p>
-                        <CurrencyIcon />
+                        <CurrencyIcon type={"primary"} />
                     </div>
                     <p className="text text_type_main-default">{ingredient.name}</p>
                 </Link>
@@ -78,9 +88,5 @@ const Card = memo(function Card({ingredient}){
 
     );
 });
-
-Card.propTypes = {
-    ingredient: cardProp,
-};
 
 export default Card;

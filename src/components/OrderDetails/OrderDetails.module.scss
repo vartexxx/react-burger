@@ -1,7 +1,26 @@
-.container {
-    padding-top: 16px;
-    padding-bottom: 120px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.order {
+    //order__container
+    &__container {
+        padding-top: 16px;
+        padding-bottom: 120px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    //order__number
+    &__number {
+        text-align: 'center';
+    }
+    //order__index
+    &__index {
+        text-align: 'center';
+    }
+    //order__ready
+    &__ready {
+        text-align: 'center';
+    }
+    //order__wait
+    &__wait {
+        text-align: 'center';
+    }
 }

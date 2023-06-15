@@ -3,7 +3,6 @@ import { Reorder } from "framer-motion";
 import PropTypes from "prop-types";
 import { useMemo, useState } from 'react';
 import { useDrop } from 'react-dnd';
-import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { ADD, SORT } from '../../services/actions/burgerConstructorAction';
 import makeOrder, { BURGER_ORDER_RESET } from '../../services/actions/burgerOrderAction';
@@ -11,6 +10,8 @@ import BurgerConstructorList from '../BurgerConstructorList/BurgerConstructorLis
 import Modal from '../Modal/Modal';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import styles from './BurgerConstructor.module.scss';
+import { useDispatch, useSelector } from '../../services/types/hooks';
+import { IIngredient } from '../../services/types/types';
 
 
 const BurgerConstructor = () => {
@@ -39,13 +40,13 @@ const BurgerConstructor = () => {
         dispatch({ type: BURGER_ORDER_RESET });
     };
 
-    const onDropHandler = (ingredient) => {
+    const onDropHandler = (ingredient: IIngredient) => {
         dispatch({ type: ADD, id: uuidv4(), payload: ingredient });
     };
 
     const [{ isHover }, dropTarget] = useDrop({
         accept: "ingredients",
-        drop(ingredient) {
+        drop(ingredient: IIngredient) {
           onDropHandler(ingredient);
         },
         collect: (monitor) => ({
@@ -113,7 +114,7 @@ const BurgerConstructor = () => {
                 </div>
             </section>
             {order && (
-                <Modal active={isOpen} setActive={setIsOpen} header={''} onClose={closeModal}>
+                <Modal setActive={setIsOpen} header={''} onClose={closeModal}>
                     <OrderDetails />
                 </Modal>
             )}

@@ -1,11 +1,18 @@
-import PropTypes from 'prop-types';
 import { forwardRef } from 'react';
-import cardProp from '../../utils/propTypes';
 import Card from '../Card/Card';
 import styles from './BurgerIngredientsList.module.scss';
+import { IIngredient } from '../../services/types/types';
+
+interface IBurgerIngredientsList {
+    title: string;
+    id: string;
+    type: string;
+    data: Array<IIngredient>;
+}
+type ref = HTMLParagraphElement;
 
 
-const BurgerIngredientsList = forwardRef((props, ref) => {
+const BurgerIngredientsList = forwardRef<ref, IBurgerIngredientsList>((props, ref) => {
     return (
         <>
             <p id={props.id} ref={ref} className='text text_type_main-medium pt-10 pb-6'>{props.title}</p>
@@ -17,12 +24,5 @@ const BurgerIngredientsList = forwardRef((props, ref) => {
         </>
     );
 });
-
-BurgerIngredientsList.propTypes = {
-    title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(cardProp),
-};
 
 export default BurgerIngredientsList;

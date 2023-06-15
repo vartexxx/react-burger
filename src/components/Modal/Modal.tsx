@@ -3,13 +3,22 @@ import { useEffect, useState } from 'react';
 import { createPortal } from "react-dom";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 import styles from './Modal.module.scss';
+import { ReactNode } from 'react';
+import { FC } from 'react';
 
 
-const modalRoot = document.querySelector('#modal');
+type TModal = {
+    setActive: (a: boolean) => void;
+    onClose: () => void;
+    header: string;
+    children?: ReactNode;
+}
 
-const Modal = ({ setActive, onClose, header, children }) => {
+const modalRoot = document.querySelector('#modal')  as HTMLElement;
+
+const Modal: FC<TModal> = ({ setActive, onClose, header, children }) => {
     const [animation, setAnimation] = useState(true);
-
+    
     const closeModalAnimation = () => {
         const closeModal = () => {
             setActive(false);
@@ -21,7 +30,7 @@ const Modal = ({ setActive, onClose, header, children }) => {
         }, 400);
     }
     useEffect(() => {
-        const handleCloseEsc = (evt) => {
+        const handleCloseEsc = (evt: KeyboardEvent) => {
             if (evt.key === 'Escape') {
                 closeModalAnimation()
             }

@@ -1,18 +1,22 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Reorder } from "framer-motion";
-import { useDispatch } from "react-redux";
 import { DELETE } from "../../services/actions/burgerConstructorAction";
-import cardProp from "../../utils/propTypes";
+import { useDispatch } from "../../services/types/hooks";
+import { IIngredient } from "../../services/types/types";
+import { FC } from "react";
 
+interface IBurgerConstructorList {
+    list: IIngredient
+}
 
-const BurgerConstructorList = ({list}) => {
+const BurgerConstructorList: FC<IBurgerConstructorList> = ({list , }) => {
     const dispatch = useDispatch();
 
     return (
         <Reorder.Item
             value={list}
         >
-            <DragIcon />
+            <DragIcon type={"primary"} />
             <ConstructorElement
                 text={list.name}
                 price={list.price}
@@ -25,8 +29,5 @@ const BurgerConstructorList = ({list}) => {
     )
 };
 
-BurgerConstructorList.propTypes = {
-    list: cardProp
-};
 
 export default BurgerConstructorList;

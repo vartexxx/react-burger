@@ -1,8 +1,8 @@
 import { RESET_INGREDIENT_INFO, SET_INGREDIENT_INFO } from '../actions/burgerCurrentIngredientAction';
 import { TIngredientCurrentAction } from '../actions/burgerCurrentIngredientAction';
-
+import { TIngredientInfo } from '../types/types';
 type TInitialState = {
-    currentIngredient: undefined | string[]
+    currentIngredient: undefined | TIngredientInfo
 }
 
 const burgerCurrentIngredientInitialState: TInitialState = {

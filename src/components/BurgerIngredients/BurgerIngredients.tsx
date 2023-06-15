@@ -1,15 +1,19 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useEffect, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { useInView } from "react-intersection-observer";
-import { useDispatch, useSelector } from 'react-redux';
-import { RESET_INGREDIENT_INFO } from '../../services/actions/burgerCurrentIngredientAction';
 import BurgerIngredientsList from '../BurgerIngredientsList/BurgerIngredientsList';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import Modal from '../Modal/Modal';
 import styles from './BurgerIngredients.module.scss';
+import { useSelector } from '../../services/types/hooks';
+import { IIngredient } from '../../services/types/types';
 
 
-const BurgerIngredients = () => {
+interface IISort {
+    bun: Array<IIngredient>;
+    main: Array<IIngredient>;
+    sauce: Array<IIngredient>;
+}
+
+const BurgerIngredients: FC = () => {
     const [bunRef, inViewBun] = useInView({ threshold: 0 });
     const [sauceRef, inViewSauce] = useInView({ threshold: 0 });
     const [mainRef, inViewMain] = useInView({ threshold: 0 });
@@ -19,7 +23,7 @@ const BurgerIngredients = () => {
     );
 
     const { bun, sauce, main } = useMemo(() => {
-        return ingredients.reduce((count, item) => {
+        return ingredients.reduce<IISort>((count, item) => {
             if(item.type === 'bun') {
                 count.bun.push(item);
             }
@@ -36,9 +40,9 @@ const BurgerIngredients = () => {
 
     const [current, setCurrent] = useState('bun');
 
-    const scrollToTab = (id) => {
+    const scrollToTab = (id: string) => {
         setCurrent(id);
-        document.querySelector(`#${id}`).scrollIntoView({behavior: 'smooth'});
+        document.querySelector(`#${id}`)?.scrollIntoView({behavior: 'smooth'});
     };
 
     useEffect(() => {

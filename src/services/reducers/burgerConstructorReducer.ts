@@ -1,17 +1,18 @@
-import { ADD, DELETE, SORT, TBurgerConstructorActions } from "../actions/burgerConstructorAction";
+import { ADD, DELETE, SORT, TConstructorAction } from "../actions/burgerConstructorAction";
 import { TIngredientsInfo } from "../types/types";
-
-type TInitialState = {
-    burgerConstructorBun: undefined | string,
-    burgerConstructorList: TIngredientsInfo,
+import { IIngredient } from "../types/types";
+export interface IConstructorInitialState {
+    burgerConstructorBun: IIngredient | undefined;
+    burgerConstructorList: Array<IIngredient>;
 }
 
-const constructorInitialState: TInitialState = {
+
+const constructorInitialState: IConstructorInitialState = {
     burgerConstructorBun: undefined,
     burgerConstructorList: [],
 };
 
-const burgerConstructorReducer = ( state = constructorInitialState, action: TBurgerConstructorActions ) => {
+const burgerConstructorReducer = ( state = constructorInitialState, action: TConstructorAction ): IConstructorInitialState => {
     switch (action.type) {
         case ADD:
             if (action.payload.type === "bun") {

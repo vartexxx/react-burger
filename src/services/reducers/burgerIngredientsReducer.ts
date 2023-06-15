@@ -1,21 +1,21 @@
 import { GET_INGREDIENTS, GET_INGREDIENTS_STATUS_ERR, GET_INGREDIENTS_STATUS_OK } from "../actions/burgerIngredientsAction";
 import { TBurgerIngredientsAction } from "../actions/burgerIngredientsAction";
+import { IIngredient } from "../types/types";
 
-
-type TInitialState = {
-    burgerIngredientsList: string[],
-    burgerIngredientsListErrorText: undefined | string;
+export interface IIngredientsInitialState {
+    burgerIngredientsList: Array<IIngredient>;
+    burgerIngredientsListErrorText: string | undefined;
 }
 
-const burgerIngredientsInitialState: TInitialState = {
+const burgerIngredientsInitialState: IIngredientsInitialState = {
     burgerIngredientsList: [],
     burgerIngredientsListErrorText: undefined,
 };
 
-const burgerIngredientsReducer = (state = burgerIngredientsInitialState, action: TBurgerIngredientsAction) => {
+const burgerIngredientsReducer = (state = burgerIngredientsInitialState, action: TBurgerIngredientsAction): IIngredientsInitialState => {
     switch(action.type) {
         case GET_INGREDIENTS:
-            return {...state, burgerIngredientsListOk: true}
+            return {...state}
         case GET_INGREDIENTS_STATUS_OK:
             return {
                 ...state,
@@ -23,6 +23,7 @@ const burgerIngredientsReducer = (state = burgerIngredientsInitialState, action:
             }
         case GET_INGREDIENTS_STATUS_ERR:
             return {
+                burgerIngredientsList: [],
                 burgerIngredientsListErrorText: action.error,
             }
         default:

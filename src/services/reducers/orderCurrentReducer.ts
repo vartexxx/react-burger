@@ -15,15 +15,15 @@ export type TOrderCurrentInfoActons =
     | IGetCurrentOrderInfo
     | IRemoveCurrentOrderInfo;
 
-type TInitialState = {
+interface IInitialState {
     order: TOrderInfo | null
 };
 
-const initalState: TInitialState = {
+const initalState: IInitialState = {
     order: null
 }
 
-const orderCurrentReducer = (state = initalState, action: TOrderCurrentInfoActons) => {
+const orderCurrentReducer = (state = initalState, action: TOrderCurrentInfoActons): IInitialState => {
     switch(action.type) {
         case GET_CURRENT_ORDER_INFO:
             return {
@@ -33,7 +33,7 @@ const orderCurrentReducer = (state = initalState, action: TOrderCurrentInfoActon
         case REMOVE_CURRENT_ORDER_INFO:
             return {
                 ...state,
-                order: undefined,
+                order: null,
             }
         default:
             return state
