@@ -15,8 +15,10 @@ const ProfilePage: FC = () => {
     let {'*': path} = useParams();
     const dispatch = useDispatch();
     const location = useLocation();
-
-    const { user }: any = useSelector((store) => store.authorizeReducer);
+    const { user }: {user: {
+        name: string,
+        email: string
+    }} = useSelector((store) => store.authorizeReducer);
     const orders = useSelector(state => state.wsReducerForOrders.orders);
 
     const password = '';

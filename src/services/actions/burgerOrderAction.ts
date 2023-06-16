@@ -34,7 +34,7 @@ export type TBurgerOrderAction =
 const makeOrder: AppThunk = (ingredients) => (dispatch: AppDispatch) => {
         const orderList = [
             ingredients.burgerConstructorBun._id,
-            ...ingredients.burgerConstructorList.map((item: any) => item._id),
+            ...ingredients.burgerConstructorList.map((item: { _id: string; }) => item._id),
             ingredients.burgerConstructorBun._id,
         ]
         dispatch({ type: BURGER_ORDER_GET })
